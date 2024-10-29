@@ -3,10 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GlutenFreeApp.Views.LoginPageView"
              Title="LoginPageView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout BackgroundColor="AliceBlue">
+        <Border Stroke="Red"  Margin="20,20,20,10">
+            <Grid x:Name="GridLogin" RowDefinitions="1*,1*,1*,1*" RowSpacing="20" Padding="40" BackgroundColor="Beige" >
+
+                <Label HorizontalOptions="Center" 
+                Grid.Row="0"
+                Text="Log In"
+                   FontSize="30"
+                />
+
+                <Entry HorizontalOptions="Center"
+                Grid.Row ="1"
+                Placeholder="UserName"
+                FontFamily="SuperOceanPersonalUse"
+                />
+
+                <Entry HorizontalOptions="Center"
+                Grid.Row ="2"
+                Placeholder="Password"
+                FontFamily="SuperOceanPersonalUse"
+                />
+
+                <Button HorizontalOptions="Center"
+                Grid.Row="3"
+                FontFamily="SuperOceanPersonalUse"    
+                Text="Submit"   
+                />
+
+            </Grid>
+        </Border>
+        <Border Stroke="Red" Margin="20,10,20,10">
+            <Grid x:Name="SignUp" RowDefinitions="1*" RowSpacing="20" Padding="40" BackgroundColor="Beige" >
+                <Button HorizontalOptions="Center"
+                Grid.Row="0"
+                Text="SignUp"
+                />
+            </Grid>
+        </Border>
+
+        <Border Stroke="Red"  Margin="20,10,20,10">
+            <Grid x:Name="ContinueWithout" RowDefinitions="1* " RowSpacing="20" Padding="40" BackgroundColor="Beige">
+                <Button HorizontalOptions="Center"
+                Grid.Row="0"
+                Text="Continue without login or signup"
+                />
+            </Grid>
+        </Border>
+
     </VerticalStackLayout>
 </ContentPage>

@@ -1,15 +1,19 @@
+using System.ComponentModel;
+
 namespace GlutenFreeApp.ViewModel;
 
-public class VIewModelBase : ContentPage
+public class ViewModelBase : ContentPage
 {
-	public VIewModelBase()
-	{
-		Content = new VerticalStackLayout
-		{
-			Children = {
-				new Label { HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Center, Text = "Welcome to .NET MAUI!"
-				}
-			}
-		};
-	}
+	
+	
+      #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+    protected void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    #endregion
 }
