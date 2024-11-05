@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace GlutenFreeApp.ViewModel;
 
-public class ViewModelBase : ContentPage
+public class ViewModelBase:INotifyPropertyChanged
 {
 	
 	
@@ -16,4 +16,5 @@ public class ViewModelBase : ContentPage
     }
 
     #endregion
+
 }

@@ -30,6 +30,7 @@
                         BorderColor="Gray"
                         BackgroundColor="Purple"
                         Command="{Binding ManagerSelectedCommand}"
+                      
                         >
 
                     </Button>
@@ -53,6 +54,8 @@
              BorderColor="Gray"
              BackgroundColor="Purple"
              Command="{Binding VisitorSelectedCommand}"
+           
+                         
                         >
                  
                     </Button>
@@ -78,6 +81,7 @@
                 <Entry 
        x:Name="PasswordEntry"
        Placeholder="Password"
+                    Text="{Binding Password}"
        IsPassword="True" />
 
                 <Entry 
@@ -91,24 +95,28 @@
             <VerticalStackLayout 
        Grid.Row="2"
    x:Name="ManagerFields" 
-  
+  IsVisible="{Binding IsManager}"
    Spacing="15">
                 <Entry 
        x:Name="NameEntry"
        Placeholder="Name"
-                    IsVisible="{Binding IsManagerSelected}"
+                   
+                    
                     />
 
                 <Entry 
        x:Name="AddressEntry"
        Placeholder="Address" 
-                    IsVisible="{Binding IsManagerSelected}"
+                    
                     />
 
+                
+                
+                
                 <Picker 
        x:Name="RestaurantTypePicker"
        Title="Type of Restaurant"
-                    IsVisible="{Binding IsManagerSelected}"
+                  
                     >
                     <Picker.Items>
                         <x:String>Fast Food</x:String>
