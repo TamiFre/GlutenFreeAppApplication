@@ -5,40 +5,50 @@
              x:DataType="viewmodels:AddCriticViewModel"
              xmlns:viewmodels ="clr-namespace:GlutenFreeApp.ViewModel"
              Title="AddCriticView">
-    <VerticalStackLayout HorizontalOptions="CenterAndExpand" >
+    <HorizontalStackLayout HorizontalOptions="Center">
+        <VerticalStackLayout HorizontalOptions="Center" >
 
-        <Grid RowDefinitions="1*,1*,1*,1*,1*">
+            <Grid RowDefinitions="1*,1*,1*,1*,1*">
 
-            <Entry
+                <Entry
                 Grid.Row="0"
             Placeholder="Name of the restaurant"
             />
 
-            <Entry
+                <Entry
                 Grid.Row="1"
             Placeholder="Address"
             />
 
-            <Entry
+                <Entry
                 Grid.Row="2"
             Placeholder="The Critic"
             />
 
-            <!--כוכבים לסינון-->
-           
-                <RadioButton
-                
-            Content="sterile"
-            GroupName="groupOne"
-            />
-                <RadioButton
-                
-            Content="non sterile"
-            GroupName="groupOne"
-            />
-            
-        </Grid>
-    </VerticalStackLayout>
+                <!--כוכבים לסינון-->
+                <HorizontalStackLayout
+                Grid.Row="3"
+                Spacing="10"
+                HorizontalOptions="Center">
+                    <RadioButton
+                    Content="sterile"
+                    GroupName="groupOne"
+                />
+                    <RadioButton
+                    Content="non sterile"
+                    GroupName="groupOne"
+                />
+                </HorizontalStackLayout>
+                <Button
+                    Grid.Row="4"
+                    Text="Submit"
+                    />
+
+
+            </Grid>
+
+        </VerticalStackLayout>
+    </HorizontalStackLayout>
 
 
 </ContentPage>
