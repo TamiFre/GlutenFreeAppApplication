@@ -11,16 +11,78 @@ public class SignUpViewModel : ViewModelBase
         set { username = value; OnPropertyChanged(); }
     }
 
-    public string password;
-    public string Password
+
+    private string? passError;
+    public string PassError
+    {
+        get { return passError; }
+        set 
+        {
+            passError = value; OnPropertyChanged();
+        }
+    }
+
+    private string password;
+    public string? Password
     {
         get { return password; }
-        set { password = value; OnPropertyChanged(); }
+
+        set 
+        {
+            password = value;
+            PassError = "";
+            OnPropertyChanged(nameof(Password));
+            OnPropertyChanged(nameof(PassError));
+            if (string.IsNullOrEmpty(password))
+            {
+                PassError = "";
+            }
+            else
+            {
+                if (password != null)
+                {
+                    bool IsPasswordOkay = IsValidPassword(password);
+                    if (!IsPasswordOkay)
+                    {
+                        PassError = "סיסמה לא טובה ";
+                    }
+                }
+                
+            }
+        }
+    }
+
+   
+    private bool IsValidPassword(string password)
+    {
+        bool hasUpperCase = false;
+        bool hasDigit = false;
+        
+        foreach (char c in password)
+        {
+            if (char.IsUpper(c))
+            {
+                hasUpperCase = true;
+            }
+            if (char.IsDigit(c))
+            {
+                hasDigit = true;
+            }
+
+            if (hasUpperCase && hasDigit)
+            {
+                break; // אם מצאנו כבר גם אות גדולה וגם ספרה, אפשר לעצור את הלולאה
+            }
+        }
+        return hasUpperCase && hasDigit;
+
     }
 
     //נחבר את זה לכפתורים
     public ICommand ManagerSelectedCommand { get; set; }
     public ICommand VisitorSelectedCommand { get; set; }
+
+    
 
     //נחבר את זה אם המנהל הוא האופציה הנבחרת
     private bool isManager;
@@ -45,6 +107,9 @@ public class SignUpViewModel : ViewModelBase
 
     }
 
+   
+
+
     private async void ManagerSelected()
     {
         IsManager=true;
@@ -57,52 +122,4 @@ public class SignUpViewModel : ViewModelBase
     }
 
 
-
-    //private bool isManagerSelected;
-
-   
-
-    //public bool IsManagerSelected
-    //{
-    //    get { return isManagerSelected; }
-    //    set
-    //    {
-
-    //        isManagerSelected = value;
-    //        ((Command)ManagerSelectedCommand).ChangeCanExecute();
-    //        ((Command)VisitorSelectedCommand).ChangeCanExecute();
-    //        OnPropertyChanged();
-
-    //    }
-    //}
-
-
-
-    //public ICommand ManagerSelectedCommand { get; }
-    //public ICommand VisitorSelectedCommand { get; }
-
-    //public SignUpViewModel()
-    //{
-
-    //    ManagerSelectedCommand = new Command(() => IsManagerSelected = true,()=>!isManagerSelected);
-    //    VisitorSelectedCommand = new Command(() => IsManagerSelected = false,()=>isManagerSelected);
-    //    IsManagerSelected = false;
-
-    //}
-
-    //private void OnManagerSelected()
-    //{
-    //    IsManagerSelected = true;
-        
-
-    //}
-
-    //private void OnVisitorSelected()
-    //{
-    //    IsManagerSelected = false;
-
-        
-    //}
-
-  
 }

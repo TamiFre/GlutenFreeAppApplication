@@ -5,11 +5,11 @@ namespace GlutenFreeApp
 {
     public partial class App : Application
     {
-        public App(SignUpViewModel vm)
+        public App()
         {
             InitializeComponent();
 
-            MainPage = new SignUpView(vm);
+            MainPage = new AppShell();
         }
     }
 }

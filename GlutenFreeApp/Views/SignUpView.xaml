@@ -116,9 +116,9 @@
                 <Picker 
        x:Name="RestaurantTypePicker"
        Title="Type of Restaurant"
-                  
                     >
-                    <Picker.Items>
+                    <Picker.Items
+                        >
                         <x:String>Fast Food</x:String>
                         <x:String>Fine Dining</x:String>
                         <x:String>Casual Dining</x:String>

@@ -44,6 +44,7 @@
                 <Button HorizontalOptions="Center"
                 Grid.Row="0"
                 Text="SignUp"
+                        Command="{Binding TransferToSignUp}"
                 />
             </Grid>
         </Border>

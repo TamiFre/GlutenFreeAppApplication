@@ -4,12 +4,26 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:GlutenFreeApp"
+    xmlns:views="clr-namespace:GlutenFreeApp.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="GlutenFreeApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+   
+
+    <TabBar>
+
+        <ShellContent
+            Title="sign up"
+            ContentTemplate="{DataTemplate views:SignUpView}"
+            Route="SignUp" />
+        <ShellContent
+            Title="login"
+            ContentTemplate="{DataTemplate views:LoginPageView}"
+            Route="Login" />
+        <ShellContent
+    Title="addcritic"
+    ContentTemplate="{DataTemplate views:AddCriticView}"
+    Route="AddCritic" />
+    </TabBar>
 
 </Shell>

@@ -1,3 +1,5 @@
+using System.Windows.Input;
+
 namespace GlutenFreeApp.ViewModel;
 
 public class LoginPageViewModel : ViewModelBase
@@ -25,6 +27,7 @@ public class LoginPageViewModel : ViewModelBase
         {
             if (password != value)
             {
+               
                 password = value;
                 OnPropertyChanged(nameof(Password));
                 // can add more logic here like email validation etc.
@@ -33,8 +36,16 @@ public class LoginPageViewModel : ViewModelBase
         }
     }
 
+    //כפץור שעושה רידיירקט לסייןאפ
+    public ICommand TransferToSignUp { get; set; }
+
+    private async void GoToSignUp()
+    {
+        AppShell.Current.GoToAsync("///SignUp");
+    }
+
     public LoginPageViewModel()
 	{
-		
+        TransferToSignUp = new Command(GoToSignUp);
 	}
 }

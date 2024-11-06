@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GlutenFreeApp.Views.AddCriticView"
+             x:DataType="viewmodels:AddCriticViewModel"
+             xmlns:viewmodels ="clr-namespace:GlutenFreeApp.ViewModel"
+             Title="AddCriticView">
+    <VerticalStackLayout HorizontalOptions="CenterAndExpand" >
+
+        <Grid RowDefinitions="1*,1*,1*,1*,1*">
+
+            <Entry
+                Grid.Row="0"
+            Placeholder="Name of the restaurant"
+            />
+
+            <Entry
+                Grid.Row="1"
+            Placeholder="Address"
+            />
+
+            <Entry
+                Grid.Row="2"
+            Placeholder="The Critic"
+            />
+
+            <!--כוכבים לסינון-->
+           
+                <RadioButton
+                
+            Content="sterile"
+            GroupName="groupOne"
+            />
+                <RadioButton
+                
+            Content="non sterile"
+            GroupName="groupOne"
+            />
+            
+        </Grid>
+    </VerticalStackLayout>
+
+
+</ContentPage>
