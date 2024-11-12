@@ -25,6 +25,12 @@ namespace GlutenFreeApp
             builder.Services.AddSingleton<SignUpViewModel>();
             builder.Services.AddSingleton<AddCriticViewModel>();
             builder.Services.AddSingleton<AddCriticView>();
+            builder.Services.AddSingleton<AllRecipeView>();
+            builder.Services.AddSingleton<AllRecipeViewModel>();
+            builder.Services.AddSingleton<AddRecipeView>();
+            builder.Services.AddSingleton<AddRecipeViewModel>();
+            builder.Services.AddSingleton<AdminPageView>();
+            builder.Services.AddSingleton<AdminPageViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

@@ -100,22 +100,25 @@
                 <Entry 
        x:Name="NameEntry"
        Placeholder="Name"
-                   
+                   Text="{Binding Username}"
                     
                     />
 
                 <Entry 
        x:Name="AddressEntry"
        Placeholder="Address" 
-                    
+                    Text="{Binding Adress}"
                     />
 
                 
                 
                 
+                <!--לבדוק איך עושים בינדינג-->
+                
                 <Picker 
        x:Name="RestaurantTypePicker"
        Title="Type of Restaurant"
+                    
                     >
                     <Picker.Items
                         >

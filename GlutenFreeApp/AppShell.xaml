@@ -24,6 +24,16 @@
     Title="addcritic"
     ContentTemplate="{DataTemplate views:AddCriticView}"
     Route="AddCritic" />
+        <ShellContent
+            Title="all recipes"
+            ContentTemplate="{DataTemplate views:AllRecipeView}"
+            Route="AllRecipes"
+            />
+        <ShellContent
+            Title="add recipe"
+            ContentTemplate="{DataTemplate views:AddRecipeView}"
+            Route="AddRecipe"
+            />
     </TabBar>
 
 </Shell>

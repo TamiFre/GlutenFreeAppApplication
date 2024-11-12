@@ -5,9 +5,9 @@
              xmlns:ViewModel ="clr-namespace:GlutenFreeApp.ViewModel"
              x:Class="GlutenFreeApp.Views.LoginPageView"
              Title="LoginPageView">
-    <VerticalStackLayout BackgroundColor="AliceBlue">
-        <Border Stroke="Red"  Margin="20,20,20,10">
-            <Grid x:Name="GridLogin" RowDefinitions="1*,1*,1*,1*" RowSpacing="20" Padding="40" BackgroundColor="Beige" >
+    <VerticalStackLayout>
+       
+            <Grid x:Name="GridLogin" RowDefinitions="1*,1*,1*,1*" RowSpacing="20" Padding="40" >
 
                 <Label HorizontalOptions="Center" 
                 Grid.Row="0"
@@ -38,25 +38,25 @@
                 />
 
             </Grid>
-        </Border>
-        <Border Stroke="Red" Margin="20,10,20,10">
-            <Grid x:Name="SignUp" RowDefinitions="1*" RowSpacing="20" Padding="40" BackgroundColor="Beige" >
+       
+       
+            <Grid x:Name="SignUp" RowDefinitions="1*" RowSpacing="20" Padding="40"  >
                 <Button HorizontalOptions="Center"
                 Grid.Row="0"
                 Text="SignUp"
                         Command="{Binding TransferToSignUp}"
                 />
             </Grid>
-        </Border>
+        
 
-        <Border Stroke="Red"  Margin="20,10,20,10">
-            <Grid x:Name="ContinueWithout" RowDefinitions="1* " RowSpacing="20" Padding="40" BackgroundColor="Beige">
+        
+            <Grid x:Name="ContinueWithout" RowDefinitions="1* " RowSpacing="20" Padding="40">
                 <Button HorizontalOptions="Center"
                 Grid.Row="0"
                 Text="Continue without login or signup"
                 />
             </Grid>
-        </Border>
+       
 
     </VerticalStackLayout>
 </ContentPage>

@@ -9,6 +9,8 @@ namespace GlutenFreeApp
             InitializeComponent();
             Routing.RegisterRoute("SignUp", typeof(SignUpView));
             Routing.RegisterRoute("Login", typeof(LoginPageView));
+            Routing.RegisterRoute("AllRecipes", typeof(AllRecipeView));
+            Routing.RegisterRoute("AddRecipe", typeof(AddRecipeView));
         }
     }
 }

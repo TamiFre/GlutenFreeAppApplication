@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GlutenFreeApp.Views.AddRecipeView"
+             Title="AddRecipeView">
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <!-- Food Type Picker -->
+       
+        <Picker
+            x:Name="FoodTypePicker"
+            Title="Select food type">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Main Course</x:String>
+                    <x:String>Appetizer</x:String>
+                    <x:String>Dessert</x:String>
+                    <x:String>Soup</x:String>
+                    <x:String>Salad</x:String>
+                    <x:String>Breakfast</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <!-- Ingredients Entry -->
+        <Label 
+            Text="Ingredients:"
+            FontSize="16"
+            Margin="0,0,0,5"/>
+        <Entry
+            x:Name="IngredientsEntry"
+            Placeholder="Enter ingredients"
+            HeightRequest="100"
+            VerticalTextAlignment="Start"/>
+
+        <!-- Instructions Entry -->
+        <Label 
+            Text="Instructions:"
+            FontSize="16"
+            Margin="0,0,0,5"/>
+        <Entry
+            x:Name="InstructionsEntry"
+            Placeholder="Enter cooking instructions"
+            HeightRequest="100"
+            VerticalTextAlignment="Start"/>
+
+        <!-- Submit Button -->
+        <Button
+            Text="Submit"
+            x:Name="SubmitButton"
+            BackgroundColor="Purple"
+            Margin="0,10,0,0"/>
+
+    </VerticalStackLayout>
+</ContentPage>

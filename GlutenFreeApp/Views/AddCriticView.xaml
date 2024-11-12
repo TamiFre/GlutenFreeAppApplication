@@ -18,11 +18,13 @@
                 <Entry
                 Grid.Row="1"
             Placeholder="Address"
+                    Text="{Binding RestName}"
             />
 
                 <Entry
                 Grid.Row="2"
             Placeholder="The Critic"
+                    Text="{Binding TheCritic}"
             />
 
                 <!--כוכבים לסינון-->
@@ -32,16 +34,19 @@
                 HorizontalOptions="Center">
                     <RadioButton
                     Content="sterile"
+                       IsChecked="{Binding IsSterile}"
                     GroupName="groupOne"
                 />
                     <RadioButton
                     Content="non sterile"
+                        IsChecked="{Binding IsNotSterile}"
                     GroupName="groupOne"
                 />
                 </HorizontalStackLayout>
                 <Button
                     Grid.Row="4"
                     Text="Submit"
+                    Command="{Binding Submit}"
                     />
 
 

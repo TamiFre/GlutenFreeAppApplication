@@ -11,6 +11,14 @@ public class SignUpViewModel : ViewModelBase
         set { username = value; OnPropertyChanged(); }
     }
 
+    private string adress;
+    public string Adress
+    {
+        get { return adress; }
+        set { adress = value; OnPropertyChanged(); }
+
+    }
+
 
     private string? passError;
     public string PassError
