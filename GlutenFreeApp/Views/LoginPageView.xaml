@@ -5,58 +5,65 @@
              xmlns:ViewModel ="clr-namespace:GlutenFreeApp.ViewModel"
              x:Class="GlutenFreeApp.Views.LoginPageView"
              Title="LoginPageView">
-    <VerticalStackLayout>
-       
-            <Grid x:Name="GridLogin" RowDefinitions="1*,1*,1*,1*" RowSpacing="20" Padding="40" >
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <!-- Header -->
+        <Label 
+        Text="Log In"
+        FontSize="30"
+        HorizontalOptions="Center"
+        Margin="0,0,0,20"/>
 
-                <Label HorizontalOptions="Center" 
-                Grid.Row="0"
-                Text="Log In"
-                   FontSize="30"
-                />
+        <!-- Username Entry -->
+        <Label 
+        Text="Username:"
+        FontSize="16"
+        Margin="0,0,0,5"/>
+        <Entry
+        x:Name="UsernameEntry"
+        Placeholder="Enter your username"
+        Text="{Binding UserName}"
+        HeightRequest="50"
+        VerticalTextAlignment="Center"/>
 
-                <Entry HorizontalOptions="Center"
-                Grid.Row ="1"
-                Placeholder="UserName"
-                FontFamily="SuperOceanPersonalUse"
-                       Text="{Binding UserName}"
-                       
-                       
-                />
+        <!-- Password Entry -->
+        <Label 
+        Text="Password:"
+        FontSize="16"
+        Margin="0,0,0,5"/>
+        <Entry
+        x:Name="PasswordEntry"
+        Placeholder="Enter your password"
+        Text="{Binding Password}"
+        IsPassword="True"
+        HeightRequest="50"
+        VerticalTextAlignment="Center"/>
 
-                <Entry HorizontalOptions="Center"
-                Grid.Row ="2"
-                Placeholder="Password"
-                FontFamily="SuperOceanPersonalUse"
-                       Text="{Binding Password}"
-                />
+        <!-- Login Button -->
+        <Button
+        Text="Log In"
+        x:Name="LoginButton"
+        BackgroundColor="Purple"
+        Margin="0,20,0,0"/>
 
-                <Button HorizontalOptions="Center"
-                Grid.Row="3"
-                FontFamily="SuperOceanPersonalUse"    
-                Text="Submit"   
-                />
+        <!-- Separator -->
+        <BoxView 
+        HeightRequest="1"
+        Color="LightGray"
+        Margin="0,20"/>
 
-            </Grid>
-       
-       
-            <Grid x:Name="SignUp" RowDefinitions="1*" RowSpacing="20" Padding="40"  >
-                <Button HorizontalOptions="Center"
-                Grid.Row="0"
-                Text="SignUp"
-                        Command="{Binding TransferToSignUp}"
-                />
-            </Grid>
-        
+        <!-- Additional Options -->
+        <Button
+        Text="Sign Up"
+        Command="{Binding TransferToSignUp}"
+        BackgroundColor="Transparent"
+        TextColor="Purple"
+        BorderColor="Purple"
+        BorderWidth="1"/>
 
-        
-            <Grid x:Name="ContinueWithout" RowDefinitions="1* " RowSpacing="20" Padding="40">
-                <Button HorizontalOptions="Center"
-                Grid.Row="0"
-                Text="Continue without login or signup"
-                />
-            </Grid>
-       
-
+        <Button
+        Text="Continue without login"
+        BackgroundColor="Transparent"
+        TextColor="Gray"
+        Margin="0,10,0,0"/>
     </VerticalStackLayout>
 </ContentPage>

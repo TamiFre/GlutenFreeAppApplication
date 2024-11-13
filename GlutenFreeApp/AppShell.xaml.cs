@@ -11,6 +11,7 @@ namespace GlutenFreeApp
             Routing.RegisterRoute("Login", typeof(LoginPageView));
             Routing.RegisterRoute("AllRecipes", typeof(AllRecipeView));
             Routing.RegisterRoute("AddRecipe", typeof(AddRecipeView));
+            Routing.RegisterRoute("AdminPage", typeof(AdminPageView));
         }
     }
 }

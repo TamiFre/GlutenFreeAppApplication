@@ -34,6 +34,11 @@
             ContentTemplate="{DataTemplate views:AddRecipeView}"
             Route="AddRecipe"
             />
+        <ShellContent
+            Title="admin page"
+            ContentTemplate="{DataTemplate views:AdminPageView}"
+            Route="AdminPage"
+            />
     </TabBar>
 
 </Shell>

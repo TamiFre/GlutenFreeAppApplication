@@ -8,6 +8,14 @@ namespace GlutenFreeApp.ViewModel
 {
     public class AddRecipeViewModel:ViewModelBase
     {
+        private string? ingridients;
+        public string? Ingridients 
+        {
+            get { return ingridients; }
+            set { ingridients = value; OnPropertyChanged(); }
+        }
+
+       
 
     }
 }

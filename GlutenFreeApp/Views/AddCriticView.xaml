@@ -5,55 +5,60 @@
              x:DataType="viewmodels:AddCriticViewModel"
              xmlns:viewmodels ="clr-namespace:GlutenFreeApp.ViewModel"
              Title="AddCriticView">
-    <HorizontalStackLayout HorizontalOptions="Center">
-        <VerticalStackLayout HorizontalOptions="Center" >
 
-            <Grid RowDefinitions="1*,1*,1*,1*,1*">
-
+    <HorizontalStackLayout HorizontalOptions="CenterAndExpand" >
+        <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="CenterAndExpand">
+            <Grid RowDefinitions="1*,1*,1*,1*,1*" RowSpacing="15">
+                <!-- Restaurant Name Entry -->
                 <Entry
                 Grid.Row="0"
-            Placeholder="Name of the restaurant"
-            />
+                Placeholder="Name of the restaurant"
+                HeightRequest="50"
+                VerticalTextAlignment="Center"/>
 
+                <!-- Address Entry -->
                 <Entry
                 Grid.Row="1"
-            Placeholder="Address"
-                    Text="{Binding RestName}"
-            />
+                Placeholder="Address"
+                Text="{Binding RestName}"
+                HeightRequest="50"
+                VerticalTextAlignment="Center"/>
 
+                <!-- Critic Entry -->
                 <Entry
                 Grid.Row="2"
-            Placeholder="The Critic"
-                    Text="{Binding TheCritic}"
-            />
+                Placeholder="The Critic"
+                Text="{Binding TheCritic}"
+                HeightRequest="50"
+                VerticalTextAlignment="Center"/>
 
-                <!--כוכבים לסינון-->
+                <!-- Radio Buttons -->
                 <HorizontalStackLayout
-                Grid.Row="3"
+                    
+                Grid.Row="3"     
                 Spacing="10"
                 HorizontalOptions="Center">
                     <RadioButton
                     Content="sterile"
-                       IsChecked="{Binding IsSterile}"
-                    GroupName="groupOne"
-                />
+                    IsChecked="{Binding IsSterile}"
+                    GroupName="groupOne"/>
                     <RadioButton
                     Content="non sterile"
-                        IsChecked="{Binding IsNotSterile}"
-                    GroupName="groupOne"
-                />
+                    IsChecked="{Binding IsNotSterile}"
+                    GroupName="groupOne"/>
                 </HorizontalStackLayout>
+
+                <!-- Submit Button -->
                 <Button
-                    Grid.Row="4"
-                    Text="Submit"
-                    Command="{Binding Submit}"
-                    />
-
-
+                Grid.Row="4"
+                Text="Submit"
+                Command="{Binding Submit}"
+                BackgroundColor="Purple"/>
             </Grid>
-
         </VerticalStackLayout>
     </HorizontalStackLayout>
+
+
 
 
 </ContentPage>
