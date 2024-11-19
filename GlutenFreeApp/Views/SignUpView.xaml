@@ -83,6 +83,7 @@
        Placeholder="Password"
                     Text="{Binding Password}"
        IsPassword="True" />
+                <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"  />
 
                 <Entry 
        x:Name="ConfirmPasswordEntry"

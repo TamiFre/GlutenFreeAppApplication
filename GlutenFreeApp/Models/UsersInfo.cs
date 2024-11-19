@@ -13,5 +13,7 @@ namespace GlutenFreeApp.Models
         public int? TypeID { set; get; }
         public int? UserID { set; get; }
 
+
+
     }
 }

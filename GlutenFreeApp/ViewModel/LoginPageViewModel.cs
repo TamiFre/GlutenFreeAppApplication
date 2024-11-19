@@ -1,9 +1,76 @@
 using System.Windows.Input;
-
+using GlutenFreeApp.Models;
+using GlutenFreeApp.Services;
 namespace GlutenFreeApp.ViewModel;
 
 public class LoginPageViewModel : ViewModelBase
 {
+
+
+    //private GlutenFreeServiceWebAPIProxy proxy;
+    //private IServiceProvider serviceProvider;
+    //public LoginPageViewModel(GlutenFreeServiceWebAPIProxy proxy, IServiceProvider serviceProvider)
+    //{
+    //    this.serviceProvider = serviceProvider;
+    //    this.proxy = proxy;
+    //    TransferToSignUp = new Command(GoToSignUp);
+    //    LoginCommand = new Command(OnLogin);
+    //    password = "";
+    //    InServerCall = false;
+    //    errorMsg = "";
+    //}
+
+
+    //private async void OnLogin()
+    //{
+    //    //Choose the way you want to blobk the page while indicating a server call
+    //    InServerCall = true;
+    //    ErrorMsg = "";
+    //    //Call the server to login
+    //    UsersInfo loginInfo = new UsersInfo { Name = UserName , Password = Password };
+    //    AppUser? u = await this.proxy.Login(loginInfo);
+
+    //    InServerCall = false;
+
+    //    //Set the application logged in user to be whatever user returned (null or real user)
+    //    ((App)Application.Current).LoggedInUser = u;
+    //    if (u == null)
+    //    {
+    //        ErrorMsg = "Invalid email or password";
+    //    }
+    //    else
+    //    {
+    //        ErrorMsg = "";
+    //        //Navigate to the main page
+    //        AppShell shell = serviceProvider.GetService<AppShell>();
+    //        TasksViewModel tasksViewModel = serviceProvider.GetService<TasksViewModel>();
+    //        tasksViewModel.Refresh(); //Refresh data and user in the tasksview model as it is a singleton
+    //        ((App)Application.Current).MainPage = shell;
+    //        Shell.Current.FlyoutIsPresented = false; //close the flyout
+    //        Shell.Current.GoToAsync("Tasks"); //Navigate to the Tasks tab page
+    //    }
+    //}
+
+
+
+
+    private string errorMsg;
+    public string ErrorMsg
+    {
+        get => errorMsg;
+        set
+        {
+            if (errorMsg != value)
+            {
+                errorMsg = value;
+                OnPropertyChanged(nameof(ErrorMsg));
+            }
+        }
+    }
+
+
+
+
     private string username;
     public string UserName
     {
@@ -44,8 +111,5 @@ public class LoginPageViewModel : ViewModelBase
         AppShell.Current.GoToAsync("///SignUp");
     }
 
-    public LoginPageViewModel()
-	{
-        TransferToSignUp = new Command(GoToSignUp);
-	}
+  
 }

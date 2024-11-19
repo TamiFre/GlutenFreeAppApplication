@@ -43,10 +43,10 @@ namespace GlutenFreeApp.Services
 
         //This methos call the Register web API on the server and return the AppUser object with the given ID
         //or null if the call fails
-        public async Task<UsersInfo?> Register(UsersInfo user)
+        public async Task<UsersInfo?> RegisterRegular(UsersInfo user)
         {
             //Set URI to the specific function API
-            string url = $"{this.baseUrl}Register";
+            string url = $"{this.baseUrl}RegisterRegular";
             try
             {
                 //Call the server API
@@ -75,6 +75,42 @@ namespace GlutenFreeApp.Services
             {
                 return null;
             }
+        }
+
+        public async Task<UsersInfo?> RegisterManager(UsersInfo user)
+        {
+            //Set URI to the specific function API
+            string url = $"{this.baseUrl}RegisterManager";
+
+            try
+            {
+                //Call the server API
+                string json = JsonSerializer.Serialize(user);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    UsersInfo? result = JsonSerializer.Deserialize<UsersInfo>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
         }
 
 

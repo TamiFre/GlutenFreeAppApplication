@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using GlutenFreeApp.ViewModel;
 using GlutenFreeApp.Views;
+using GlutenFreeApp.Services;
 
 
 namespace GlutenFreeApp
@@ -19,18 +20,19 @@ namespace GlutenFreeApp
 
 
                 });
-            builder.Services.AddSingleton<LoginPageView>();
-            builder.Services.AddSingleton<LoginPageViewModel>();
-            builder.Services.AddSingleton<SignUpView>();
-            builder.Services.AddSingleton<SignUpViewModel>();
-            builder.Services.AddSingleton<AddCriticViewModel>();
-            builder.Services.AddSingleton<AddCriticView>();
-            builder.Services.AddSingleton<AllRecipeView>();
-            builder.Services.AddSingleton<AllRecipeViewModel>();
-            builder.Services.AddSingleton<AddRecipeView>();
-            builder.Services.AddSingleton<AddRecipeViewModel>();
-            builder.Services.AddSingleton<AdminPageView>();
-            builder.Services.AddSingleton<AdminPageViewModel>();
+            builder.Services.AddSingleton<GlutenFreeServiceWebAPIProxy>();
+            builder.Services.AddTransient<LoginPageView>();
+            builder.Services.AddTransient<LoginPageViewModel>();
+            builder.Services.AddTransient<SignUpView>();
+            builder.Services.AddTransient<SignUpViewModel>();
+            builder.Services.AddTransient<AddCriticViewModel>();
+            builder.Services.AddTransient<AddCriticView>();
+            builder.Services.AddTransient<AllRecipeView>();
+            builder.Services.AddTransient<AllRecipeViewModel>();
+            builder.Services.AddTransient<AddRecipeView>();
+            builder.Services.AddTransient<AddRecipeViewModel>();
+            builder.Services.AddTransient<AdminPageView>();
+            builder.Services.AddTransient<AdminPageViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

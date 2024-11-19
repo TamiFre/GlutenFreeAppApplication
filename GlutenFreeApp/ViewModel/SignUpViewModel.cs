@@ -2,6 +2,7 @@ using GlutenFreeApp.ViewModel;
 using System.Windows.Input;
 using GlutenFreeApp.Services;
 using GlutenFreeApp.Models;
+
 namespace GlutenFreeApp.ViewModel;
 
 public class SignUpViewModel : ViewModelBase
@@ -35,62 +36,78 @@ public class SignUpViewModel : ViewModelBase
 
 
     //ולידציה לסיסמה
+    #region Password
+    private bool showPasswordError;
+
+    public bool ShowPasswordError
+    {
+        get => showPasswordError;
+        set
+        {
+            showPasswordError = value;
+            OnPropertyChanged("ShowPasswordError");
+        }
+    }
 
     private string password;
-    public string? Password
-    {
-        get { return password; }
 
-        set 
+    public string Password
+    {
+        get => password;
+        set
         {
             password = value;
-            PassError = "";
-            OnPropertyChanged(nameof(Password));
-            OnPropertyChanged(nameof(PassError));
-            if (string.IsNullOrEmpty(password))
-            {
-                PassError = "";
-            }
-            else
-            {
-                if (password != null)
-                {
-                    bool IsPasswordOkay = IsValidPassword(password);
-                    if (!IsPasswordOkay)
-                    {
-                        PassError = "סיסמה לא טובה ";
-                    }
-                }
-                
-            }
+            ValidatePassword();
+            OnPropertyChanged("Password");
         }
     }
 
-   
-    private bool IsValidPassword(string password)
+    private string passwordError;
+
+    public string PasswordError
     {
-        bool hasUpperCase = false;
-        bool hasDigit = false;
-        
-        foreach (char c in password)
+        get => passwordError;
+        set
         {
-            if (char.IsUpper(c))
-            {
-                hasUpperCase = true;
-            }
-            if (char.IsDigit(c))
-            {
-                hasDigit = true;
-            }
-
-            if (hasUpperCase && hasDigit)
-            {
-                break; // אם מצאנו כבר גם אות גדולה וגם ספרה, אפשר לעצור את הלולאה
-            }
+            passwordError = value;
+            OnPropertyChanged("PasswordError");
         }
-        return hasUpperCase && hasDigit;
-
     }
+
+    private void ValidatePassword()
+    {
+        //Password must include characters and numbers and be longer than 4 characters
+        if (string.IsNullOrEmpty(password) ||
+            password.Length < 4 ||
+            !password.Any(char.IsDigit) ||
+            !password.Any(char.IsLetter))
+        {
+            this.ShowPasswordError = true;
+        }
+        else
+            this.ShowPasswordError = false;
+    }
+
+    //This property will indicate if the password entry is a password
+    private bool isPassword = true;
+    public bool IsPassword
+    {
+        get => isPassword;
+        set
+        {
+            isPassword = value;
+            OnPropertyChanged("IsPassword");
+        }
+    }
+    //This command will trigger on pressing the password eye icon
+    public Command ShowPasswordCommand { get; }
+    //This method will be called when the password eye icon is pressed
+    public void OnShowPassword()
+    {
+        //Toggle the password visibility
+        IsPassword = !IsPassword;
+    }
+    #endregion
 
     //נחבר את זה לכפתורים
     public ICommand ManagerSelectedCommand { get; set; }
@@ -111,44 +128,73 @@ public class SignUpViewModel : ViewModelBase
     }
 
 
-    //ADD MODELSBL AND THE NEEDED THINGS BELOW
 
-
-
-
+    //HOW TO CHANGE IF IS MANAGER
     private async void OnRegister()
     {
-
-        var newUser = new UsersInfo
+        ValidatePassword();
+        if (!ShowPasswordError)
         {
-            Name = this.Username,
-            Password = this.Password,
-            //need to add the actions in ModelsBl
-            TypeID = this.GetType().Name,
-            UserID = this.GetID.Name
-        };
+            //register for manager
+            if (IsManager)
+            {
+                //Create a new user that is a manager
+                var newUser = new UsersInfo
+                {
+                    Name = this.Username,
+                    Password = this.Password,
+                    TypeID = 3
+                };
+                
+                //Call the Register method on the proxy to register the new user
+                InServerCall = true;
+                newUser = await proxy.RegisterManager(newUser);
+                InServerCall = false;
 
-        //the server is in action
-        InServerCall = true;
-        //call the proxy and the register with new user
-        newUser = await proxy.Register(newUser);
-        //we're done with the server call so enable
-        InServerCall=false;
+                //If the registration was successful, navigate to the login page
+                if (newUser != null)
+                {
+                    InServerCall = false;
 
-        //check if registeration okay
-        if (newUser != null)
-        {
-            InServerCall = false;
-            await Application.Current.MainPage.DisplayAlert("Registration", "User Data Was Saved", "ok");
+                    //ASK OFER
 
-            InServerCall = false;
-            ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+                    ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+                }
+
+            }
+            //if its not a manager
+            else if (!IsManager)
+            {
+                var newUser = new UsersInfo
+                {
+                    Name = this.Username,
+                    Password = this.Password,
+                    TypeID = 1
+                };
+
+                //Call the Register method on the proxy to register the new user
+                InServerCall = true;
+                newUser = await proxy.RegisterRegular(newUser);
+                InServerCall = false;
+
+                //If the registration was successful, navigate to the login page
+                if (newUser != null)
+                {
+                    InServerCall = false;
+
+                    //ASK OFER NAVIGATE TO WHERE?
+
+                    ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+                }
+            }
+
         }
-        else 
+        else
         {
-            //display not good alert
+
+            //If the registration failed, display an error message
             string errorMsg = "Registration failed. Please try again.";
-            await Application.Current.MainPage.DisplayAlert("Registration", errorMsg, "ok");
+            await Application.Current.MainPage.DisplayAlert("Registration", "failed", "ok");
         }
 
     }
