@@ -12,7 +12,9 @@ namespace GlutenFreeApp
         {
 
             InitializeComponent();
-            LoginPageView? v = serviceProvider.GetService<LoginPageView>();
+            //LoginPageView? v = serviceProvider.GetService<LoginPageView>();
+            SignUpView? v = serviceProvider.GetService<SignUpView>();
+
             MainPage = new NavigationPage(v);
         }
     }

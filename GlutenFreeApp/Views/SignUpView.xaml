@@ -30,9 +30,7 @@
                         BorderColor="Gray"
                         BackgroundColor="Purple"
                         Command="{Binding ManagerSelectedCommand}"
-                      
                         >
-
                     </Button>
                     <Label 
                         Text="Manager"
@@ -46,23 +44,21 @@
 
                 <VerticalStackLayout Spacing="5">
                     <Button 
-             x:Name="VisitorDot"
-             HeightRequest="24"
-             WidthRequest="24"
-             CornerRadius="12"
-             Padding="0"
-             BorderColor="Gray"
-             BackgroundColor="Purple"
-             Command="{Binding VisitorSelectedCommand}"
-           
-                         
+                        x:Name="VisitorDot"
+                        HeightRequest="24"
+                        WidthRequest="24"
+                        CornerRadius="12"
+                        Padding="0"
+                        BorderColor="Gray"
+                        BackgroundColor="Purple"
+                        Command="{Binding VisitorSelectedCommand}"   
                         >
                  
                     </Button>
                     <Label 
-             Text="Visitor"
-             FontSize="14"
-             HorizontalOptions="Center" />
+                        Text="Visitor"
+                        FontSize="14"
+                        HorizontalOptions="Center" />
                 </VerticalStackLayout>
 
 
@@ -73,53 +69,48 @@
             <!--common fields for both-->
             <VerticalStackLayout Spacing="15" Margin="0,20,0,0" Grid.Row="1">
                 <Entry 
-       x:Name="UsernameEntry"
-       Placeholder="Username"
+                    x:Name="UsernameEntry"
+                    Placeholder="Username"
                     Text="{Binding Username}"
-       Margin="0,20,0,0" />
+                    Margin="0,20,0,0" />
 
                 <Entry 
-       x:Name="PasswordEntry"
-       Placeholder="Password"
+                    x:Name="PasswordEntry"
+                    Placeholder="Password"
                     Text="{Binding Password}"
-       IsPassword="True" />
+                    IsPassword="True" />
                 <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"  />
 
                 <Entry 
-       x:Name="ConfirmPasswordEntry"
-       Placeholder="Confirm Password"
-       IsPassword="True" />
+                    x:Name="ConfirmPasswordEntry"
+                    Placeholder="Confirm Password"
+                    IsPassword="True" />
             </VerticalStackLayout>
 
             <!--only manager fields-->
             <!--IsVisible="{Binding IsManagerVisible}" - add this to see if manager is chosen-->
             <VerticalStackLayout 
-       Grid.Row="2"
-   x:Name="ManagerFields" 
-  IsVisible="{Binding IsManager}"
-   Spacing="15">
+                Grid.Row="2"
+                x:Name="ManagerFields" 
+                IsVisible="{Binding IsManager}"
+                Spacing="15">
                 <Entry 
-       x:Name="NameEntry"
-       Placeholder="Name"
-                   Text="{Binding Username}"
-                    
+                   x:Name="NameEntry"
+                   Placeholder="Name"
+                   Text="{Binding RestName}"
                     />
 
                 <Entry 
-       x:Name="AddressEntry"
-       Placeholder="Address" 
+                    x:Name="AddressEntry"
+                    Placeholder="Address" 
                     Text="{Binding Adress}"
                     />
 
-                
-                
-                
                 <!--לבדוק איך עושים בינדינג-->
                 
                 <Picker 
-       x:Name="RestaurantTypePicker"
-       Title="Type of Restaurant"
-                    
+                   x:Name="RestaurantTypePicker"
+                   Title="Type of Restaurant"
                     >
                     <Picker.Items
                         >

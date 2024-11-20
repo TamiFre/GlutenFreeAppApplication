@@ -126,6 +126,9 @@ public class LoginPageViewModel : ViewModelBase
     //redirect to sign up
     public ICommand TransferToSignUp { get; set; }
 
+
+    //ASK OFER - IT WONT WORK BECAUSE NO SHELL SO HOW DO I DO THAT
+
     private async void GoToSignUp()
     {
         AppShell.Current.GoToAsync("///SignUp");

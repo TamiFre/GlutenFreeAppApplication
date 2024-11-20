@@ -8,6 +8,15 @@ namespace GlutenFreeApp.ViewModel;
 public class SignUpViewModel : ViewModelBase
 {
     #region properties
+
+    private string restName;
+    public string RestName
+    {
+        get {return restName;}  
+        set {restName = value; OnPropertyChanged(); }
+    }
+
+
     private string username;
     public string Username
     {
@@ -34,6 +43,9 @@ public class SignUpViewModel : ViewModelBase
         }
     }
     #endregion
+
+    //WONT SHOW PASSWORD ERROR
+
 
     //ולידציה לסיסמה
     #region Password
@@ -136,7 +148,7 @@ public class SignUpViewModel : ViewModelBase
     private async void OnRegister()
     {
         ValidatePassword();
-        if (!ShowPasswordError)
+        if (ShowPasswordError)
         {
 
             //NEXT ETERATION - REGISTER FOR MANAGER 
