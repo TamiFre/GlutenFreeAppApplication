@@ -21,9 +21,9 @@
             ContentTemplate="{DataTemplate views:LoginPageView}"
             Route="Login" />
         <ShellContent
-    Title="addcritic"
-    ContentTemplate="{DataTemplate views:AddCriticView}"
-    Route="AddCritic" />
+             Title="addcritic"
+            ContentTemplate="{DataTemplate views:AddCriticView}"
+             Route="AddCritic" />
         <ShellContent
             Title="all recipes"
             ContentTemplate="{DataTemplate views:AllRecipeView}"
@@ -39,6 +39,13 @@
             ContentTemplate="{DataTemplate views:AdminPageView}"
             Route="AdminPage"
             />
+        
+        <!--add info page-->
+        <!--<ShellContent
+            Title="info page"
+            ContentTemplate="{DataTemplate views:}"
+            />-->
+
     </TabBar>
 
 </Shell>

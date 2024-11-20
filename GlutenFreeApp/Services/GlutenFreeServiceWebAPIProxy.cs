@@ -25,11 +25,11 @@ namespace GlutenFreeApp.Services
 
         #region with tunnel
         //Define the serevr IP address! (should be realIP address if you are using a device that is not running on the same machine as the server)
-        private static string serverIP = "zfcz411q-7143.euw.devtunnels.ms";
+        private static string serverIP = "srxdcrp2-5199.euw.devtunnels.ms";
         private HttpClient client;
         private string baseUrl;
-        public static string BaseAddress = "https://zfcz411q-7143.euw.devtunnels.ms/api/";
-        private static string ImageBaseAddress = "https://zfcz411q-7143.euw.devtunnels.ms/";
+        public static string BaseAddress = "https://srxdcrp2-5199.euw.devtunnels.ms/api/";
+        private static string ImageBaseAddress = "https://srxdcrp2-5199.euw.devtunnels.ms/";
         #endregion
         public GlutenFreeServiceWebAPIProxy()
         {
@@ -40,6 +40,9 @@ namespace GlutenFreeApp.Services
             this.client = new HttpClient(handler);
             this.baseUrl = BaseAddress;
         }
+
+
+        #region regular register
 
         //This methos call the Register web API on the server and return the AppUser object with the given ID
         //or null if the call fails
@@ -77,6 +80,50 @@ namespace GlutenFreeApp.Services
             }
         }
 
+        #endregion
+
+        #region Login
+        //Login
+
+        public async Task<UsersInfo?> LoginAsync(UsersInfo userInfo)
+        {
+            //Set URI to the specific function API
+            string url = $"{this.baseUrl}Login";
+            try
+            {
+                //Call the server API
+                string json = JsonSerializer.Serialize(userInfo);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    UsersInfo? result = JsonSerializer.Deserialize<UsersInfo>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
+        //NEXT ETERATION
+
+        #region register manager
         public async Task<UsersInfo?> RegisterManager(UsersInfo user)
         {
             //Set URI to the specific function API
@@ -112,7 +159,7 @@ namespace GlutenFreeApp.Services
             }
 
         }
-
+        #endregion
 
 
 

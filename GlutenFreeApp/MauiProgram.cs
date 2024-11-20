@@ -33,9 +33,10 @@ namespace GlutenFreeApp
             builder.Services.AddTransient<AddRecipeViewModel>();
             builder.Services.AddTransient<AdminPageView>();
             builder.Services.AddTransient<AdminPageViewModel>();
+            builder.Services.AddTransient<AppShell>();
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

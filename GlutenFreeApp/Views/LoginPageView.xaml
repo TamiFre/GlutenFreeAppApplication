@@ -43,6 +43,7 @@
         Text="Log In"
         x:Name="LoginButton"
         BackgroundColor="Purple"
+        Command="{Binding LoginCommand}"
         Margin="0,20,0,0"/>
 
         <!-- Separator -->
@@ -59,7 +60,8 @@
         TextColor="Purple"
         BorderColor="Purple"
         BorderWidth="1"/>
-
+        
+        <!-- Add Button to transfer to info page-->
         <Button
         Text="Continue without login"
         BackgroundColor="Transparent"

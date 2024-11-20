@@ -7,7 +7,7 @@ namespace GlutenFreeApp.ViewModel;
 
 public class SignUpViewModel : ViewModelBase
 {
-    //התכונות
+    #region properties
     private string username;
     public string Username
     {
@@ -33,7 +33,7 @@ public class SignUpViewModel : ViewModelBase
             passError = value; OnPropertyChanged();
         }
     }
-
+    #endregion
 
     //ולידציה לסיסמה
     #region Password
@@ -110,9 +110,11 @@ public class SignUpViewModel : ViewModelBase
     #endregion
 
     //נחבר את זה לכפתורים
+    #region buttons
     public ICommand ManagerSelectedCommand { get; set; }
     public ICommand VisitorSelectedCommand { get; set; }
     public ICommand SubmitCommand { get; set; }
+    #endregion
 
     private GlutenFreeServiceWebAPIProxy proxy;
     public SignUpViewModel(GlutenFreeServiceWebAPIProxy proxy)
@@ -127,43 +129,51 @@ public class SignUpViewModel : ViewModelBase
 
     }
 
-
-
+    
     //HOW TO CHANGE IF IS MANAGER
+
+    #region regsiter
     private async void OnRegister()
     {
         ValidatePassword();
         if (!ShowPasswordError)
         {
+
+            //NEXT ETERATION - REGISTER FOR MANAGER 
+
             //register for manager
-            if (IsManager)
-            {
-                //Create a new user that is a manager
-                var newUser = new UsersInfo
-                {
-                    Name = this.Username,
-                    Password = this.Password,
-                    TypeID = 3
-                };
+            //if (IsManager)
+            //{
+            //    //Create a new user that is a manager
+            //    var newUser = new UsersInfo
+            //    {
+            //        Name = this.Username,
+            //        Password = this.Password,
+            //        TypeID = 3
+            //    };
                 
-                //Call the Register method on the proxy to register the new user
-                InServerCall = true;
-                newUser = await proxy.RegisterManager(newUser);
-                InServerCall = false;
+            //    //Call the Register method on the proxy to register the new user
+            //    InServerCall = true;
+            //    newUser = await proxy.RegisterManager(newUser);
+            //    InServerCall = false;
 
-                //If the registration was successful, navigate to the login page
-                if (newUser != null)
-                {
-                    InServerCall = false;
+            //    //If the registration was successful, navigate to the login page
+            //    if (newUser != null)
+            //    {
+            //        InServerCall = false;
 
-                    //ASK OFER
+            //        //ASK OFER
 
-                    ((App)(Application.Current)).MainPage.Navigation.PopAsync();
-                }
+            //        ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+            //    }
 
-            }
+            //}
+
+
             //if its not a manager
-            else if (!IsManager)
+
+
+            if (!IsManager)
             {
                 var newUser = new UsersInfo
                 {
@@ -198,9 +208,9 @@ public class SignUpViewModel : ViewModelBase
         }
 
     }
+    #endregion
 
-
-    //נחבר את זה אם המנהל הוא האופציה הנבחרת
+    #region selection of type 
     private bool isManager;
     public bool IsManager
     {
@@ -224,6 +234,6 @@ public class SignUpViewModel : ViewModelBase
     {
         IsManager=false;
     }
-
+    #endregion
 
 }
