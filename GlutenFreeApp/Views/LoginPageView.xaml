@@ -6,16 +6,16 @@
              x:Class="GlutenFreeApp.Views.LoginPageView"
              Title="LoginPageView">
     <VerticalStackLayout Padding="20" Spacing="15">
-        <!-- Header -->
+         <!--Header--> 
         <Label 
-        Text="Log In"
-        FontSize="30"
+        Text="🌾LOG IN🌾"
+        FontSize="40"
         HorizontalOptions="Center"
         Margin="0,0,0,20"/>
 
-        <!-- Username Entry -->
+         <!--Username Entry--> 
         <Label 
-        Text="Username:"
+        Text="👤 Username:"
         FontSize="16"
         Margin="0,0,0,5"/>
         <Entry
@@ -25,9 +25,9 @@
         HeightRequest="50"
         VerticalTextAlignment="Center"/>
 
-        <!-- Password Entry -->
+         <!--Password Entry--> 
         <Label 
-        Text="Password:"
+        Text="🔑 Password:"
         FontSize="16"
         Margin="0,0,0,5"/>
         <Entry
@@ -38,7 +38,7 @@
         HeightRequest="50"
         VerticalTextAlignment="Center"/>
 
-        <!-- Login Button -->
+         <!--Login Button--> 
         <Button
         Text="Log In"
         x:Name="LoginButton"
@@ -46,13 +46,13 @@
         Command="{Binding LoginCommand}"
         Margin="0,20,0,0"/>
 
-        <!-- Separator -->
+         <!--Separator--> 
         <BoxView 
         HeightRequest="1"
         Color="LightGray"
         Margin="0,20"/>
 
-        <!-- Additional Options -->
+         <!--Additional Options--> 
         <Button
         Text="Sign Up"
         Command="{Binding TransferToSignUp}"
@@ -61,11 +61,14 @@
         BorderColor="Purple"
         BorderWidth="1"/>
         
-        <!-- Add Button to transfer to info page-->
+         <!--Add Button to transfer to info page-->
         <Button
         Text="Continue without login"
         BackgroundColor="Transparent"
         TextColor="Gray"
+        Command="{Binding TransferToInfo}"
         Margin="0,10,0,0"/>
     </VerticalStackLayout>
+
+
 </ContentPage>

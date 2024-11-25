@@ -33,15 +33,7 @@ public class SignUpViewModel : ViewModelBase
     }
 
 
-    private string? passError;
-    public string PassError
-    {
-        get { return passError; }
-        set 
-        {
-            passError = value; OnPropertyChanged();
-        }
-    }
+    
     #endregion
 
     //WONT SHOW PASSWORD ERROR
@@ -138,6 +130,7 @@ public class SignUpViewModel : ViewModelBase
         VisitorSelectedCommand = new Command(VisitorSelected, () => IsManager);
         SubmitCommand = new Command(OnRegister);
         IsManager = false;
+        PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
 
     }
 

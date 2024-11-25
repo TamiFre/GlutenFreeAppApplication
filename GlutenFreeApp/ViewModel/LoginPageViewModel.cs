@@ -1,6 +1,8 @@
 using System.Windows.Input;
 using GlutenFreeApp.Models;
 using GlutenFreeApp.Services;
+using GlutenFreeApp.Views;
+using Microsoft.Win32;
 namespace GlutenFreeApp.ViewModel;
 
 public class LoginPageViewModel : ViewModelBase
@@ -17,6 +19,7 @@ public class LoginPageViewModel : ViewModelBase
         this.proxy = proxy;
         TransferToSignUp = new Command(GoToSignUp);
         LoginCommand = new Command(OnLogin);
+        TransferToInfo = new Command(GoToInfo);
         password = "";
         InServerCall = false;
         errorMsg = "";
@@ -126,14 +129,21 @@ public class LoginPageViewModel : ViewModelBase
     //redirect to sign up
     public ICommand TransferToSignUp { get; set; }
 
-
-    //ASK OFER - IT WONT WORK BECAUSE NO SHELL SO HOW DO I DO THAT
-
     private async void GoToSignUp()
     {
-        AppShell.Current.GoToAsync("///SignUp");
+        // Navigate to the Register View page
+        ((App)Application.Current).MainPage.Navigation.PushAsync(serviceProvider.GetService<SignUpView>());
     }
     #endregion
 
+    #region redirect to info page
+    public ICommand TransferToInfo { get; set; }
+
+    private async void GoToInfo()
+    {
+        //Navigate to Info
+        ((App)Application.Current).MainPage.Navigation.PushAsync(serviceProvider.GetService<InformationView>());
+    }
+    #endregion
 
 }
