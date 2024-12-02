@@ -5,8 +5,11 @@
              Title="InformationView">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Random Fun Facts!"
             VerticalOptions="Center" 
+            FontSize="90"
             HorizontalOptions="Center" />
+        
+        <!--There will be something that rotates between the facts. the facts are added in the admin page and will be in a list-->
     </VerticalStackLayout>
 </ContentPage>
