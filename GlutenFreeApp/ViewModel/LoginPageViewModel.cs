@@ -39,7 +39,7 @@ public class LoginPageViewModel : ViewModelBase
         //Call the server to login
         UsersInfo loginInfo = new UsersInfo { Name = UserName, Password = Password };
         UsersInfo? u = await this.proxy.LoginAsync(loginInfo);
-
+        
         InServerCall = false;
 
         //Set the application logged in user to be whatever user returned (null or real user)
@@ -60,9 +60,18 @@ public class LoginPageViewModel : ViewModelBase
             ((App)Application.Current).MainPage = shell;
             Shell.Current.FlyoutIsPresented = false; //close the flyout
 
-            //currently navigates to the recipes and later add the info
+            //check if its admin and if so - go to admin page
+            if (u.TypeID == 2)
+            {
+                Shell.Current.GoToAsync("AdminPage");
+            }
 
-            Shell.Current.GoToAsync("AllRecipes"); //Navigate to the Info tab page - add later
+            //currently navigates to the recipes and later add the info
+            else
+            {
+                Shell.Current.GoToAsync("AllRecipes"); //Navigate to the Info tab page - add later 
+
+            }
         }
     }
     #endregion

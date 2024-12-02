@@ -8,6 +8,8 @@ namespace GlutenFreeApp
     {
 
         public UsersInfo? LoggedInUser { get; set; }
+
+
         public App(IServiceProvider serviceProvider)
         {
 

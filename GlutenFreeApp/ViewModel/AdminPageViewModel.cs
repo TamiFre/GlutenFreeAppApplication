@@ -8,5 +8,6 @@ namespace GlutenFreeApp.ViewModel
 {
     public class AdminPageViewModel:ViewModelBase
     {
+
     }
 }
