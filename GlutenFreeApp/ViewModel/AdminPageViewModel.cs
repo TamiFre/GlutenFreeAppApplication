@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GlutenFreeApp.Models;
 using GlutenFreeApp.Services;
 
 
@@ -53,7 +54,15 @@ namespace GlutenFreeApp.ViewModel
 
         private async void AddFact()
         {
-            //add fact to the data base 
+            InServerCall = true;
+
+            //call the server to add the information
+
+            InformationInfo information = new InformationInfo { InfoText = Fact};
+            bool worked = await this.proxy.AddFactAsync(information);
+            InServerCall = false;
+            
+           
         }
 
     }

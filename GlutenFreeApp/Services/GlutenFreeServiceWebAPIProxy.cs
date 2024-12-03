@@ -161,7 +161,32 @@ namespace GlutenFreeApp.Services
         }
         #endregion
 
+        #region Add Fun Fact
+        //will return true if added correctly and false otherwise
+        public async Task<bool> AddFactAsync(InformationInfo fact)
+        {
+            string url = $"{this.baseUrl}AddFact";
+            try 
+            {
+                //do a json to info
+                string json = JsonSerializer.Serialize<InformationInfo>(fact);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //check if fine
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
 
+                return false;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
 
     }
 }
