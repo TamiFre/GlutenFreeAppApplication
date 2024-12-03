@@ -26,6 +26,9 @@ namespace GlutenFreeApp.ViewModel
         #region builder
         public AdminPageViewModel(GlutenFreeServiceWebAPIProxy proxy, IServiceProvider serviceProvider) 
         {
+            this.serviceProvider = serviceProvider;
+            this.proxy = proxy;
+            errorMsg = "";
             AddFactCommand = new Command(AddFact);
         }
         #endregion
@@ -44,6 +47,22 @@ namespace GlutenFreeApp.ViewModel
                 }
             }
         }
+
+        private string errorMsg;
+        public string ErrorMsg
+        {
+            get => errorMsg;
+            set
+            {
+                if (errorMsg != value)
+                {
+                    errorMsg = value;
+                    OnPropertyChanged(nameof(ErrorMsg));
+                }
+            }
+        }
+
+
         #endregion
 
 
@@ -54,6 +73,7 @@ namespace GlutenFreeApp.ViewModel
 
         private async void AddFact()
         {
+            ErrorMsg = "";
             InServerCall = true;
 
             //call the server to add the information
@@ -61,6 +81,15 @@ namespace GlutenFreeApp.ViewModel
             InformationInfo information = new InformationInfo { InfoText = Fact};
             bool worked = await this.proxy.AddFactAsync(information);
             InServerCall = false;
+
+            if (!worked)
+            {
+                ErrorMsg = "Something Went Wrong";
+            }
+            else 
+            {
+                ErrorMsg = "All Good";
+            }
             
            
         }

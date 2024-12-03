@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:GlutenFreeApp.ViewModel"
+             x:DataType="viewModels:AdminPageViewModel"
              x:Class="GlutenFreeApp.Views.AdminPageView"
              Title="AdminPageView">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
             <!-- Header -->
             <Label 
-        Text="Admin Dashboard"
-        FontSize="30"
-        HorizontalOptions="Center"
-        Margin="0,0,0,20"/>
+                 Text="Admin Dashboard"
+                 FontSize="30"
+                 HorizontalOptions="Center"
+                 Margin="0,0,0,20"/>
 
             <!-- Search Section -->
             <Label 
-Text="Search Here"
-FontSize="16"
-Margin="0,0,0,5"/>
+                Text="Search Here"
+                FontSize="16"
+                Margin="0,0,0,5"/>
+            
             <Entry
-Placeholder="Search..."
-HeightRequest="50"
-VerticalTextAlignment="Center"
-Margin="0,0,0,20"/>
+                Placeholder="Search..."
+                HeightRequest="50"
+                VerticalTextAlignment="Center"
+                Margin="0,0,0,20"/>
 
 
             <!-- Facts Section -->
             <Label 
-       Text="Enter Facts"
-       FontSize="16"
-       Margin="0,20,0,5"/>
-            <Entry
-       Placeholder="Enter new fact here"
-       HeightRequest="100"
-       VerticalTextAlignment="Start"/>
-            <Button
-       Text="Submit Fact"
-       BackgroundColor="Purple"
-       Margin="0,10,0,0"/>
+                Text="Enter Facts"
+                FontSize="16"
+                Margin="0,20,0,5"/>
+            <Entry  IsEnabled="{Binding NotInServerCall}"
+                Placeholder="Enter new fact here"
+                HeightRequest="100"
+                Text="{Binding Fact}"
+                VerticalTextAlignment="Start"/>
+            <Button  IsEnabled="{Binding NotInServerCall}"
+                Text="Submit Fact"
+                BackgroundColor="Purple"
+                Command="{Binding AddFactCommand}"
+                Margin="0,10,0,0"/>
+            <Label
+                Text="{Binding ErrorMsg}"
+                />
 
             <!-- Pending Recipes Section -->
             <Label 
-        Text="Pending Recipes"
-        FontSize="20"
-        Margin="0,0,0,10"/>
+                Text="Pending Recipes"
+                FontSize="20"
+                Margin="0,0,0,10"/>
 
             <!-- Note: Bind ItemsSource to your recipes database collection -->
             <CollectionView x:Name="PendingRecipesList"
@@ -52,7 +60,7 @@ Margin="0,0,0,20"/>
                         <Frame Margin="0,5" Padding="10">
                             <Grid ColumnDefinitions="3*,1*,1*">
                                 <!-- Note: Bind these to your recipe properties -->
-                                <Label Grid.Column="0" Text="{Binding RecipeName}"/>
+                                <Label Grid.Column="0"/>
                                 <Button Grid.Column="1" 
                                 Text="Approve" 
                                 BackgroundColor="Purple"
@@ -68,9 +76,9 @@ Margin="0,0,0,20"/>
 
             <!-- Pending Restaurants Section -->
             <Label 
-        Text="Pending Restaurants"
-        FontSize="20"
-        Margin="0,20,0,10"/>
+                 Text="Pending Restaurants"
+                 FontSize="20"
+                 Margin="0,20,0,10"/>
 
             <!-- Note: Bind ItemsSource to your restaurants database collection -->
             <CollectionView x:Name="PendingRestaurantsList"
@@ -80,7 +88,7 @@ Margin="0,0,0,20"/>
                         <Frame Margin="0,5" Padding="10">
                             <Grid ColumnDefinitions="3*,1*,1*">
                                 <!-- Note: Bind these to your restaurant properties -->
-                                <Label Grid.Column="0" Text="{Binding RestaurantName}"/>
+                                <Label Grid.Column="0" />
                                 <Button Grid.Column="1" 
                                 Text="Approve" 
                                 BackgroundColor="Purple"
