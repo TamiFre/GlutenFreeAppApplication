@@ -24,16 +24,20 @@ public class SignUpViewModel : ViewModelBase
         set { username = value; OnPropertyChanged(); }
     }
 
-    private string adress;
-    public string Adress
+    private string address;
+    public string Address
     {
-        get { return adress; }
-        set { adress = value; OnPropertyChanged(); }
+        get { return address; }
+        set { address = value; OnPropertyChanged(); }
 
     }
 
-
-    
+    private string typeFood;
+    public string TypeFood
+    {
+        get { return typeFood; }
+        set { typeFood = value; OnPropertyChanged(); }
+    }
     #endregion
 
    
@@ -147,32 +151,42 @@ public class SignUpViewModel : ViewModelBase
             //NEXT ETERATION - REGISTER FOR MANAGER 
 
             //register for manager
-            //if (IsManager)
-            //{
-            //    //Create a new user that is a manager
-            //    var newUser = new UsersInfo
-            //    {
-            //        Name = this.Username,
-            //        Password = this.Password,
-            //        TypeID = 3
-            //    };
-                
-            //    //Call the Register method on the proxy to register the new user
-            //    InServerCall = true;
-            //    newUser = await proxy.RegisterManager(newUser);
-            //    InServerCall = false;
+            if (IsManager)
+                {
+                    //Create a new user that is a manager
+                    var newUser = new UsersInfo
+                    {
+                        Name = this.Username,
+                        Password = this.Password,
+                        TypeID = 3
+                    };
+                    //Create the restaurant
+                    var newRest = new RestaurantInfo
+                    {
+                        Address = this.Address,
+                        StatusID = 2,//PENDING
+                        
+                        UserID =(int)newUser.UserID
+                    };
 
-            //    //If the registration was successful, navigate to the login page
-            //    if (newUser != null)
-            //    {
-            //        InServerCall = false;
+                    //Call the Register method on the proxy to register the new user
+                    InServerCall = true;
+                    newUser = await proxy.RegisterManager(newUser, newRest);
+                    InServerCall = false;
 
-            //        //ASK OFER
+                    //If the registration was successful, navigate to the login page
+                    if (newUser != null)
+                    {
+                        InServerCall = false;
 
-            //        ((App)(Application.Current)).MainPage.Navigation.PopAsync();
-            //    }
+                        //ASK OFER
 
-            //}
+                        ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+                    }
+
+                }
+
+
 
 
             //if its not a manager
@@ -197,7 +211,6 @@ public class SignUpViewModel : ViewModelBase
                 {
                     InServerCall = false;
 
-                    //ASK OFER NAVIGATE TO WHERE?
 
                     ((App)(Application.Current)).MainPage.Navigation.PopAsync();
                 }

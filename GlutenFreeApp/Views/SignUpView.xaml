@@ -103,7 +103,7 @@
                 <Entry 
                     x:Name="AddressEntry"
                     Placeholder="Address" 
-                    Text="{Binding Adress}"
+                    Text="{Binding Address}"
                     />
 
                 <!--לבדוק איך עושים בינדינג-->
@@ -111,14 +111,15 @@
                 <Picker 
                    x:Name="RestaurantTypePicker"
                    Title="Type of Restaurant"
+                    SelectedItem="{Binding TypeFood}"
                     >
                     <Picker.Items
                         >
-                        <x:String>Fast Food</x:String>
-                        <x:String>Fine Dining</x:String>
-                        <x:String>Casual Dining</x:String>
-                        <x:String>Café</x:String>
-                        <x:String>Buffet</x:String>
+                        <x:String>Italian</x:String>
+                        <x:String>Asian</x:String>
+                        <x:String>Mexican</x:String>
+                        <x:String>BBQ</x:String>
+                        <x:String>French</x:String>
                     </Picker.Items>
                 </Picker>
             </VerticalStackLayout>

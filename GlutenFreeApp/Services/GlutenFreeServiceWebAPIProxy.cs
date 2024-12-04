@@ -124,15 +124,16 @@ namespace GlutenFreeApp.Services
         //NEXT ETERATION
 
         #region register manager
-        public async Task<UsersInfo?> RegisterManager(UsersInfo user)
+        public async Task<ManagerInfo?> RegisterManager(ManagerInfo manager)
         {
             //Set URI to the specific function API
             string url = $"{this.baseUrl}RegisterManager";
 
             try
             {
+              
                 //Call the server API
-                string json = JsonSerializer.Serialize(user);
+                string json = JsonSerializer.Serialize(manager);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 //Check status
@@ -145,7 +146,7 @@ namespace GlutenFreeApp.Services
                     {
                         PropertyNameCaseInsensitive = true
                     };
-                    UsersInfo? result = JsonSerializer.Deserialize<UsersInfo>(resContent, options);
+                    ManagerInfo? result = JsonSerializer.Deserialize<ManagerInfo>(resContent, options);
                     return result;
                 }
                 else
