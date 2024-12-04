@@ -14,7 +14,7 @@ namespace GlutenFreeApp.ViewModel
     public class AdminPageViewModel:ViewModelBase
     {
         //to do:
-        //do a command that adds the fact the admin wants to add to the DB
+        //do a command that adds the fact the admin wants to add to the DB - done
         //do a sort of table that shows all of the pending restaurants and allow the admin to approve them
         //order: first the facts and then do the table - example might be in talsi's git with the monkeys
 
