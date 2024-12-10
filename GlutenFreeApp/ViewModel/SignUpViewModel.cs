@@ -168,10 +168,15 @@ public class SignUpViewModel : ViewModelBase
                         
                         UserID =(int)newUser.UserID
                     };
+                var manager = new ManagerInfo
+                {
+                    UserInfo = newUser,
+                    RestInfo = newRest
+                };
 
                     //Call the Register method on the proxy to register the new user
                     InServerCall = true;
-                    newUser = await proxy.RegisterManager(newUser, newRest);
+                    manager = await proxy.RegisterManager(manager);
                     InServerCall = false;
 
                     //If the registration was successful, navigate to the login page

@@ -189,5 +189,33 @@ namespace GlutenFreeApp.Services
         }
         #endregion
 
+        #region Add Recipe
+
+        //Check
+        public async Task<bool> AddRecipeAsync(RecipeInfo recipeInfo)
+        {
+            string url = $"{this.baseUrl}AddRecipe";
+            try
+            {
+                //do a json to info
+                string json = JsonSerializer.Serialize<RecipeInfo>(recipeInfo);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //check if fine
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+
+                return false;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
+
     }
 }

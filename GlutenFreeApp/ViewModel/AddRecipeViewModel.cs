@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GlutenFreeApp.Models;
 using GlutenFreeApp.Services;
 
 namespace GlutenFreeApp.ViewModel
@@ -24,18 +25,25 @@ namespace GlutenFreeApp.ViewModel
 
 
         #region Properties
-        private string ingridients;
-        public string Ingridients 
+        private string recipe;
+        public string Recipe
         {
-            get { return ingridients; }
-            set { ingridients = value; OnPropertyChanged(); }
+            get { return recipe; }
+            set { recipe = value; OnPropertyChanged(); }
         }
 
-        private string instructions;
-        public string Instructions
-        { 
-            get { return instructions; } 
-            set {ingridients = value; OnPropertyChanged(); } 
+        private string errorMsg;
+        public string ErrorMsg
+        {
+            get => errorMsg;
+            set
+            {
+                if (errorMsg != value)
+                {
+                    errorMsg = value;
+                    OnPropertyChanged(nameof(ErrorMsg));
+                }
+            }
         }
 
         private string typeFood;
@@ -48,11 +56,31 @@ namespace GlutenFreeApp.ViewModel
 
         #region buttons
         public ICommand SubmitRecipeCommand { get; set; }
+        #endregion
+
+        //Check 
 
         private async void AddRecipe()
         {
-            
+            InServerCall = true;
+
+            //call the server to add the information
+
+            //add the recipe as pending
+            RecipeInfo information = new RecipeInfo { Recipe = Recipe, StatusID=2 };
+            bool worked = await this.proxy.AddRecipeAsync(information);
+            InServerCall = false;
+
+            if (!worked)
+            {
+                ErrorMsg = "Something Went Wrong";
+            }
+            else
+            {
+                ErrorMsg = "All Good";
+            }
+
         }
-        #endregion
+       
     }
 }

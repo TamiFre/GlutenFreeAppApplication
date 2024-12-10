@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Android.Database;
 using GlutenFreeApp.Models;
 using GlutenFreeApp.Services;
 
@@ -30,6 +32,7 @@ namespace GlutenFreeApp.ViewModel
             this.proxy = proxy;
             errorMsg = "";
             AddFactCommand = new Command(AddFact);
+            
         }
         #endregion
 
@@ -71,6 +74,7 @@ namespace GlutenFreeApp.ViewModel
         public ICommand AddFactCommand { get; set; }
         #endregion
 
+        #region add fact
         private async void AddFact()
         {
             ErrorMsg = "";
@@ -93,6 +97,13 @@ namespace GlutenFreeApp.ViewModel
             
            
         }
+        #endregion
 
+        #region collection view
+        //ask ofer if what the chat suggested is okay
+
+        public ObservableCollection<RecipeInfo> Recipes { get; set; }
+        public ObservableCollection<RestaurantInfo> Restaurants { get; set; }
+        #endregion
     }
 }
