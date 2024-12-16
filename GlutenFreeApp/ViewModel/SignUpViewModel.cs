@@ -158,14 +158,15 @@ public class SignUpViewModel : ViewModelBase
                     {
                         Name = this.Username,
                         Password = this.Password,
-                        TypeID = 3
+                        TypeID = 3,
+                        UserID = 0
                     };
                     //Create the restaurant
                     var newRest = new RestaurantInfo
                     {
                         Address = this.Address,
                         StatusID = 2,//PENDING
-                        
+                        TypeFoodID = 2,//not working
                         UserID =(int)newUser.UserID
                     };
                 var manager = new ManagerInfo

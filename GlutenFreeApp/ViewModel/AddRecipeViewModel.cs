@@ -64,10 +64,13 @@ namespace GlutenFreeApp.ViewModel
         {
             InServerCall = true;
 
+            UsersInfo? u = ((App)Application.Current).LoggedInUser;
             //call the server to add the information
 
             //add the recipe as pending
-            RecipeInfo information = new RecipeInfo { Recipe = Recipe, StatusID=2 };
+
+            //how to add user id 
+            RecipeInfo information = new RecipeInfo { Recipe = Recipe, StatusID=2, UserID = u.UserID.Value };
             bool worked = await this.proxy.AddRecipeAsync(information);
             InServerCall = false;
 
