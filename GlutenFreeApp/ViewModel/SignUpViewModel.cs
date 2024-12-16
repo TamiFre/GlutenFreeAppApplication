@@ -40,11 +40,17 @@ public class SignUpViewModel : ViewModelBase
     }
     #endregion
 
-   
-
-
     //ולידציה לסיסמה
     #region Password
+    
+    private string confirmPass;
+    public string ConfirmPass
+    {
+        get { return confirmPass; }
+        set { confirmPass = value; OnPropertyChanged(); }
+    }
+
+
     private bool showPasswordError;
 
     public bool ShowPasswordError
@@ -134,33 +140,34 @@ public class SignUpViewModel : ViewModelBase
         VisitorSelectedCommand = new Command(VisitorSelected, () => IsManager);
         SubmitCommand = new Command(OnRegister);
         IsManager = false;
+       
         PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
 
     }
-
-    
-    //HOW TO CHANGE IF IS MANAGER
 
     #region regsiter
     private async void OnRegister()
     {
         ValidatePassword();
+       
         if (!ShowPasswordError)
         {
 
             //NEXT ETERATION - REGISTER FOR MANAGER 
 
             //register for manager
+
             if (IsManager)
+            {
+               
+                //Create a new user that is a manager
+                var newUser = new UsersInfo
                 {
-                    //Create a new user that is a manager
-                    var newUser = new UsersInfo
-                    {
                         Name = this.Username,
                         Password = this.Password,
                         TypeID = 3,
                         UserID = 0
-                    };
+                };
                     //Create the restaurant
                     var newRest = new RestaurantInfo
                     {
@@ -169,12 +176,12 @@ public class SignUpViewModel : ViewModelBase
                         TypeFoodID = 2,//not working
                         UserID =(int)newUser.UserID
                     };
-                var manager = new ManagerInfo
-                {
-                    UserManager = newUser,
-                    RestaurantManager = newRest
-                };
-
+                    var manager = new ManagerInfo
+                    {
+                        UserManager = newUser,
+                        RestaurantManager = newRest
+                    };
+    
                     //Call the Register method on the proxy to register the new user
                     InServerCall = true;
                     manager = await proxy.RegisterManager(manager);
@@ -190,14 +197,9 @@ public class SignUpViewModel : ViewModelBase
                         ((App)(Application.Current)).MainPage.Navigation.PopAsync();
                     }
 
-                }
-
-
-
+            }
 
             //if its not a manager
-
-
             if (!IsManager)
             {
                 var newUser = new UsersInfo
