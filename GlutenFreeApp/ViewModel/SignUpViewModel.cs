@@ -164,15 +164,15 @@ public class SignUpViewModel : ViewModelBase
                     //Create the restaurant
                     var newRest = new RestaurantInfo
                     {
-                        Address = this.Address,
+                        RestAddress = this.Address,
                         StatusID = 2,//PENDING
                         TypeFoodID = 2,//not working
                         UserID =(int)newUser.UserID
                     };
                 var manager = new ManagerInfo
                 {
-                    UserInfo = newUser,
-                    RestInfo = newRest
+                    UserManager = newUser,
+                    RestaurantManager = newRest
                 };
 
                     //Call the Register method on the proxy to register the new user

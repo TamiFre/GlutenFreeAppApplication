@@ -8,7 +8,7 @@ namespace GlutenFreeApp.Models
 {
     public class ManagerInfo
     {
-        public UsersInfo UserInfo { get; set; } = null;
-        public RestaurantInfo RestInfo { get; set; } = null;
+        public UsersInfo UserManager { get; set; } = null;
+        public RestaurantInfo RestaurantManager { get; set; } = null;
     }
 }
