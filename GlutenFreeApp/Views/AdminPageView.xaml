@@ -48,9 +48,15 @@
 
             <!-- Pending Recipes Section -->
             <Label 
-                Text="Pending Recipes"
+                Text="Recipes"
                 FontSize="20"
                 Margin="0,0,0,10"/>
+            
+            
+            <!-- Add Picker status-->
+
+    
+
 
             <!-- Note: Bind ItemsSource to your recipes database collection -->
             <CollectionView x:Name="PendingRecipesList"
@@ -76,12 +82,30 @@
 
             <!-- Pending Restaurants Section -->
             <Label 
-                 Text="Pending Restaurants"
+                 Text="Restaurants"
                  FontSize="20"
                  Margin="0,20,0,10"/>
+            
+            
+            <!--Add Picker Status-->
+
+            <Picker
+              x:Name="Status Rest Picker"
+              Title="Select Status Rest "
+              SelectedItem="{Binding StatusRestSelected}"
+                >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Approved</x:String>
+                        <x:String>Pending</x:String>
+                        <x:String>Declined</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
 
             <!-- Note: Bind ItemsSource to your restaurants database collection -->
-            <CollectionView x:Name="PendingRestaurantsList"
+            <CollectionView x:Name="RestaurantsList"
                     HeightRequest="200" ItemsSource="{Binding Restaurants}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

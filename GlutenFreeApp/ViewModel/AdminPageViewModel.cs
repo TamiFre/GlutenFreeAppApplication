@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
+using Android.Database;
 using GlutenFreeApp.Models;
 using GlutenFreeApp.Services;
+using Java.Util;
 
 
 
@@ -20,7 +21,12 @@ namespace GlutenFreeApp.ViewModel
         //do a sort of table that shows all of the pending restaurants and allow the admin to approve them
         //order: first the facts and then do the table - example might be in talsi's git with the monkeys
 
-        //ADD BINDING
+        #region collection view 
+        
+        public ObservableCollection<RecipeInfo> Recipes { get; set; }
+        public ObservableCollection<RestaurantInfo> Restaurants { get; set; }
+
+        #endregion
 
         private GlutenFreeServiceWebAPIProxy proxy;
         private IServiceProvider serviceProvider;
@@ -32,7 +38,10 @@ namespace GlutenFreeApp.ViewModel
             this.proxy = proxy;
             errorMsg = "";
             AddFactCommand = new Command(AddFact);
+            //ask ofer about the transformation from list to collection
+            Restaurants = new ObservableCollection<RestaurantInfo>();
             
+
         }
         #endregion
 
@@ -65,13 +74,39 @@ namespace GlutenFreeApp.ViewModel
             }
         }
 
+        private string statusRestSelected;
+        public string StatusRestSelected
+        {
+            get => statusRestSelected;
+            set 
+            {
+                if (statusRestSelected != value)
+                {
+                    statusRestSelected = value;
+                    OnPropertyChanged(nameof(StatusRestSelected));
+                }
+            }
+        }
 
+        private string statusRecipeSelected;
+        public string StatusRecipeSelected
+        {
+            get => statusRecipeSelected;
+            set
+            {
+                if (statusRecipeSelected != value)
+                {
+                    statusRecipeSelected = value;
+                    OnPropertyChanged(nameof(StatusRestSelected));
+                }
+            }
+        }
         #endregion
-
-
 
         #region buttons
         public ICommand AddFactCommand { get; set; }
+        public ICommand GetRestByStatus { get; set; }
+        public ICommand GetRecipeByStatus { get; set; }
         #endregion
 
         #region add fact
@@ -99,11 +134,14 @@ namespace GlutenFreeApp.ViewModel
         }
         #endregion
 
-        #region collection view
-        //ask ofer if what the chat suggested is okay
-
-        public ObservableCollection<RecipeInfo> Recipes { get; set; }
-        public ObservableCollection<RestaurantInfo> Restaurants { get; set; }
+        #region get all restaurants
+        public async Task<List <RestaurantInfo>> GetAllRestaurants()
+        {
+            List<RestaurantInfo?> list = await this.proxy.GetAllRestaurants();
+            return list;
+        }
         #endregion
+
+
     }
 }

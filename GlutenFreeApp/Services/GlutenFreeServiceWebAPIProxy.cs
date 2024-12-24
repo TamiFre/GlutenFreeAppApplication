@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using GlutenFreeApp.Models;
 
+
 namespace GlutenFreeApp.Services
 {
     public class GlutenFreeServiceWebAPIProxy
@@ -217,5 +218,77 @@ namespace GlutenFreeApp.Services
         }
         #endregion
 
+        #region Get Restaurants By Status
+        //get restaurantds by status
+        public async Task<List<RestaurantInfo?>> GetRestaurantByStatus(int statusID)
+        {
+            //Set URI to the specific function API
+            string url = $"{this.baseUrl}GetRestByStatus";
+            try
+            {
+                string json = JsonSerializer.Serialize(statusID);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<RestaurantInfo?> result = JsonSerializer.Deserialize<List<RestaurantInfo?>>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex) 
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Get All Restaurants
+        //get all restaurants
+        public async Task<List<RestaurantInfo?>> GetAllRestaurants()
+        {
+            string url = $"{this.baseUrl}GetAllRests";
+            try
+            {
+                // Call the server API
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                // Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    // Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+
+                    // Deserialize result to List<GaragePartsDTO>
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<RestaurantInfo> result = JsonSerializer.Deserialize<List<RestaurantInfo>>(resContent, options);
+
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }
