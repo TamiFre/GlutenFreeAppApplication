@@ -5,10 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Android.Database;
 using GlutenFreeApp.Models;
 using GlutenFreeApp.Services;
-using Java.Util;
 
 
 
@@ -22,10 +20,11 @@ namespace GlutenFreeApp.ViewModel
         //order: first the facts and then do the table - example might be in talsi's git with the monkeys
 
         #region collection view 
-        
+        //private ObservableCollection<RecipeInfo> recipesCol;
         public ObservableCollection<RecipeInfo> Recipes { get; set; }
+        //private ObservableCollection<RestaurantInfo> restaurantsCol;
         public ObservableCollection<RestaurantInfo> Restaurants { get; set; }
-
+  
         #endregion
 
         private GlutenFreeServiceWebAPIProxy proxy;
@@ -38,10 +37,7 @@ namespace GlutenFreeApp.ViewModel
             this.proxy = proxy;
             errorMsg = "";
             AddFactCommand = new Command(AddFact);
-            //ask ofer about the transformation from list to collection
-            Restaurants = new ObservableCollection<RestaurantInfo>();
-            
-
+            FillAllRestaurants();
         }
         #endregion
 
@@ -135,9 +131,17 @@ namespace GlutenFreeApp.ViewModel
         #endregion
 
         #region get all restaurants
-        public async Task<List <RestaurantInfo>> GetAllRestaurants()
+        // fill the observable collection with all the restaurants
+        public async void FillAllRestaurants()
         {
-            List<RestaurantInfo?> list = await this.proxy.GetAllRestaurants();
+            List<RestaurantInfo> restaurants = new List<RestaurantInfo>();
+            restaurants = await GetAllRestaurants();
+            Restaurants = new ObservableCollection<RestaurantInfo>(restaurants);
+        }
+
+        public async Task<List<RestaurantInfo>> GetAllRestaurants()
+        {
+            List<RestaurantInfo> list = await this.proxy.GetAllRestaurants();
             return list;
         }
         #endregion
