@@ -5,10 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:GlutenFreeApp"
     xmlns:views="clr-namespace:GlutenFreeApp.Views"
-    Shell.FlyoutBehavior="Disabled"
-    Title="GlutenFreeApp">
+    Title="GlutenFreeApp"
+    Shell.FlyoutBehavior="Disabled">
 
-   
+
 
     <TabBar>
 
@@ -17,30 +17,24 @@
             ContentTemplate="{DataTemplate views:SignUpView}"
             Route="SignUp" />
         <ShellContent
-            Title="login"
-            ContentTemplate="{DataTemplate views:LoginPageView}"
-            Route="Login" />
-        <ShellContent
-             Title="addcritic"
+            Title="addcritic"
             ContentTemplate="{DataTemplate views:AddCriticView}"
-             Route="AddCritic" />
+            Route="AddCritic" />
         <ShellContent
             Title="all recipes"
             ContentTemplate="{DataTemplate views:AllRecipeView}"
-            Route="AllRecipes"
-            />
+            Route="AllRecipes" />
         <ShellContent
             Title="add recipe"
             ContentTemplate="{DataTemplate views:AddRecipeView}"
-            Route="AddRecipe"
-            />
+            Route="AddRecipe" />
         <ShellContent
             Title="admin page"
             ContentTemplate="{DataTemplate views:AdminPageView}"
-            Route="AdminPage"
-            />
-        
-        <!--add info page-->
+            IsVisible="{Binding IsManager}"
+            Route="AdminPage" />
+
+        <!--  add info page  -->
         <!--<ShellContent
             Title="info page"
             ContentTemplate="{DataTemplate views:}"

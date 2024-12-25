@@ -20,15 +20,17 @@ namespace GlutenFreeApp.ViewModel
         //order: first the facts and then do the table - example might be in talsi's git with the monkeys
 
         #region collection view 
-        //private ObservableCollection<RecipeInfo> recipesCol;
-        public ObservableCollection<RecipeInfo> Recipes { get; set; }
-        //private ObservableCollection<RestaurantInfo> restaurantsCol;
-        public ObservableCollection<RestaurantInfo> Restaurants { get; set; }
+        private ObservableCollection<RecipeInfo> recipesCol;
+        public ObservableCollection<RecipeInfo> RecipesCol { get { return recipesCol; } set { recipesCol = value;OnPropertyChanged(); } }
+        private ObservableCollection<RestaurantInfo> restaurantsCol;
+        public ObservableCollection<RestaurantInfo> RestaurantsCol { get { return restaurantsCol; } set { restaurantsCol = value; OnPropertyChanged(); } }
   
         #endregion
 
         private GlutenFreeServiceWebAPIProxy proxy;
         private IServiceProvider serviceProvider;
+
+     
 
         #region builder
         public AdminPageViewModel(GlutenFreeServiceWebAPIProxy proxy, IServiceProvider serviceProvider) 
@@ -38,8 +40,10 @@ namespace GlutenFreeApp.ViewModel
             errorMsg = "";
             AddFactCommand = new Command(AddFact);
             FillAllRestaurants();
+            FillAllRecipes();
         }
         #endregion
+      
 
         #region properties
         private string fact;
@@ -100,6 +104,8 @@ namespace GlutenFreeApp.ViewModel
         #endregion
 
         #region buttons
+        //bind the buttons to buttons on the view after selecting the picker
+
         public ICommand AddFactCommand { get; set; }
         public ICommand GetRestByStatus { get; set; }
         public ICommand GetRecipeByStatus { get; set; }
@@ -136,7 +142,7 @@ namespace GlutenFreeApp.ViewModel
         {
             List<RestaurantInfo> restaurants = new List<RestaurantInfo>();
             restaurants = await GetAllRestaurants();
-            Restaurants = new ObservableCollection<RestaurantInfo>(restaurants);
+            RestaurantsCol = new ObservableCollection<RestaurantInfo>(restaurants);    
         }
 
         public async Task<List<RestaurantInfo>> GetAllRestaurants()
@@ -146,6 +152,19 @@ namespace GlutenFreeApp.ViewModel
         }
         #endregion
 
-
+        #region get all recipes
+        //fill the observable collection with the data
+        public async void FillAllRecipes()
+        {
+            List<RecipeInfo> recipes = new List<RecipeInfo>();
+            recipes = await GetAllRecipes();
+            RecipesCol = new ObservableCollection<RecipeInfo>(recipes);
+        }
+        public async Task<List<RecipeInfo>> GetAllRecipes()
+        {
+            List<RecipeInfo> list = await this.proxy.GetAllRecipes();
+            return list;
+        }
+        #endregion
     }
 }

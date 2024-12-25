@@ -290,5 +290,44 @@ namespace GlutenFreeApp.Services
             }
         }
         #endregion
+
+        #region Get Recipes By Status
+        #endregion
+
+        #region Get All Recipes
+        public async Task<List<RecipeInfo>> GetAllRecipes()
+        {
+            string url = $"{this.baseUrl}GetAllRecipes";
+            try
+            {
+                // Call the server API
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                // Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    // Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+
+                    // Deserialize result to List<GaragePartsDTO>
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<RecipeInfo> result = JsonSerializer.Deserialize<List<RecipeInfo>>(resContent, options);
+
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }
