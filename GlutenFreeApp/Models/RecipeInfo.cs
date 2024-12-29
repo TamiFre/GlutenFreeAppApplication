@@ -8,7 +8,7 @@ namespace GlutenFreeApp.Models
 {
     public class RecipeInfo
     {
-        public string Recipe { get; set; } = null;
+        public string RecipeText { get; set; } = null;
         public int RecipeID { get; set; }
         public int UserID { get; set; }
         public int StatusID { get; set; }

@@ -30,8 +30,6 @@ namespace GlutenFreeApp.ViewModel
         private GlutenFreeServiceWebAPIProxy proxy;
         private IServiceProvider serviceProvider;
 
-     
-
         #region builder
         public AdminPageViewModel(GlutenFreeServiceWebAPIProxy proxy, IServiceProvider serviceProvider) 
         {
@@ -41,9 +39,45 @@ namespace GlutenFreeApp.ViewModel
             AddFactCommand = new Command(AddFact);
             FillAllRestaurants();
             FillAllRecipes();
+            SearchRestByStatus = new Command(ShowRestaurantsByStatus);
+            SearchRecipeByStatus = new Command(ShowRecipesByStatus);
         }
         #endregion
-      
+
+        #region show restaurants by status chosen in the picker
+        public async void ShowRestaurantsByStatus()
+        {
+            //get the filtered list
+            List<RestaurantInfo> restaurantsByStatus = new List<RestaurantInfo>();
+            restaurantsByStatus = await GetAllRestaurantsByStatus();
+            RestaurantsCol.Clear();
+            RestaurantsCol = new ObservableCollection<RestaurantInfo>(restaurantsByStatus);
+        }
+
+        public async Task<List<RestaurantInfo>> GetAllRestaurantsByStatus()
+        {
+            List<RestaurantInfo> list = await this.proxy.GetRestaurantByStatus(StatusRestSelected+1);
+            return list;
+        }
+        #endregion
+
+        //problem with the proxy
+        #region show recipes by status chosen in the picker
+        public async void ShowRecipesByStatus()
+        {
+            //get the filtered list
+            List<RecipeInfo> recipesByStatus = new List<RecipeInfo>();
+            recipesByStatus = await GetAllRecipesByStatus();
+            RecipesCol.Clear();
+            RecipesCol = new ObservableCollection<RecipeInfo>(recipesByStatus);
+        }
+
+        public async Task<List<RecipeInfo>> GetAllRecipesByStatus()
+        {
+            List<RecipeInfo> list = await this.proxy.GetRecipetByStatus(StatusRecipeSelected + 1);
+            return list;
+        }
+        #endregion
 
         #region properties
         private string fact;
@@ -74,8 +108,8 @@ namespace GlutenFreeApp.ViewModel
             }
         }
 
-        private string statusRestSelected;
-        public string StatusRestSelected
+        private int statusRestSelected;
+        public int StatusRestSelected
         {
             get => statusRestSelected;
             set 
@@ -88,8 +122,8 @@ namespace GlutenFreeApp.ViewModel
             }
         }
 
-        private string statusRecipeSelected;
-        public string StatusRecipeSelected
+        private int statusRecipeSelected;
+        public int StatusRecipeSelected
         {
             get => statusRecipeSelected;
             set
@@ -101,14 +135,14 @@ namespace GlutenFreeApp.ViewModel
                 }
             }
         }
+
         #endregion
 
         #region buttons
-        //bind the buttons to buttons on the view after selecting the picker
-
+        public ICommand SearchRestByStatus { get; set; }
+        public ICommand SearchRecipeByStatus { get; set; }
         public ICommand AddFactCommand { get; set; }
-        public ICommand GetRestByStatus { get; set; }
-        public ICommand GetRecipeByStatus { get; set; }
+
         #endregion
 
         #region add fact

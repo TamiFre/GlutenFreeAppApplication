@@ -43,7 +43,7 @@ namespace GlutenFreeApp.Services
         }
 
 
-        #region regular register
+        #region Regular register
 
         //This methos call the Register web API on the server and return the AppUser object with the given ID
         //or null if the call fails
@@ -124,7 +124,7 @@ namespace GlutenFreeApp.Services
 
         //NEXT ETERATION
 
-        #region register manager
+        #region Register manager
         public async Task<ManagerInfo?> RegisterManager(ManagerInfo manager)
         {
             //Set URI to the specific function API
@@ -219,27 +219,22 @@ namespace GlutenFreeApp.Services
         #endregion
 
         #region Get Restaurants By Status
-        //get restaurantds by status
-        public async Task<List<RestaurantInfo?>> GetRestaurantByStatus(int statusID)
+       
+        public async Task<List<RestaurantInfo>> GetRestaurantByStatus(int statusID)
         {
-            //Set URI to the specific function API
-            string url = $"{this.baseUrl}GetRestByStatus";
+            string url = $"{this.baseUrl}GetRestByStatus?statusID={statusID}";  // Correct query string for GET request
+
             try
             {
-                string json = JsonSerializer.Serialize(statusID);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync(url, content);
-                //Check status
+                HttpResponseMessage response = await client.GetAsync(url);  // Use GET instead of POST
                 if (response.IsSuccessStatusCode)
                 {
-                    //Extract the content as string
                     string resContent = await response.Content.ReadAsStringAsync();
-                    //Desrialize result
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     };
-                    List<RestaurantInfo?> result = JsonSerializer.Deserialize<List<RestaurantInfo?>>(resContent, options);
+                    List<RestaurantInfo> result = JsonSerializer.Deserialize<List<RestaurantInfo>>(resContent, options);
                     return result;
                 }
                 else
@@ -247,16 +242,17 @@ namespace GlutenFreeApp.Services
                     return null;
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return null;
             }
         }
+
         #endregion
 
         #region Get All Restaurants
         //get all restaurants
-        public async Task<List<RestaurantInfo?>> GetAllRestaurants()
+        public async Task<List<RestaurantInfo>> GetAllRestaurants()
         {
             string url = $"{this.baseUrl}GetAllRests";
             try
@@ -291,7 +287,35 @@ namespace GlutenFreeApp.Services
         }
         #endregion
 
+        //the resContent returns empty
         #region Get Recipes By Status
+        public async Task<List<RecipeInfo>> GetRecipetByStatus(int statusID)
+        {
+            string url = $"{this.baseUrl}GetRecipeByStatus?statusID={statusID}";  // Correct query string for GET request
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);  // Use GET instead of POST
+                if (response.IsSuccessStatusCode)
+                {
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<RecipeInfo> result = JsonSerializer.Deserialize<List<RecipeInfo>>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         #endregion
 
         #region Get All Recipes
