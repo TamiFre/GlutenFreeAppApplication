@@ -23,7 +23,6 @@ namespace GlutenFreeApp.ViewModel
         }
         #endregion
 
-
         #region Properties
         private string recipe;
         public string Recipe
