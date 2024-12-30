@@ -78,7 +78,7 @@ namespace GlutenFreeApp.ViewModel
             return list;
         }
         #endregion
-
+        //
         #region properties
         private string fact;
         public string Fact 
@@ -142,6 +142,10 @@ namespace GlutenFreeApp.ViewModel
         public ICommand SearchRestByStatus { get; set; }
         public ICommand SearchRecipeByStatus { get; set; }
         public ICommand AddFactCommand { get; set; }
+        public ICommand ApproveRestaurant { get; set; }
+        public ICommand DeclineRestaurant { get; set; }
+        public ICommand ApproveRecipe { get; set; }
+        public ICommand DeclineRecipe { get; set; }
 
         #endregion
 

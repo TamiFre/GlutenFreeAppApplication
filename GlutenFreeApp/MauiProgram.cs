@@ -37,6 +37,7 @@ namespace GlutenFreeApp
             builder.Services.AddTransient<InformationViewModel>();
             builder.Services.AddTransient<AppShell>();
             builder.Services.AddTransient<AppShellViewModel>();
+            builder.Services.AddTransient<InfoTabs>();
 
 #if DEBUG
             builder.Logging.AddDebug();

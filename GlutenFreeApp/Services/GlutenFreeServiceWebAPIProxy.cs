@@ -287,7 +287,6 @@ namespace GlutenFreeApp.Services
         }
         #endregion
 
-        //the resContent returns empty
         #region Get Recipes By Status
         public async Task<List<RecipeInfo>> GetRecipetByStatus(int statusID)
         {

@@ -12,10 +12,7 @@
 
     <TabBar>
 
-        <ShellContent
-            Title="sign up"
-            ContentTemplate="{DataTemplate views:SignUpView}"
-            Route="SignUp" />
+       
         <ShellContent
             Title="addcritic"
             ContentTemplate="{DataTemplate views:AddCriticView}"
@@ -33,12 +30,11 @@
             ContentTemplate="{DataTemplate views:AdminPageView}"
             IsVisible="{Binding IsManager}"
             Route="AdminPage" />
-
-        <!--  add info page  -->
-        <!--<ShellContent
+        <ShellContent
             Title="info page"
-            ContentTemplate="{DataTemplate views:}"
-            />-->
+            ContentTemplate="{DataTemplate views:InformationView}"
+            Route="InfoPage"
+            />
 
     </TabBar>
 

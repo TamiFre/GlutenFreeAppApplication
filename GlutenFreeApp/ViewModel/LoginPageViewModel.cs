@@ -2,12 +2,13 @@ using System.Windows.Input;
 using GlutenFreeApp.Models;
 using GlutenFreeApp.Services;
 using GlutenFreeApp.Views;
+using Microsoft.Maui.Controls;
 using Microsoft.Win32;
 namespace GlutenFreeApp.ViewModel;
 
 public class LoginPageViewModel : ViewModelBase
 {
-
+    //ASK OFER HOW TO OPEN THE SHELL EVEN WITHOUT LOGIN
 
     private GlutenFreeServiceWebAPIProxy proxy;
     private IServiceProvider serviceProvider;
@@ -151,7 +152,7 @@ public class LoginPageViewModel : ViewModelBase
     private async void GoToInfo()
     {
         //Navigate to Info
-        ((App)Application.Current).MainPage.Navigation.PushAsync(serviceProvider.GetService<InformationView>());
+        ((App)Application.Current).MainPage.Navigation.PushAsync(serviceProvider.GetService<InfoTabs>());
     }
     #endregion
 

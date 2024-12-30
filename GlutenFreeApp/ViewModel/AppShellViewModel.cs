@@ -18,6 +18,14 @@ namespace GlutenFreeApp.ViewModel
             this.currentUser = ((App)Application.Current).LoggedInUser;
         }
 
+        //check if someone is logged in - returns true if someone is NOT logged in
+        public bool IsLoggedIn
+        {
+            get 
+            {
+                return this.currentUser==null;
+            }
+        }
 
         //check if its admin
         public bool IsManager
