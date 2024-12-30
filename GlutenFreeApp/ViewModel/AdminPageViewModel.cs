@@ -61,7 +61,7 @@ namespace GlutenFreeApp.ViewModel
         }
         #endregion
 
-        //problem with the proxy
+        
         #region show recipes by status chosen in the picker
         public async void ShowRecipesByStatus()
         {
@@ -78,7 +78,7 @@ namespace GlutenFreeApp.ViewModel
             return list;
         }
         #endregion
-        //
+      
         #region properties
         private string fact;
         public string Fact 
