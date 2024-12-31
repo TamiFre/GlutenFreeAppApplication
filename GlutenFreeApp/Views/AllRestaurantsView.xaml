@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GlutenFreeApp.Views.AllRestaurantsView"
+             xmlns:models="clr-namespace:GlutenFreeApp.Models"
+             xmlns:viewModels="clr-namespace:GlutenFreeApp.ViewModel"
+             Title="AllRestaurantsView">
+    <VerticalStackLayout>
+        <Label
+       Text="All Restaurants"
+       HorizontalOptions="CenterAndExpand"
+       FontSize="30"
+       Margin="30"
+       />
+
+
+        <Picker
+x:Name="FoodTypePicker"
+Title="Select restaurant type"
+SelectedIndex="{Binding TypeFoodSelected}"
+>
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Italian</x:String>
+                    <x:String>Asian</x:String>
+                    <x:String>Mexican</x:String>
+                    <x:String>BBQ</x:String>
+                    <x:String>French</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button
+            Text="Search By the Chosen food type"
+            Command="{Binding SearchByFoodSelected}"
+            />
+
+        <CollectionView
+             x:Name="PendingRestaurantsList"
+             HeightRequest="200"
+             ItemsSource="{Binding RestaurantsCol}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:RestaurantInfo">
+                    <Frame Margin="0,5" Padding="10">
+                        <Grid RowDefinitions="*" ColumnDefinitions="*,*">
+                            <Label Text="{Binding RestAddress}" Grid.Column="0" />
+
+                            <Label Text="{Binding TypeFoodID}" FontSize="14" TextColor="Gray" Grid.Column="1"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
