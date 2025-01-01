@@ -20,11 +20,35 @@ namespace GlutenFreeApp.ViewModel
             this.serviceProvider = serviceProvider;
             FillAllApprovedRestaurants();
             SearchByFoodSelected = new Command(ShowRestaurantsByFoodSelected);
+
+            //ASK OFER _ HOW RO ACCESS THE SINGULAR ITEM 
+
+            //ExpandCommand - new Command(FillAllCritics());
         }
 
         #region observable collection
         private ObservableCollection<RestaurantInfo> restaurantsCol;
         public ObservableCollection<RestaurantInfo> RestaurantsCol { get { return restaurantsCol; } set { restaurantsCol = value; OnPropertyChanged(); } }
+        #endregion
+
+        #region observable collection of the critics of the chosen restaurant
+        private ObservableCollection<CriticInfo> criticCol;
+        public ObservableCollection<CriticInfo> CriticCol
+        {
+            get { return criticCol; }
+            set { criticCol = value; OnPropertyChanged(); }
+        }
+        #endregion
+
+        #region get critics
+        public ICommand ExpandCommand { get; set; }
+
+        public async void FillAllCritics(RestaurantInfo restaurantInfo)
+        {
+            List<CriticInfo> critics = new List<CriticInfo>();
+            critics = await this.proxy.GetCriticForRestaurant(restaurantInfo);
+            CriticCol = new ObservableCollection<CriticInfo>(critics);
+        }
         #endregion
 
         #region get approved restauratns
@@ -54,11 +78,28 @@ namespace GlutenFreeApp.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private string stringFoodSelected;
+        public string StringFoodSelected
+        {
+            get => stringFoodSelected;
+            set
+            {
+                stringFoodSelected = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        //ask ofer
+        #region transform the int of the food type to a string
+      
         #endregion
 
         #region show restaurants by food type selected
         public async void ShowRestaurantsByFoodSelected()
         {
+            
             //get the filtered list
             List<RestaurantInfo> restaurantsByStatus = new List<RestaurantInfo>();
             restaurantsByStatus = await GetAllRestaurantsByFoodSelected();
@@ -68,26 +109,23 @@ namespace GlutenFreeApp.ViewModel
 
         public async Task<List<RestaurantInfo>> GetAllRestaurantsByFoodSelected()
         {
+            if (TypeFoodSelected + 1 == 1)
+            {
+                List<RestaurantInfo> list1 = await this.proxy.GetAllApprovedRestaurants();
+                return list1;
+            }
+            else 
+            { 
             List<RestaurantInfo> list = await this.proxy.GetApprovedRestaurantsByChosenFoodType(TypeFoodSelected + 1);
             return list;
+            }
         }
 
         public ICommand SearchByFoodSelected { get; set; }
         #endregion
 
         //not working
-        #region transform the int of the food type to a string
-        public enum FoodType
-        {
-            Italian = 1,
-            Asian = 2,
-            Mexican = 3,
-            BBQ = 4,
-            French = 5
-        }
-
        
-        #endregion
 
     }
 }

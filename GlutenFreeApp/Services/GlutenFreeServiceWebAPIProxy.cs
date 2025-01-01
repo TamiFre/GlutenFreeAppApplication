@@ -456,5 +456,42 @@ namespace GlutenFreeApp.Services
             }
         }
         #endregion
+
+        #region Get All Critics For A Specific Restaurant
+        public async Task<List<CriticInfo>?> GetCriticForRestaurant(RestaurantInfo restaurantInfo)
+        {
+            string url = $"{this.baseUrl}GetCriticForRestaurant";
+            try
+            {
+                //do a json to info
+                string json = JsonSerializer.Serialize<RestaurantInfo>(restaurantInfo);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //check if fine
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<CriticInfo>? result = JsonSerializer.Deserialize<List<CriticInfo>?>(resContent, options);
+                    return result;
+                }
+
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

@@ -21,6 +21,7 @@ SelectedIndex="{Binding TypeFoodSelected}"
 >
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
+                    <x:String>ShowAll</x:String>
                     <x:String>Italian</x:String>
                     <x:String>Asian</x:String>
                     <x:String>Mexican</x:String>
@@ -42,10 +43,11 @@ SelectedIndex="{Binding TypeFoodSelected}"
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:RestaurantInfo">
                     <Frame Margin="0,5" Padding="10">
-                        <Grid RowDefinitions="*" ColumnDefinitions="*,*">
-                            <Label Text="{Binding RestAddress}" Grid.Column="0" />
+                        <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
+                            <Label Text="{Binding RestAddress}" Grid.Column="0" Grid.Row="0" />
 
-                            <Label Text="{Binding TypeFoodID}" FontSize="14" TextColor="Gray" Grid.Column="1"/>
+                            <Label Text="{Binding RestName}" FontSize="14" TextColor="Gray" Grid.Column="0" Grid.Row="1"/>
+                            <Button Text="Expand" Command="{Binding  Source={x:Reference PendingRestaurantsList}, Path=BindingContext.ExpandCommand}" CommandParameter="{Binding .}" Grid.Column="1" CornerRadius="4" WidthRequest="100"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>

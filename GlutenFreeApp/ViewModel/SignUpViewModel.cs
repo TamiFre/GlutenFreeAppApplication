@@ -174,7 +174,8 @@ public class SignUpViewModel : ViewModelBase
                         RestAddress = this.Address,
                         StatusID = 2,//PENDING
                         TypeFoodID = 2,//not working
-                        UserID =(int)newUser.UserID
+                        UserID =(int)newUser.UserID,
+                        RestName = this.RestName
                     };
                     var manager = new ManagerInfo
                     {
