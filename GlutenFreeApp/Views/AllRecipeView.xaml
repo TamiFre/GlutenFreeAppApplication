@@ -9,18 +9,22 @@
         <Label
             Text="All Recipes"
             HorizontalOptions="CenterAndExpand"
+            FontAttributes="Bold"
+            Margin="0, 0, 0, 30"
             FontSize="30"
-            Margin="30"
             />
 
         
         <Picker
-     x:Name="FoodTypePicker"
-     Title="Select recipe type"
-     SelectedItem="{Binding TypeFoodSelected}"
-     >
+             x:Name="FoodTypePicker"
+             Title="Select recipe type"
+             SelectedIndex="{Binding TypeFoodSelected}"
+             HeightRequest="60"
+             Margin="0, 0, 0, 10"
+                 >
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
+                    <x:String>ShowAll</x:String>
                     <x:String>Italian</x:String>
                     <x:String>Asian</x:String>
                     <x:String>Mexican</x:String>
@@ -30,9 +34,16 @@
             </Picker.ItemsSource>
         </Picker>
 
+        <Button
+            Text="Search by the food type"
+            Command="{Binding SearchByFoodTypeSelected}"
+            HeightRequest="30"
+            Margin="0, 0, 0, 30"
+            />
+
         <CollectionView
       x:Name="PendingRecipesList"
-      HeightRequest="200"
+      HeightRequest="300"
       ItemsSource="{Binding RecipesCol}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:RecipeInfo">

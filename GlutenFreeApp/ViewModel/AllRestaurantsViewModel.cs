@@ -21,7 +21,7 @@ namespace GlutenFreeApp.ViewModel
             FillAllApprovedRestaurants();
             SearchByFoodSelected = new Command(ShowRestaurantsByFoodSelected);
 
-            //ASK OFER _ HOW RO ACCESS THE SINGULAR ITEM 
+            //ASK OFER _ HOW RO ACCESS THE SINGULAR ITEM AND FOOD TYPE
 
             //ExpandCommand - new Command(FillAllCritics());
         }
@@ -91,11 +91,6 @@ namespace GlutenFreeApp.ViewModel
         }
         #endregion
 
-        //ask ofer
-        #region transform the int of the food type to a string
-      
-        #endregion
-
         #region show restaurants by food type selected
         public async void ShowRestaurantsByFoodSelected()
         {
@@ -123,9 +118,6 @@ namespace GlutenFreeApp.ViewModel
 
         public ICommand SearchByFoodSelected { get; set; }
         #endregion
-
-        //not working
-       
 
     }
 }

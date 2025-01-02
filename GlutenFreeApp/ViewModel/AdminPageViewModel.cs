@@ -60,7 +60,6 @@ namespace GlutenFreeApp.ViewModel
             return list;
         }
         #endregion
-
         
         #region show recipes by status chosen in the picker
         public async void ShowRecipesByStatus()

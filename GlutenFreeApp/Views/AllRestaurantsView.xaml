@@ -5,20 +5,23 @@
              xmlns:models="clr-namespace:GlutenFreeApp.Models"
              xmlns:viewModels="clr-namespace:GlutenFreeApp.ViewModel"
              Title="AllRestaurantsView">
-    <VerticalStackLayout>
+    <VerticalStackLayout IsEnabled="{Binding NotInServerCall}">
         <Label
        Text="All Restaurants"
        HorizontalOptions="CenterAndExpand"
        FontSize="30"
-       Margin="30"
+       FontAttributes="Bold"
+             Margin="0, 0, 0, 30"
        />
 
 
         <Picker
-x:Name="FoodTypePicker"
-Title="Select restaurant type"
-SelectedIndex="{Binding TypeFoodSelected}"
->
+            x:Name="FoodTypePicker"
+            Title="Select restaurant type"
+            SelectedIndex="{Binding TypeFoodSelected}"
+             HeightRequest="60"
+            Margin="0, 0, 0, 10"
+                                >
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>ShowAll</x:String>
@@ -34,15 +37,18 @@ SelectedIndex="{Binding TypeFoodSelected}"
         <Button
             Text="Search By the Chosen food type"
             Command="{Binding SearchByFoodSelected}"
+            HeightRequest="30"
+            Margin="0, 0, 0, 30"
             />
 
         <CollectionView
              x:Name="PendingRestaurantsList"
-             HeightRequest="200"
+             HeightRequest="300"
+            
              ItemsSource="{Binding RestaurantsCol}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:RestaurantInfo">
-                    <Frame Margin="0,5" Padding="10">
+                    <Frame  Margin="0, 10" Padding="15">
                         <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
                             <Label Text="{Binding RestAddress}" Grid.Column="0" Grid.Row="0" />
 

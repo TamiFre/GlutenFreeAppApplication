@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GlutenFreeApp.Models;
+using System.Windows.Input;
 
 namespace GlutenFreeApp.ViewModel
 {
@@ -20,6 +21,7 @@ namespace GlutenFreeApp.ViewModel
             this.proxy = proxy;
             this.serviceProvider = serviceProvider;
             FillAllRecipes();
+            SearchByFoodTypeSelected = new Command(ShowRecipesByFoodSelected);
         }
 
         #region Observsble collection
@@ -42,11 +44,38 @@ namespace GlutenFreeApp.ViewModel
         }
         #endregion
 
+        #region Show By Food Selection
+        public ICommand SearchByFoodTypeSelected { get; set; }
+        public async void ShowRecipesByFoodSelected()
+        {
+
+            //get the filtered list
+            List<RecipeInfo> recipesByStatus = new List<RecipeInfo>();
+            recipesByStatus = await GetAllRecipesByFoodSelected();
+            RecipesCol.Clear();
+            RecipesCol = new ObservableCollection<RecipeInfo>(recipesByStatus);
+        }
+
+        public async Task<List<RecipeInfo>> GetAllRecipesByFoodSelected()
+        {
+            if (TypeFoodSelected + 1 == 1)
+            {
+                List<RecipeInfo> list1 = await this.proxy.GetAllApprovedRecipes();
+                return list1;
+            }
+            else
+            {
+                List<RecipeInfo> list = await this.proxy.GetApprovedRecipesByChosenFoodType(TypeFoodSelected + 1);
+                return list;
+            }
+        }
+        #endregion
+
         #region Properties
         //maybe do it an int and do a constant to each typefood because of the dto and models
 
-        private string typeFoodSelected;
-        public string TypeFoodSelected 
+        private int typeFoodSelected;
+        public int TypeFoodSelected 
         {
             get=> typeFoodSelected;
             set

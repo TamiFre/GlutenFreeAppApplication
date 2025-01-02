@@ -12,5 +12,6 @@ namespace GlutenFreeApp.Models
         public int RecipeID { get; set; }
         public int UserID { get; set; }
         public int StatusID { get; set; }
+        public int TypeFoodID { get; set; }
     }
 }

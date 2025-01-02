@@ -5,7 +5,7 @@
              xmlns:ViewModel ="clr-namespace:GlutenFreeApp.ViewModel"
              x:Class="GlutenFreeApp.Views.LoginPageView"
              Title="LoginPageView">
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding NotInServerCall}">
          <!--Header--> 
         <Label 
         Text="🌾LOG IN🌾"
@@ -74,6 +74,12 @@
         TextColor="Gray"
         Command="{Binding TransferToInfo}"
         Margin="0,10,0,0"/>
+
+        <ActivityIndicator IsRunning="{Binding InServerCall}" 
+         Color="Red" 
+         VerticalOptions="Center" 
+         HorizontalOptions="Center" />
+
     </VerticalStackLayout>
 
 

@@ -493,5 +493,34 @@ namespace GlutenFreeApp.Services
             }
         }
         #endregion
+
+        #region Get Approved Recipes By Food Type Selection
+        public async Task<List<RecipeInfo>?> GetApprovedRecipesByChosenFoodType(int chosenFoodType)
+        {
+            string url = $"{this.baseUrl}GetApprovedRecipesByChosenFoodType?chosenFoodType={chosenFoodType}";
+            try
+            {
+                // Call the server API
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    // Deserialize result to List<GaragePartsDTO>
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<RecipeInfo> result = JsonSerializer.Deserialize<List<RecipeInfo>>(resContent, options);
+                    return result;
+                }
+                return null;
+            }
+            catch (Exception ex) 
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }
