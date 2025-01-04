@@ -7,9 +7,20 @@
         <Label 
             Text="Random Fun Facts!"
             VerticalOptions="Center" 
-            FontSize="90"
+            FontSize="60"
             HorizontalOptions="Center" />
-        
+
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding CurrentFact}"
+            />
+
+        <Button
+            HorizontalOptions="Center"
+            Text="If You Dont Want To wait For the Random Fact - Press Here!"
+            Command="{Binding GetRandomFactCommand}"
+            />
+
         <!--There will be something that rotates between the facts. the facts are added in the admin page and will be in a list-->
     </VerticalStackLayout>
 </ContentPage>

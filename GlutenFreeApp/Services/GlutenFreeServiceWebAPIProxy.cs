@@ -189,7 +189,7 @@ namespace GlutenFreeApp.Services
             }
         }
         #endregion
-
+       
         #region Add Recipe
 
         //Check
@@ -217,7 +217,7 @@ namespace GlutenFreeApp.Services
             }
         }
         #endregion
-
+        
         #region Get Restaurants By Status
        
         public async Task<List<RestaurantInfo>> GetRestaurantByStatus(int statusID)
@@ -249,7 +249,7 @@ namespace GlutenFreeApp.Services
         }
 
         #endregion
-
+        
         #region Get All Restaurants
         //get all restaurants
         public async Task<List<RestaurantInfo>> GetAllRestaurants()
@@ -266,7 +266,7 @@ namespace GlutenFreeApp.Services
                     // Extract the content as string
                     string resContent = await response.Content.ReadAsStringAsync();
 
-                    // Deserialize result to List<GaragePartsDTO>
+                    // Deserialize result to List
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
@@ -332,7 +332,7 @@ namespace GlutenFreeApp.Services
                     // Extract the content as string
                     string resContent = await response.Content.ReadAsStringAsync();
 
-                    // Deserialize result to List<GaragePartsDTO>
+                    // Deserialize result to List
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
@@ -368,7 +368,7 @@ namespace GlutenFreeApp.Services
                     // Extract the content as string
                     string resContent = await response.Content.ReadAsStringAsync();
 
-                    // Deserialize result to List<GaragePartsDTO>
+                    // Deserialize result to List
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
@@ -437,7 +437,7 @@ namespace GlutenFreeApp.Services
                 {
                     // Extract the content as string
                     string resContent = await response.Content.ReadAsStringAsync();
-                    // Deserialize result to List<GaragePartsDTO>
+                    // Deserialize result to List
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
@@ -506,12 +506,40 @@ namespace GlutenFreeApp.Services
                 {
                     // Extract the content as string
                     string resContent = await response.Content.ReadAsStringAsync();
-                    // Deserialize result to List<GaragePartsDTO>
+                    // Deserialize result to List
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     };
                     List<RecipeInfo> result = JsonSerializer.Deserialize<List<RecipeInfo>>(resContent, options);
+                    return result;
+                }
+                return null;
+            }
+            catch (Exception ex) 
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Get All Fun Facts
+        public async Task<List<InformationInfo>?> GetAllFunFacts()
+        {
+            string url = $"{this.baseUrl}GetAllFacts";
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    // Deserialize result to List
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<InformationInfo> result = JsonSerializer.Deserialize<List<InformationInfo>>(resContent, options);
                     return result;
                 }
                 return null;
