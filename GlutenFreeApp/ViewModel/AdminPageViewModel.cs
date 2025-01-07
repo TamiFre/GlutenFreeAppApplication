@@ -43,6 +43,7 @@ namespace GlutenFreeApp.ViewModel
             SearchRestByStatus = new Command(ShowRestaurantsByStatus);
             SearchRecipeByStatus = new Command(ShowRecipesByStatus);
             ApproveRestaurant = new Command(ChangeRestStatusToApprove);
+            DeclineRestaurant = new Command(ChangeRestStatusToDecline);
         }
         #endregion
 
@@ -199,12 +200,24 @@ namespace GlutenFreeApp.ViewModel
 
         public async void ChangeRestStatusToApprove()
         {
+            ErrorMsgStatus = "";
             bool success = await this.proxy.ChangeRestStatusToApproved(SelectedRest);
             if (success)
             {
                 ErrorMsgStatus = "Status Changed to Approved";
             }
             ErrorMsgStatus = "Something Went Wrong";
+        }
+
+        public async void ChangeRestStatusToDecline()
+        {
+            ErrorMsgStatus = "";
+            bool success = await this.proxy.ChangeRestStatusToDecline(SelectedRest);
+            if (success)
+            {
+                ErrorMsgStatus = "Status Changed To Declined";
+            }
+            ErrorMsgStatus = "Something went Wrong";
         }
         #endregion
 

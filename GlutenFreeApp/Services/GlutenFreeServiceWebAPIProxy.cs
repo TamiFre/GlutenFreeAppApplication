@@ -589,6 +589,39 @@ namespace GlutenFreeApp.Services
                 return false;
             }
         }
+
+        public async Task<bool> ChangeRestStatusToDecline(RestaurantInfo restaurantInfo)
+        {
+            string url = $"{this.baseUrl}ChangeRestStatusToDecline";
+            try
+            {
+                //Call the server API
+                string json = JsonSerializer.Serialize(restaurantInfo);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    bool result = JsonSerializer.Deserialize<bool>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         #endregion
     }
 }
