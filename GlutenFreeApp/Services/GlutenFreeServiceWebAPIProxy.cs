@@ -550,5 +550,45 @@ namespace GlutenFreeApp.Services
             }
         }
         #endregion
+
+        //ask ofer
+        #region Get All Statuses
+        #endregion
+
+        #region Change Rest Status
+        //will return true if it worked and false if it didnt
+        public async Task<bool> ChangeRestStatusToApproved(RestaurantInfo restaurantInfo)
+        {
+            string url = $"{this.baseUrl}ChangeRestStatusToApprove";
+            try
+            {
+                //Call the server API
+                string json = JsonSerializer.Serialize(restaurantInfo);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    bool result = JsonSerializer.Deserialize<bool>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
     }
 }

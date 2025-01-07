@@ -72,7 +72,9 @@
             <CollectionView
                 x:Name="PendingRecipesList"
                 HeightRequest="200"
-                ItemsSource="{Binding RecipesCol}">
+                ItemsSource="{Binding RecipesCol}"
+               
+                >
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RecipeInfo">
                         <Frame Margin="0,5" Padding="10">
@@ -144,7 +146,10 @@
             <CollectionView
                 x:Name="RestaurantsList"
                 HeightRequest="200"
-                ItemsSource="{Binding RestaurantsCol}">
+                ItemsSource="{Binding RestaurantsCol}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedObject}"
+                >
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RestaurantInfo">
                         <Frame Margin="0,5" Padding="10">
@@ -154,7 +159,7 @@
                                         <SwipeItem
                                              Text="Reject"
                                              BackgroundColor="Gray"
-                                             Command="{Binding  Source={x:Reference RestaurantsList}, Path=BindingContext.ApproveRestaurant}"
+                                             Command="{Binding  Source={x:Reference RestaurantsList}, Path=BindingContext.DeclineRestaurant}"
                                              CommandParameter="{Binding .}"
                                              />
                                     </SwipeItems>
@@ -165,7 +170,7 @@
                                         <SwipeItem
                                               Text="Approve"
                                               BackgroundColor="Purple"
-                                              Command="{Binding  Source={x:Reference RestaurantsList}, Path=BindingContext.DeclineRestaurant}"
+                                              Command="{Binding  Source={x:Reference RestaurantsList}, Path=BindingContext.ApproveRestaurant}"
                                               CommandParameter="{Binding .}"
                                                />
                                     </SwipeItems>

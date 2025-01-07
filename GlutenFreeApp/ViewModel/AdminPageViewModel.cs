@@ -36,11 +36,13 @@ namespace GlutenFreeApp.ViewModel
             this.serviceProvider = serviceProvider;
             this.proxy = proxy;
             errorMsg = "";
+            errorMsgStatus = "";
             AddFactCommand = new Command(AddFact);
             FillAllRestaurants();
             FillAllRecipes();
             SearchRestByStatus = new Command(ShowRestaurantsByStatus);
             SearchRecipeByStatus = new Command(ShowRecipesByStatus);
+            ApproveRestaurant = new Command(ChangeRestStatusToApprove);
         }
         #endregion
 
@@ -107,6 +109,20 @@ namespace GlutenFreeApp.ViewModel
             }
         }
 
+        private string errorMsgStatus;
+        public string ErrorMsgStatus
+        {
+            get => errorMsgStatus;
+            set
+            {
+                if (errorMsgStatus != value)
+                {
+                    errorMsgStatus = value;
+                    OnPropertyChanged(nameof(ErrorMsgStatus));
+                }
+            }
+        }
+
         private int statusRestSelected;
         public int StatusRestSelected
         {
@@ -146,6 +162,50 @@ namespace GlutenFreeApp.ViewModel
         public ICommand ApproveRecipe { get; set; }
         public ICommand DeclineRecipe { get; set; }
 
+
+        private RestaurantInfo selectedObject;
+        public RestaurantInfo SelectedObject
+        {
+            get => selectedObject;
+            set
+            {
+                selectedObject = value;
+                if (value != null)
+                {
+                    // Extract the Id property by from the restaurant object
+                    int id = value.RestID;
+                    SelectedRest = RestaurantsCol.Where(r => r.RestID == id).FirstOrDefault();
+                }
+                else
+                    SelectedRest = null;
+                OnPropertyChanged();
+            }
+        }
+
+        private RestaurantInfo selesctedRest;
+        public RestaurantInfo SelectedRest
+        {
+            get => selesctedRest;
+            set
+            {
+                if (value != null)
+                {
+                    selesctedRest = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
+
+        public async void ChangeRestStatusToApprove()
+        {
+            bool success = await this.proxy.ChangeRestStatusToApproved(SelectedRest);
+            if (success)
+            {
+                ErrorMsgStatus = "Status Changed to Approved";
+            }
+            ErrorMsgStatus = "Something Went Wrong";
+        }
         #endregion
 
         #region add fact
