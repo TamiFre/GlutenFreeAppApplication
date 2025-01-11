@@ -12,28 +12,37 @@
 
     <TabBar>
 
-       
-        <ShellContent
-            Title="addcritic"
-            ContentTemplate="{DataTemplate views:AddCriticView}"
-            Route="AddCritic" />
-        <ShellContent
-            Title="all recipes"
-            ContentTemplate="{DataTemplate views:AllRecipeView}"
-            Route="AllRecipes" />
-        <ShellContent
-            Title="add recipe"
-            ContentTemplate="{DataTemplate views:AddRecipeView}"
-            Route="AddRecipe" />
         <ShellContent
             Title="admin page"
             ContentTemplate="{DataTemplate views:AdminPageView}"
             IsVisible="{Binding IsManager}"
             Route="AdminPage" />
+        
+        <ShellContent
+            Title="all recipes"
+            ContentTemplate="{DataTemplate views:AllRecipeView}"
+            Route="AllRecipes" />
+        <ShellContent
+            Title="all restaurants"
+            ContentTemplate="{DataTemplate views:AllRestaurantsView}"
+            Route="AllRestauramts" />
+        <ShellContent
+            Title="add recipe"
+            ContentTemplate="{DataTemplate views:AddRecipeView}"
+            Route="AddRecipe" />
+        <ShellContent
+            Title="addcritic"
+            ContentTemplate="{DataTemplate views:AddCriticView}"
+            Route="AddCritic" />
         <ShellContent
             Title="info page"
             ContentTemplate="{DataTemplate views:InformationView}"
             Route="InfoPage"
+            />
+        <ShellContent
+            Title="update profile"
+            ContentTemplate="{DataTemplate views:UpdateProfileView}"
+            Route="UpdateProfile"
             />
 
     </TabBar>

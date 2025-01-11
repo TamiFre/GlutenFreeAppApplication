@@ -73,7 +73,8 @@
                 x:Name="PendingRecipesList"
                 HeightRequest="200"
                 ItemsSource="{Binding RecipesCol}"
-               
+                SelectionMode="Single"
+                SelectedItem="{Binding ObjetRecipeSelected}"
                 >
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RecipeInfo">
@@ -95,11 +96,11 @@
                                 <SwipeView.RightItems>
                                     <SwipeItems>
                                         <SwipeItem
-                                    Text="Approve"
-                                    BackgroundColor="Purple"
-                                    Command="{Binding  Source={x:Reference PendingRecipesList}, Path=BindingContext.DeclineRecipe}"
-                                    CommandParameter="{Binding .}"
-                                     />
+                                             Text="Approve"
+                                             BackgroundColor="Purple"
+                                             Command="{Binding  Source={x:Reference PendingRecipesList}, Path=BindingContext.DeclineRecipe}"
+                                             CommandParameter="{Binding .}"
+                                         />
                                     </SwipeItems>
                                 </SwipeView.RightItems>
 

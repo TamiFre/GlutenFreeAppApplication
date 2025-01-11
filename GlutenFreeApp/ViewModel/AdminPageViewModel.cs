@@ -36,7 +36,8 @@ namespace GlutenFreeApp.ViewModel
             this.serviceProvider = serviceProvider;
             this.proxy = proxy;
             errorMsg = "";
-            errorMsgStatus = "";
+            errorMsgStatusRest = "";
+            errorMsgStatusRecipe = "";
             AddFactCommand = new Command(AddFact);
             FillAllRestaurants();
             FillAllRecipes();
@@ -110,16 +111,30 @@ namespace GlutenFreeApp.ViewModel
             }
         }
 
-        private string errorMsgStatus;
-        public string ErrorMsgStatus
+        private string errorMsgStatusRest;
+        public string ErrorMsgStatusRest
         {
-            get => errorMsgStatus;
+            get => errorMsgStatusRest;
             set
             {
-                if (errorMsgStatus != value)
+                if (errorMsgStatusRest != value)
                 {
-                    errorMsgStatus = value;
-                    OnPropertyChanged(nameof(ErrorMsgStatus));
+                    errorMsgStatusRest = value;
+                    OnPropertyChanged(nameof(ErrorMsgStatusRest));
+                }
+            }
+        }
+
+        private string errorMsgStatusRecipe;
+        public string ErrorMsgStatusRecipe
+        {
+            get => errorMsgStatusRecipe;
+            set 
+            {
+                if (errorMsgStatusRecipe != value)
+                {
+                    errorMsgStatusRecipe = value;
+                    OnPropertyChanged(nameof(ErrorMsgStatusRecipe));
                 }
             }
         }
@@ -162,8 +177,9 @@ namespace GlutenFreeApp.ViewModel
         public ICommand DeclineRestaurant { get; set; }
         public ICommand ApproveRecipe { get; set; }
         public ICommand DeclineRecipe { get; set; }
+        #endregion
 
-
+        #region Restaurant selected - approve and decline
         private RestaurantInfo selectedObject;
         public RestaurantInfo SelectedObject
         {
@@ -200,24 +216,80 @@ namespace GlutenFreeApp.ViewModel
 
         public async void ChangeRestStatusToApprove()
         {
-            ErrorMsgStatus = "";
+            ErrorMsgStatusRest = "";
             bool success = await this.proxy.ChangeRestStatusToApproved(SelectedRest);
             if (success)
             {
-                ErrorMsgStatus = "Status Changed to Approved";
+                ErrorMsgStatusRest = "Status Changed to Approved";
             }
-            ErrorMsgStatus = "Something Went Wrong";
+            ErrorMsgStatusRest = "Something Went Wrong";
         }
 
         public async void ChangeRestStatusToDecline()
         {
-            ErrorMsgStatus = "";
+            ErrorMsgStatusRest = "";
             bool success = await this.proxy.ChangeRestStatusToDecline(SelectedRest);
             if (success)
             {
-                ErrorMsgStatus = "Status Changed To Declined";
+                ErrorMsgStatusRest = "Status Changed To Declined";
             }
-            ErrorMsgStatus = "Something went Wrong";
+            ErrorMsgStatusRest = "Something went Wrong";
+        }
+        #endregion
+
+        #region Recipe Selected - approve and decline - CHECK IN CLASS
+        private RecipeInfo objetRecipeSelected;
+        public RecipeInfo ObjetRecipeSelected
+        {
+            get => objetRecipeSelected;
+            set 
+            {
+                if (value != null)
+                {
+                    // Extract the Id property by from the restaurant object
+                    int id = value.RecipeID;
+                    SelectedRecipe = RecipesCol.Where(r => r.RecipeID == id).FirstOrDefault();
+                }
+                else
+                    SelectedRecipe = null;
+                OnPropertyChanged();
+            }
+        }
+
+        private RecipeInfo selectedRecipe;
+        public RecipeInfo SelectedRecipe
+        {
+            get => selectedRecipe;
+            set 
+            {
+                if (value != null)
+                {
+                    selectedRecipe = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public async void ChangeRecipeStatusToApprove()
+        {
+            ErrorMsgStatusRecipe = "";
+            bool success = await this.proxy.ChangeRecipeStatusToApprove(SelectedRecipe);
+            if (success)
+            {
+                ErrorMsgStatusRecipe = "Status Changed to Approved";
+            }
+            ErrorMsgStatusRecipe = "Something Went Wrong";
+        }
+
+        public async void ChangeRecipeStatusToDecline()
+        {
+            ErrorMsgStatusRecipe = "";
+            bool success = await this.proxy.ChangeRecipeStatusToDecline(SelectedRecipe);
+            if (success)
+            {
+                ErrorMsgStatusRecipe = "Status Changed to Decline";
+            }
+            ErrorMsgStatusRecipe = "Something Went Wrong";
         }
         #endregion
 
@@ -245,7 +317,7 @@ namespace GlutenFreeApp.ViewModel
            
         }
         #endregion
-
+        
         #region get all restaurants
         // fill the observable collection with all the restaurants
         public async void FillAllRestaurants()

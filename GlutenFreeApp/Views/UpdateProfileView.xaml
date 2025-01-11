@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GlutenFreeApp.Views.UpdateProfileView"
+             Title="UpdateProfileView"
+             >
+    <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding NotInServerCall}">
+        <!-- Header -->
+        <Label 
+        Text="Update Profile"
+        FontSize="40"
+        HorizontalOptions="Center"
+        Margin="0,0,0,20"/>
+
+        <!-- Username Entry -->
+        <Label 
+        Text="Username:"
+        FontSize="16"
+        Margin="0,0,0,5"/>
+        <Entry
+        x:Name="UsernameEntry"
+        Placeholder="Enter your username"
+        Text="{Binding UserName}"
+        HeightRequest="50"
+        VerticalTextAlignment="Center"/>
+
+        <!-- Password Entry -->
+        <Label 
+        Text="Password:"
+        FontSize="16"
+        Margin="0,0,0,5"/>
+        <Entry
+        x:Name="PasswordEntry"
+        Placeholder="Enter your password"
+        Text="{Binding Password}"
+        IsPassword="True"
+        HeightRequest="50"
+        VerticalTextAlignment="Center"/>
+
+        <!-- Error Message -->
+
+        <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"  />
+
+        <!-- Submit Button -->
+        <Button
+        Text="Update Profile"
+        x:Name="UpdateButton"
+        BackgroundColor="Purple"
+        Command="{Binding SubmitCommand}"
+        Margin="0,20,0,0"/>
+
+        
+        
+
+        <!-- Separator -->
+        <BoxView 
+        HeightRequest="1"
+        Color="LightGray"
+        Margin="0,20"/>
+
+        <!-- Additional Options -->
+        
+        <ActivityIndicator IsRunning="{Binding InServerCall}" 
+        Color="Red" 
+        VerticalOptions="Center" 
+        HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

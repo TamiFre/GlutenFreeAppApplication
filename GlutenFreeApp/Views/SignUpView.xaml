@@ -81,11 +81,7 @@
                     IsPassword="True" />
                 <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"  />
 
-                <Entry 
-                    x:Name="ConfirmPasswordEntry"
-                    Placeholder="Confirm Password"
-                    Text="{Binding ConfirmPass}"
-                    IsPassword="True" />
+               
                 
             </VerticalStackLayout>
 
@@ -113,7 +109,7 @@
                 <Picker 
                    x:Name="RestaurantTypePicker"
                    Title="Type of Restaurant"
-                    SelectedItem="{Binding TypeFood}"
+                    SelectedIndex="{Binding TypeFood}"
                     >
                     <Picker.Items
                         >

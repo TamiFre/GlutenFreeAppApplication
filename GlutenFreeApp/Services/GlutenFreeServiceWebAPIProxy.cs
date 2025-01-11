@@ -554,6 +554,7 @@ namespace GlutenFreeApp.Services
         //ask ofer
         #region Get All Statuses
         #endregion
+        //
 
         #region Change Rest Status
         //will return true if it worked and false if it didnt
@@ -611,6 +612,104 @@ namespace GlutenFreeApp.Services
                     };
                     bool result = JsonSerializer.Deserialize<bool>(resContent, options);
                     return result;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region Change Recipe Status - CHECK IN CLASS - ALL ADMIN PAGE
+        //will return true if it worked and false otherwise
+        public async Task<bool> ChangeRecipeStatusToApprove(RecipeInfo recipeInfo)
+        {
+            string url = $"{this.baseUrl}ChangeRecipeStatusToApprove";
+            try
+            {
+                //Call the server API
+                string json = JsonSerializer.Serialize(recipeInfo);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    bool result = JsonSerializer.Deserialize<bool>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> ChangeRecipeStatusToDecline (RecipeInfo recipeInfo)
+        {
+            string url = $"{this.baseUrl}ChangeRecipeStatusToDecline";
+            try
+            {
+                //Call the server API
+                string json = JsonSerializer.Serialize(recipeInfo);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    bool result = JsonSerializer.Deserialize<bool>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region Update Profile
+        //return true if succeeded false otherwise
+        public async Task<bool> UpdateUser(UsersInfo user)
+        {
+            //Set URI to the specific function API
+            string url = $"{this.baseUrl}UpdateProfile";
+            try
+            {
+                //Call the server API
+                string json = JsonSerializer.Serialize(user);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
                 }
                 else
                 {

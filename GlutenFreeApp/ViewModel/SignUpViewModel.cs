@@ -32,8 +32,8 @@ public class SignUpViewModel : ViewModelBase
 
     }
 
-    private string typeFood;
-    public string TypeFood
+    private int typeFood;
+    public int TypeFood
     {
         get { return typeFood; }
         set { typeFood = value; OnPropertyChanged(); }
@@ -43,13 +43,6 @@ public class SignUpViewModel : ViewModelBase
     //ולידציה לסיסמה
     #region Password
     
-    private string confirmPass;
-    public string ConfirmPass
-    {
-        get { return confirmPass; }
-        set { confirmPass = value; OnPropertyChanged(); }
-    }
-
 
     private bool showPasswordError;
 
@@ -173,7 +166,7 @@ public class SignUpViewModel : ViewModelBase
                     {
                         RestAddress = this.Address,
                         StatusID = 2,//PENDING
-                        TypeFoodID = 2,//not working
+                        TypeFoodID = this.TypeFood+1,
                         UserID =(int)newUser.UserID,
                         RestName = this.RestName
                     };
