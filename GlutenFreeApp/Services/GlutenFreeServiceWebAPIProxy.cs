@@ -553,9 +553,60 @@ namespace GlutenFreeApp.Services
 
         //ask ofer
         #region Get All Statuses
+        public async Task<List<StatusInfo>> GetAllStatuses()
+        {
+            string url = $"{this.baseUrl}GetAllStatuses";
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    // Deserialize result to List
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<StatusInfo> result = JsonSerializer.Deserialize<List<StatusInfo>>(resContent, options);
+                    return result;
+                }
+                return null;
+            }
+            catch (Exception ex) 
+            {
+                return null;
+            }
+        }
         #endregion
-        //
-
+      
+        #region Get All Food Types
+        public async Task<List<TypeFoodInfo>> GetAllFoodTypes()
+        {
+            string url = $"{this.baseUrl}GetAllFoodTypes";
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    // Deserialize result to List
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<TypeFoodInfo> result = JsonSerializer.Deserialize<List<TypeFoodInfo>>(resContent, options);
+                    return result;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
         #region Change Rest Status
         //will return true if it worked and false if it didnt
         public async Task<bool> ChangeRestStatusToApproved(RestaurantInfo restaurantInfo)

@@ -14,16 +14,27 @@ namespace GlutenFreeApp.ViewModel
         private GlutenFreeServiceWebAPIProxy proxy;
         private IServiceProvider serviceProvider;
 
+        //how to access in view
+        #region  Food Types
+        //the statuses and food types
+        private ObservableCollection<TypeFoodInfo> foodTypeList;
+        public ObservableCollection<TypeFoodInfo> FoodTypeList
+        {
+            get => foodTypeList;
+            set
+            {
+                foodTypeList = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
         public AllRestaurantsViewModel(GlutenFreeServiceWebAPIProxy proxy, IServiceProvider serviceProvider)
         {
             this.proxy = proxy;
             this.serviceProvider = serviceProvider;
             FillAllApprovedRestaurants();
             SearchByFoodSelected = new Command(ShowRestaurantsByFoodSelected);
-
-            //ASK OFER _ HOW RO ACCESS THE SINGULAR ITEM AND FOOD TYPE
-
-            //ExpandCommand - new Command(FillAllCritics());
+            FoodTypeList = new ObservableCollection<TypeFoodInfo>(((App)Application.Current).FoodTypes);
         }
 
         #region observable collection

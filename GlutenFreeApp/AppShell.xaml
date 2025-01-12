@@ -44,6 +44,12 @@
             ContentTemplate="{DataTemplate views:UpdateProfileView}"
             Route="UpdateProfile"
             />
+        <ShellContent
+            Title="update restaurant profile"
+            IsVisible="{Binding IsRestaurantManager}"
+            ContentTemplate="{DataTemplate views:UpdateRestaurantProfileView}"
+            Route="UpdateRestauratnProfile"
+            />
 
     </TabBar>
 

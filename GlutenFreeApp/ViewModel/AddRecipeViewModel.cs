@@ -57,8 +57,7 @@ namespace GlutenFreeApp.ViewModel
         public ICommand SubmitRecipeCommand { get; set; }
         #endregion
 
-        //Check 
-
+       
         private async void AddRecipe()
         {
             InServerCall = true;

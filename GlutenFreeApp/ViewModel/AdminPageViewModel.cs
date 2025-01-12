@@ -14,17 +14,37 @@ namespace GlutenFreeApp.ViewModel
 {
     public class AdminPageViewModel:ViewModelBase
     {
-        //to do:
-        //do a command that adds the fact the admin wants to add to the DB - done
-        //do a sort of table that shows all of the pending restaurants and allow the admin to approve them
-        //order: first the facts and then do the table - example might be in talsi's git with the monkeys
+       
 
         #region collection view 
         private ObservableCollection<RecipeInfo> recipesCol;
         public ObservableCollection<RecipeInfo> RecipesCol { get { return recipesCol; } set { recipesCol = value;OnPropertyChanged(); } }
         private ObservableCollection<RestaurantInfo> restaurantsCol;
         public ObservableCollection<RestaurantInfo> RestaurantsCol { get { return restaurantsCol; } set { restaurantsCol = value; OnPropertyChanged(); } }
-  
+
+        private ObservableCollection<StatusInfo> statusList;
+        public ObservableCollection<StatusInfo> StatusList 
+        {
+            get => statusList;
+            set 
+            {
+                statusList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<TypeFoodInfo> foodTypeList;
+        public ObservableCollection<TypeFoodInfo> FoodTypeList
+        {
+            get => foodTypeList;
+            set 
+            {
+                foodTypeList = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         #endregion
 
         private GlutenFreeServiceWebAPIProxy proxy;
@@ -45,7 +65,11 @@ namespace GlutenFreeApp.ViewModel
             SearchRecipeByStatus = new Command(ShowRecipesByStatus);
             ApproveRestaurant = new Command(ChangeRestStatusToApprove);
             DeclineRestaurant = new Command(ChangeRestStatusToDecline);
+            //get the data from the app - how to access it?
+            StatusList = new ObservableCollection<StatusInfo>(((App)Application.Current).Statuses);
+            FoodTypeList = new ObservableCollection<TypeFoodInfo>(((App)Application.Current).FoodTypes);
         }
+
         #endregion
 
         #region show restaurants by status chosen in the picker

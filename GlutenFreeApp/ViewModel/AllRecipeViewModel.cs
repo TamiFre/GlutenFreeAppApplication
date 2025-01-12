@@ -15,13 +15,28 @@ namespace GlutenFreeApp.ViewModel
         private GlutenFreeServiceWebAPIProxy proxy;
         private IServiceProvider serviceProvider;
 
-        // the page shows the approved recipes. need to also show the food type of the recipe and do a picker to search the recipes by food type
+        //how to access in view
+        #region  Food Types
+        //the statuses and food types
+        private ObservableCollection<TypeFoodInfo> foodTypeList;
+        public ObservableCollection<TypeFoodInfo> FoodTypeList
+        {
+            get => foodTypeList;
+            set
+            {
+                foodTypeList = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
         public AllRecipeViewModel(GlutenFreeServiceWebAPIProxy proxy, IServiceProvider serviceProvider)
         {
             this.proxy = proxy;
             this.serviceProvider = serviceProvider;
             FillAllRecipes();
             SearchByFoodTypeSelected = new Command(ShowRecipesByFoodSelected);
+            //get the data from the app - how to access it?
+            FoodTypeList = new ObservableCollection<TypeFoodInfo>(((App)Application.Current).FoodTypes);
         }
 
         #region Observsble collection

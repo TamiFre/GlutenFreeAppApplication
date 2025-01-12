@@ -8,5 +8,7 @@ namespace GlutenFreeApp.Models
 {
     public class StatusInfo
     {
+        public int StatusID { get; set; }
+        public string StatusDesc { get; set; }
     }
 }

@@ -115,6 +115,7 @@ namespace GlutenFreeApp.ViewModel
         #endregion
 
         #endregion
+
         #region submit
         public ICommand SubmitCommand { set; get; }
         private async void OnSubmit()
@@ -130,7 +131,11 @@ namespace GlutenFreeApp.ViewModel
             bool success = await proxy.UpdateUser(currentUser);
             if (success)
             {
+                await Application.Current.MainPage.DisplayAlert("Profile Updated", "Success", "ok");
+                
+                //HOW TO REMOVE THE SHELL
                 Shell.Current.GoToAsync("Login");
+                
             }
         }
         #endregion

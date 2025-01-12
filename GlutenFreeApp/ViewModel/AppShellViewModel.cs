@@ -36,6 +36,14 @@ namespace GlutenFreeApp.ViewModel
             }
         }
 
+        //check if its a restaurant owner
+        public bool IsRestaurantManager
+        {
+            get 
+            {
+                return (this.currentUser.TypeID == 3);
+            }
+        }
 
         //this command will be used for logout menu item
         public Command LogoutCommand
