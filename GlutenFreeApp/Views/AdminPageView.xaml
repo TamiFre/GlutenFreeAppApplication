@@ -98,7 +98,7 @@
                                         <SwipeItem
                                              Text="Approve"
                                              BackgroundColor="Purple"
-                                             Command="{Binding  Source={x:Reference PendingRecipesList}, Path=BindingContext.DeclineRecipe}"
+                                             Command="{Binding  Source={x:Reference PendingRecipesList}, Path=BindingContext.ApproveRecipe}"
                                              CommandParameter="{Binding .}"
                                          />
                                     </SwipeItems>

@@ -551,7 +551,6 @@ namespace GlutenFreeApp.Services
         }
         #endregion
 
-        //ask ofer
         #region Get All Statuses
         public async Task<List<StatusInfo>> GetAllStatuses()
         {
@@ -607,6 +606,7 @@ namespace GlutenFreeApp.Services
             }
         }
         #endregion
+
         #region Change Rest Status
         //will return true if it worked and false if it didnt
         public async Task<bool> ChangeRestStatusToApproved(RestaurantInfo restaurantInfo)

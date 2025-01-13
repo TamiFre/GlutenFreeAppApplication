@@ -13,6 +13,17 @@ namespace GlutenFreeApp.Models
         public int RestID { get; set; }
         public int UserID { get; set; }
         public int StatusID { get; set; }  
+        public string StatusName
+        {
+            get
+            {
+                List<StatusInfo> statuses = ((App)Application.Current).Statuses;
+                StatusInfo status = statuses.Where(s => s.StatusID == this.StatusID).FirstOrDefault();
+                if (status != null)
+                    return status.StatusDesc;
+                return "Unknown!";
+            }
+        }
         public int TypeFoodID { get; set; }
     }
 }

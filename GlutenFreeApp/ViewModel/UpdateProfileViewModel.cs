@@ -132,10 +132,9 @@ namespace GlutenFreeApp.ViewModel
             if (success)
             {
                 await Application.Current.MainPage.DisplayAlert("Profile Updated", "Success", "ok");
-                
-                //HOW TO REMOVE THE SHELL
-                Shell.Current.GoToAsync("Login");
-                
+                ((App)Application.Current).LoggedInUser.Name = UserName;    
+                ((App)Application.Current).LoggedInUser.Password = Password;    
+
             }
         }
         #endregion

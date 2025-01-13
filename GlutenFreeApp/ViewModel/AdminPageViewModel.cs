@@ -65,6 +65,8 @@ namespace GlutenFreeApp.ViewModel
             SearchRecipeByStatus = new Command(ShowRecipesByStatus);
             ApproveRestaurant = new Command(ChangeRestStatusToApprove);
             DeclineRestaurant = new Command(ChangeRestStatusToDecline);
+            DeclineRecipe = new Command(ChangeRecipeStatusToDecline);
+            ApproveRecipe = new Command(ChangeRecipeStatusToApprove);
             //get the data from the app - how to access it?
             StatusList = new ObservableCollection<StatusInfo>(((App)Application.Current).Statuses);
             FoodTypeList = new ObservableCollection<TypeFoodInfo>(((App)Application.Current).FoodTypes);
@@ -268,6 +270,7 @@ namespace GlutenFreeApp.ViewModel
             get => objetRecipeSelected;
             set 
             {
+                objetRecipeSelected = value;
                 if (value != null)
                 {
                     // Extract the Id property by from the restaurant object
