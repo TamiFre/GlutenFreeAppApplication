@@ -48,7 +48,10 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:RecipeInfo">
                     <Frame Margin="0,5" Padding="10">
-                        <Label Text="{Binding RecipeText}" />
+                        <Grid RowDefinitions="*" ColumnDefinitions="*,*">
+                            <Label Text="{Binding RecipeText}" Grid.Column="0" />
+                            <Label Text="{Binding TypeFoodName}" Grid.Column="1" />
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

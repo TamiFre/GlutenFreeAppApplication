@@ -25,5 +25,27 @@ namespace GlutenFreeApp.Models
             }
         }
         public int TypeFoodID { get; set; }
+        public string TypeFoodName
+        {
+            get
+            {
+                List<TypeFoodInfo> foodTypes = ((App)Application.Current).FoodTypes;
+                TypeFoodInfo foodType = foodTypes.Where(f => f.TypeFoodID == this.TypeFoodID).FirstOrDefault();
+                if (foodType != null)
+                    return foodType.TypeFoodName;
+                return "Unknown";
+            }
+        }
+
+        //CHECK IN CLASS
+        public bool IsSwipeEnabled
+        {
+            get
+            {
+                if (this.StatusID != 2)
+                    return true;
+                return false;
+            }
+        }
     }
 }

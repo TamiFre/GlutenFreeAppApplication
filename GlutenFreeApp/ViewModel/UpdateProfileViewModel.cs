@@ -20,7 +20,7 @@ namespace GlutenFreeApp.ViewModel
             this.serviceProvider = serviceProvider;
             SubmitCommand = new Command(OnSubmit);
             PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
-
+            EmailError = "Email is required";
         }
 
         #region properties
@@ -37,7 +37,70 @@ namespace GlutenFreeApp.ViewModel
                 }
             }
         }
+        #endregion
 
+        #region email
+
+        private string userEmail;
+        public string UserEmail
+        {
+            get { return userEmail; }
+            set
+            {
+                userEmail = value;
+                ValidateEmail();
+                OnPropertyChanged();
+            }
+        }
+
+        private string emailError;
+
+        public string EmailError
+        {
+            get => emailError;
+            set
+            {
+                emailError = value;
+                OnPropertyChanged("EmailError");
+            }
+        }
+
+        private bool showEmailError;
+
+        public bool ShowEmailError
+        {
+            get => showEmailError;
+            set
+            {
+                showEmailError = value;
+                OnPropertyChanged("ShowEmailError");
+            }
+        }
+
+
+        private void ValidateEmail()
+        {
+            this.ShowEmailError = string.IsNullOrEmpty(UserEmail);
+            if (!ShowEmailError)
+            {
+                //check if email is in the correct format using regular expression
+                if (!System.Text.RegularExpressions.Regex.IsMatch(UserEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+                {
+                    EmailError = "Email is not valid";
+                    ShowEmailError = true;
+                }
+                else
+                {
+                    EmailError = "";
+                    ShowEmailError = false;
+                }
+            }
+            else
+            {
+                EmailError = "Email is required";
+            }
+        }
+        #endregion
         //ולידציה לסיסמה
         #region Password
 
@@ -112,8 +175,6 @@ namespace GlutenFreeApp.ViewModel
             //Toggle the password visibility
             IsPassword = !IsPassword;
         }
-        #endregion
-
         #endregion
 
         #region submit

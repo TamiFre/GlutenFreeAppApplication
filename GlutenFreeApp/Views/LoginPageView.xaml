@@ -5,32 +5,33 @@
              xmlns:ViewModel ="clr-namespace:GlutenFreeApp.ViewModel"
              x:Class="GlutenFreeApp.Views.LoginPageView"
              Title="LoginPageView">
-    <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding NotInServerCall}">
-         <!--Header--> 
-        <Label 
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding NotInServerCall}">
+            <!--Header-->
+            <Label 
         Text="🌾LOG IN🌾"
         FontSize="40"
         HorizontalOptions="Center"
         Margin="0,0,0,20"/>
 
-         <!--Username Entry--> 
-        <Label 
+            <!--Username Entry-->
+            <Label 
         Text="👤 Username:"
         FontSize="16"
         Margin="0,0,0,5"/>
-        <Entry
+            <Entry
         x:Name="UsernameEntry"
         Placeholder="Enter your username"
         Text="{Binding UserName}"
         HeightRequest="50"
         VerticalTextAlignment="Center"/>
 
-         <!--Password Entry--> 
-        <Label 
+            <!--Password Entry-->
+            <Label 
         Text="🔑 Password:"
         FontSize="16"
         Margin="0,0,0,5"/>
-        <Entry
+            <Entry
         x:Name="PasswordEntry"
         Placeholder="Enter your password"
         Text="{Binding Password}"
@@ -38,11 +39,11 @@
         HeightRequest="50"
         VerticalTextAlignment="Center"/>
 
-        <Label 
-  Text="🔑 Email:"
+            <Label 
+  Text=" Email:"
   FontSize="16"
   Margin="0,0,0,5"/>
-        <Entry
+            <Entry
   x:Name="EmailEntry"
   Placeholder="Enter your email"
   Text="{Binding UserEmail}"
@@ -52,47 +53,48 @@
 
 
 
-        <!--Login Button--> 
-        <Button
+            <!--Login Button-->
+            <Button
         Text="Log In"
         x:Name="LoginButton"
         BackgroundColor="Purple"
         Command="{Binding LoginCommand}"
         Margin="0,20,0,0"/>
 
-        <Label
+            <Label
      Text="{Binding ErrorMsg}"
      />
 
-        <!--Separator--> 
-        <BoxView 
+            <!--Separator-->
+            <BoxView 
         HeightRequest="1"
         Color="LightGray"
         Margin="0,20"/>
 
-         <!--Additional Options--> 
-        <Button
+            <!--Additional Options-->
+            <Button
         Text="Sign Up"
         Command="{Binding TransferToSignUp}"
         BackgroundColor="Transparent"
         TextColor="Purple"
         BorderColor="Purple"
         BorderWidth="1"/>
-        
-         <!--Add Button to transfer to info page-->
-        <Button
+
+            <!--Add Button to transfer to info page-->
+            <Button
         Text="Continue without login"
         BackgroundColor="Transparent"
         TextColor="Gray"
         Command="{Binding TransferToInfo}"
         Margin="0,10,0,0"/>
 
-        <ActivityIndicator IsRunning="{Binding InServerCall}" 
+            <ActivityIndicator IsRunning="{Binding InServerCall}" 
          Color="Red" 
          VerticalOptions="Center" 
          HorizontalOptions="Center" />
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
 
+    </ScrollView>
 
 </ContentPage>

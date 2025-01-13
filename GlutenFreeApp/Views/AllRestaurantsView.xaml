@@ -49,11 +49,12 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:RestaurantInfo">
                     <Frame  Margin="0, 10" Padding="15">
-                        <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
-                            <Label Text="{Binding RestAddress}" Grid.Column="0" Grid.Row="0" />
 
-                            <Label Text="{Binding RestName}" FontSize="14" TextColor="Gray" Grid.Column="0" Grid.Row="1"/>
-                            <Button Text="Expand" Command="{Binding  Source={x:Reference PendingRestaurantsList}, Path=BindingContext.ExpandCommand}" CommandParameter="{Binding .}" Grid.Column="1" CornerRadius="4" WidthRequest="100"/>
+                        <Grid RowDefinitions="*,*" ColumnDefinitions="*,*,*">
+                            <Label Text="{Binding RestName}" Grid.Row="0" Grid.Column="0"/>
+                            <Label Text="{Binding RestAddress} " Grid.Row="1" Grid.Column="0"/>
+                            <Label Text="{Binding TypeFoodName}" Grid.Row="0" Grid.Column="1"/>
+                            <Button Text="Expand" Command="{Binding  Source={x:Reference PendingRestaurantsList}, Path=BindingContext.ExpandCommand}" CommandParameter="{Binding .}" Grid.Column="2" CornerRadius="4" WidthRequest="100"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>

@@ -14,35 +14,13 @@ namespace GlutenFreeApp.ViewModel
 {
     public class AdminPageViewModel:ViewModelBase
     {
-       
+       //cant accept or approve unless pending is selected
 
         #region collection view 
         private ObservableCollection<RecipeInfo> recipesCol;
         public ObservableCollection<RecipeInfo> RecipesCol { get { return recipesCol; } set { recipesCol = value;OnPropertyChanged(); } }
         private ObservableCollection<RestaurantInfo> restaurantsCol;
         public ObservableCollection<RestaurantInfo> RestaurantsCol { get { return restaurantsCol; } set { restaurantsCol = value; OnPropertyChanged(); } }
-
-        private ObservableCollection<StatusInfo> statusList;
-        public ObservableCollection<StatusInfo> StatusList 
-        {
-            get => statusList;
-            set 
-            {
-                statusList = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private ObservableCollection<TypeFoodInfo> foodTypeList;
-        public ObservableCollection<TypeFoodInfo> FoodTypeList
-        {
-            get => foodTypeList;
-            set 
-            {
-                foodTypeList = value;
-                OnPropertyChanged();
-            }
-        }
 
 
         #endregion
@@ -67,12 +45,10 @@ namespace GlutenFreeApp.ViewModel
             DeclineRestaurant = new Command(ChangeRestStatusToDecline);
             DeclineRecipe = new Command(ChangeRecipeStatusToDecline);
             ApproveRecipe = new Command(ChangeRecipeStatusToApprove);
-            //get the data from the app - how to access it?
-            StatusList = new ObservableCollection<StatusInfo>(((App)Application.Current).Statuses);
-            FoodTypeList = new ObservableCollection<TypeFoodInfo>(((App)Application.Current).FoodTypes);
+            
         }
 
-        #endregion
+        #endregion  
 
         #region show restaurants by status chosen in the picker
         public async void ShowRestaurantsByStatus()
@@ -86,6 +62,7 @@ namespace GlutenFreeApp.ViewModel
 
         public async Task<List<RestaurantInfo>> GetAllRestaurantsByStatus()
         {
+            
             List<RestaurantInfo> list = await this.proxy.GetRestaurantByStatus(StatusRestSelected+1);
             return list;
         }
@@ -248,7 +225,9 @@ namespace GlutenFreeApp.ViewModel
             {
                 ErrorMsgStatusRest = "Status Changed to Approved";
             }
-            ErrorMsgStatusRest = "Something Went Wrong";
+            else
+                ErrorMsgStatusRest = "Something Went Wrong";
+            ShowRestaurantsByStatus();
         }
 
         public async void ChangeRestStatusToDecline()
@@ -259,11 +238,13 @@ namespace GlutenFreeApp.ViewModel
             {
                 ErrorMsgStatusRest = "Status Changed To Declined";
             }
-            ErrorMsgStatusRest = "Something went Wrong";
+            else
+              ErrorMsgStatusRest = "Something went Wrong";
+            ShowRestaurantsByStatus();
         }
         #endregion
 
-        #region Recipe Selected - approve and decline - CHECK IN CLASS
+        #region Recipe Selected - approve and decline 
         private RecipeInfo objetRecipeSelected;
         public RecipeInfo ObjetRecipeSelected
         {
@@ -305,7 +286,9 @@ namespace GlutenFreeApp.ViewModel
             {
                 ErrorMsgStatusRecipe = "Status Changed to Approved";
             }
-            ErrorMsgStatusRecipe = "Something Went Wrong";
+            else
+                ErrorMsgStatusRecipe = "Something Went Wrong";
+            ShowRecipesByStatus();
         }
 
         public async void ChangeRecipeStatusToDecline()
@@ -316,7 +299,9 @@ namespace GlutenFreeApp.ViewModel
             {
                 ErrorMsgStatusRecipe = "Status Changed to Decline";
             }
-            ErrorMsgStatusRecipe = "Something Went Wrong";
+            else
+                ErrorMsgStatusRecipe = "Something Went Wrong";
+            ShowRecipesByStatus();
         }
         #endregion
 

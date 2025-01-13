@@ -41,6 +41,22 @@
 
         <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"  />
 
+        <!-- Email Entry -->
+        <Label 
+        Text="Email:"
+        FontSize="16"
+        Margin="0,0,0,5"/>
+        <Entry
+        x:Name="EmailEntry"
+        Placeholder="Enter your email"
+        Text="{Binding UserEmail}"
+        HeightRequest="50"
+        VerticalTextAlignment="Center"/>
+
+        <!-- Error Message -->
+
+        <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}"  />
+
         <!-- Submit Button -->
         <Button
         Text="Update Profile"
