@@ -38,7 +38,19 @@
         HeightRequest="50"
         VerticalTextAlignment="Center"/>
 
-       
+        <Label 
+  Text="🔑 Email:"
+  FontSize="16"
+  Margin="0,0,0,5"/>
+        <Entry
+  x:Name="EmailEntry"
+  Placeholder="Enter your email"
+  Text="{Binding UserEmail}"
+  
+  HeightRequest="50"
+  VerticalTextAlignment="Center"/>
+
+
 
         <!--Login Button--> 
         <Button

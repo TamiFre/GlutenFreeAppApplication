@@ -16,7 +16,7 @@ public class SignUpViewModel : ViewModelBase
         set {restName = value; OnPropertyChanged(); }
     }
 
-
+    
     private string username;
     public string Username
     {
@@ -123,6 +123,69 @@ public class SignUpViewModel : ViewModelBase
     public ICommand SubmitCommand { get; set; }
     #endregion
 
+    #region email
+
+    private string userEmail;
+    public string UserEmail
+    {
+        get { return userEmail; }
+        set 
+        { 
+            userEmail = value;
+            ValidateEmail();
+            OnPropertyChanged(); 
+        }
+    }
+
+    private string emailError;
+
+    public string EmailError
+    {
+        get => emailError;
+        set
+        {
+            emailError = value;
+            OnPropertyChanged("EmailError");
+        }
+    }
+
+    private bool showEmailError;
+
+    public bool ShowEmailError
+    {
+        get => showEmailError;
+        set
+        {
+            showEmailError = value;
+            OnPropertyChanged("ShowEmailError");
+        }
+    }
+
+
+    private void ValidateEmail()
+    {
+        this.ShowEmailError = string.IsNullOrEmpty(UserEmail);
+        if (!ShowEmailError)
+        {
+            //check if email is in the correct format using regular expression
+            if (!System.Text.RegularExpressions.Regex.IsMatch(UserEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+            {
+                EmailError = "Email is not valid";
+                ShowEmailError = true;
+            }
+            else
+            {
+                EmailError = "";
+                ShowEmailError = false;
+            }
+        }
+        else
+        {
+            EmailError = "Email is required";
+        }
+    }
+    #endregion
+
     private GlutenFreeServiceWebAPIProxy proxy;
     public SignUpViewModel(GlutenFreeServiceWebAPIProxy proxy)
     {
@@ -133,7 +196,7 @@ public class SignUpViewModel : ViewModelBase
         VisitorSelectedCommand = new Command(VisitorSelected, () => IsManager);
         SubmitCommand = new Command(OnRegister);
         IsManager = false;
-       
+        EmailError = "Email is required";
         PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
 
     }
@@ -159,6 +222,7 @@ public class SignUpViewModel : ViewModelBase
                         Name = this.Username,
                         Password = this.Password,
                         TypeID = 3,
+                        UserEmail= this.UserEmail,
                         UserID = 0
                 };
                     //Create the restaurant
@@ -200,7 +264,8 @@ public class SignUpViewModel : ViewModelBase
                 {
                     Name = this.Username,
                     Password = this.Password,
-                    TypeID = 1
+                    TypeID = 1,
+                    UserEmail = this.UserEmail
                 };
 
                 //Call the Register method on the proxy to register the new user

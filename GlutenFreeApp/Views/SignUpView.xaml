@@ -81,8 +81,17 @@
                     IsPassword="True" />
                 <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"  />
 
-               
-                
+                <Entry
+                    x:Name="EmailEntry"
+                    Placeholder="Email"
+                    Text="{Binding UserEmail}"
+                    />
+                <Label
+                    Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}"
+                    />
+
+
+
             </VerticalStackLayout>
 
             <!--only manager fields-->

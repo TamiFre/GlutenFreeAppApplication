@@ -15,6 +15,7 @@ namespace GlutenFreeApp.Models
         public string Password { set; get; } = null;
         public int? TypeID { set; get; }
         public int? UserID { set; get; }
+        public string UserEmail { set; get; }
 
 
 

@@ -38,7 +38,7 @@ public class LoginPageViewModel : ViewModelBase
         InServerCall = true;
         ErrorMsg = "";
         //Call the server to login
-        UsersInfo loginInfo = new UsersInfo { Name = UserName, Password = Password };
+        UsersInfo loginInfo = new UsersInfo { Name = UserName, Password = Password , UserEmail = UserEmail};
         UsersInfo? u = await this.proxy.LoginAsync(loginInfo);
         
         InServerCall = false;
@@ -127,6 +127,20 @@ public class LoginPageViewModel : ViewModelBase
                 OnPropertyChanged(nameof(Password));
                 // can add more logic here like email validation etc.
                 // can add error message property and set it here
+            }
+        }
+    }
+
+    private string userEmail;
+    public string UserEmail 
+    {
+        get => userEmail;
+        set 
+        {
+            if (userEmail != value)
+            {
+                userEmail = value;
+                OnPropertyChanged();
             }
         }
     }
