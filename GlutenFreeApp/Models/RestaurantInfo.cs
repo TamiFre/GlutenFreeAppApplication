@@ -42,7 +42,7 @@ namespace GlutenFreeApp.Models
         {
             get
             {
-                if (this.StatusID != 2)
+                if (this.StatusID == 2)
                     return true;
                 return false;
             }
