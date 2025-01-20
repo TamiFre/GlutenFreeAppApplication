@@ -676,7 +676,7 @@ namespace GlutenFreeApp.Services
         }
         #endregion
 
-        #region Change Recipe Status - CHECK IN CLASS - ALL ADMIN PAGE
+        #region Change Recipe Status 
         //will return true if it worked and false otherwise
         public async Task<bool> ChangeRecipeStatusToApprove(RecipeInfo recipeInfo)
         {
@@ -755,6 +755,32 @@ namespace GlutenFreeApp.Services
             {
                 //Call the server API
                 string json = JsonSerializer.Serialize(user);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region Update Restaurant
+        public async Task<bool> UpdateRestaurant(RestaurantInfo restaurantInfo)
+        {
+            string url = $"{this.baseUrl}UpdateRestauratnt";
+            try
+            {
+                string json = JsonSerializer.Serialize(restaurantInfo);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 //Check status
