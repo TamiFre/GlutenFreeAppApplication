@@ -115,14 +115,14 @@ namespace GlutenFreeApp.ViewModel
 
         public async Task<List<RestaurantInfo>> GetAllRestaurantsByFoodSelected()
         {
-            if (TypeFoodSelected + 1 == 1)
+            if (TypeFoodSelected  == 1)
             {
                 List<RestaurantInfo> list1 = await this.proxy.GetAllApprovedRestaurants();
                 return list1;
             }
             else 
             { 
-            List<RestaurantInfo> list = await this.proxy.GetApprovedRestaurantsByChosenFoodType(TypeFoodSelected + 1);
+            List<RestaurantInfo> list = await this.proxy.GetApprovedRestaurantsByChosenFoodType(TypeFoodSelected );
             return list;
             }
         }

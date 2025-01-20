@@ -799,5 +799,34 @@ namespace GlutenFreeApp.Services
             }
         }
         #endregion
+
+        #region Get All User Restaurants
+        public async Task<List<RestaurantInfo?>> GetAllUserRestaurants(int userID)
+        {
+            string url = $"{this.baseUrl}GetAllUserRestaurants?userID={userID}";
+            try
+            {
+                // Call the server API
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    // Deserialize result to List
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<RestaurantInfo> result = JsonSerializer.Deserialize<List<RestaurantInfo>>(resContent, options);
+                    return result;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

@@ -5,6 +5,17 @@
              Title="UpdateRestaurantProfileView">
     <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding NotInServerCall}">
         <!-- Header -->
+        
+        <!--Ask Ofer-->
+
+        <Picker
+            x:Name="RestPicker"
+            Title="Select A Restaurant"
+            ItemsSource="{Binding UserRestaurants}"
+            ItemDisplayBinding="{Binding RestName}"
+            SelectedItem="{Binding RestSelected}"
+            />
+        
         <Label 
     Text="Update Restaurant"
     FontSize="40"
@@ -19,7 +30,7 @@
         <Entry
     x:Name="RestaurantName"
     Placeholder="Enter your restaurant name"
-    Text="{Binding UserName}"
+    Text="{Binding RestaurantName}"
     HeightRequest="50"
     VerticalTextAlignment="Center"/>
 
@@ -31,21 +42,17 @@
         <Entry
     x:Name="AddressEntry"
     Placeholder="Enter your address"
-    Text="{Binding Password}"
+    Text="{Binding RestAddress }"
     IsPassword="True"
     HeightRequest="50"
     VerticalTextAlignment="Center"/>
-
-        <!-- Error Message -->
-
-        <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"  />
 
         <!-- Submit Button -->
         <Button
     Text="Update Restaurant"
     x:Name="UpdateButton"
     BackgroundColor="Purple"
-    Command="{Binding SubmitCommand}"
+    Command="{Binding OnSubmit}"
     Margin="0,20,0,0"/>
 
         <!-- Separator -->
