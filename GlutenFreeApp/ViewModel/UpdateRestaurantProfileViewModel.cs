@@ -37,15 +37,15 @@ namespace GlutenFreeApp.ViewModel
             }
         }
 
-        private string restName;
-        public string RestName
+        private string restaurantName;
+        public string RestaurantName
         {
-            get => restName;
+            get => restaurantName;
             set
             {
-                if (restName != value)
+                if (restaurantName != value)
                 {
-                    restName = value;
+                    restaurantName = value;
                     OnPropertyChanged();
                 }
             }
@@ -76,6 +76,7 @@ namespace GlutenFreeApp.ViewModel
                 if (value != restSelected)
                 {
                     restSelected = value;
+                    StatusRest = restSelected.StatusName;
                     OnPropertyChanged();
                 }
             }
@@ -112,20 +113,39 @@ namespace GlutenFreeApp.ViewModel
         }
         #endregion
 
-        //ask ofer
+        #region status rest selected
+        private string statusRest;
+        public string StatusRest
+        {
+            get => statusRest;
+            set 
+            {
+                if (statusRest != value)
+                {
+                    statusRest = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+       
+        #endregion
+
         #region submit
         public ICommand OnSubmit { set; get; }
 
         private async void OnSubmitCommand()
         {
             RestaurantInfo current = RestSelected;
-            current.RestName = this.RestName;
+            current.RestName = this.RestaurantName;
             current.RestAddress = this.RestAddress;
+            current.StatusID = 2;
             InServerCall = true;
             bool success = await proxy.UpdateRestaurant(current);
             if (success)
             {
-                await Application.Current.MainPage.DisplayAlert("Profile Updated", "Success", "ok");
+                InServerCall = false;
+                await Application.Current.MainPage.DisplayAlert("Restaurant Updated And Is Now Pending", "Success", "ok");
                   
             }
 

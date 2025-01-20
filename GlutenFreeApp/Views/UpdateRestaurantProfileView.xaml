@@ -8,19 +8,30 @@
         
         <!--Ask Ofer-->
 
-        <Picker
-            x:Name="RestPicker"
-            Title="Select A Restaurant"
-            ItemsSource="{Binding UserRestaurants}"
-            ItemDisplayBinding="{Binding RestName}"
-            SelectedItem="{Binding RestSelected}"
-            />
         
+
+        
+
         <Label 
     Text="Update Restaurant"
     FontSize="40"
     HorizontalOptions="Center"
     Margin="0,0,0,20"/>
+        
+        <Picker
+    x:Name="RestPicker"
+    Title="Select A Restaurant"
+    ItemsSource="{Binding UserRestaurants}"
+    ItemDisplayBinding="{Binding RestName}"
+    SelectedItem="{Binding RestSelected}"
+    />
+
+        <Label
+            Text="The Status Of The Chosen Restaurant:"
+    />
+        <Label
+            Text="{Binding StatusRest}"
+            />
 
         <!-- Username Entry -->
         <Label 
