@@ -1,97 +1,100 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:DataType="ViewModel:LoginPageViewModel"
-             xmlns:ViewModel ="clr-namespace:GlutenFreeApp.ViewModel"
-             x:Class="GlutenFreeApp.Views.LoginPageView"
-             Title="LoginPageView">
+<ContentPage
+    x:Class="GlutenFreeApp.Views.LoginPageView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModel="clr-namespace:GlutenFreeApp.ViewModel"
+    Title="LoginPageView"
+    x:DataType="ViewModel:LoginPageViewModel">
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding NotInServerCall}">
-            <!--Header-->
-            <Label 
-        Text="🌾LOG IN🌾"
-        FontSize="40"
-        HorizontalOptions="Center"
-        Margin="0,0,0,20"/>
+        <VerticalStackLayout
+            Padding="20"
+            IsEnabled="{Binding NotInServerCall}"
+            Spacing="15">
+            <!--  Header  -->
+            <Label
+                Margin="0,0,0,20"
+                FontFamily="TorontoFont"
+                FontSize="40"
+                HorizontalOptions="Center"
+                Text="🌾LOG IN🌾" />
 
-            <!--Username Entry-->
-            <Label 
-        Text="👤 Username:"
-        FontSize="16"
-        Margin="0,0,0,5"/>
+            <!--  Username Entry  -->
+            <Label
+                Margin="0,0,0,5"
+                FontSize="16"
+                Text="👤 Username:" />
             <Entry
-        x:Name="UsernameEntry"
-        Placeholder="Enter your username"
-        Text="{Binding UserName}"
-        HeightRequest="50"
-        VerticalTextAlignment="Center"/>
+                x:Name="UsernameEntry"
+                HeightRequest="50"
+                Placeholder="Enter your username"
+                Text="{Binding UserName}"
+                VerticalTextAlignment="Center" />
 
-            <!--Password Entry-->
-            <Label 
-        Text="🔑 Password:"
-        FontSize="16"
-        Margin="0,0,0,5"/>
+            <!--  Password Entry  -->
+            <Label
+                Margin="0,0,0,5"
+                FontSize="16"
+                Text="🔑 Password:" />
             <Entry
-        x:Name="PasswordEntry"
-        Placeholder="Enter your password"
-        Text="{Binding Password}"
-        IsPassword="True"
-        HeightRequest="50"
-        VerticalTextAlignment="Center"/>
-
-            <Label 
-  Text=" Email:"
-  FontSize="16"
-  Margin="0,0,0,5"/>
-            <Entry
-  x:Name="EmailEntry"
-  Placeholder="Enter your email"
-  Text="{Binding UserEmail}"
-  
-  HeightRequest="50"
-  VerticalTextAlignment="Center"/>
-
-
-
-            <!--Login Button-->
-            <Button
-        Text="Log In"
-        x:Name="LoginButton"
-        BackgroundColor="Purple"
-        Command="{Binding LoginCommand}"
-        Margin="0,20,0,0"/>
+                x:Name="PasswordEntry"
+                HeightRequest="50"
+                IsPassword="True"
+                Placeholder="Enter your password"
+                Text="{Binding Password}"
+                VerticalTextAlignment="Center" />
 
             <Label
-     Text="{Binding ErrorMsg}"
-     />
+                Margin="0,0,0,5"
+                FontSize="16"
+                Text="📧 Email:" />
+            <Entry
+                x:Name="EmailEntry"
+                HeightRequest="50"
+                Placeholder="Enter your email"
+                Text="{Binding UserEmail}"
+                VerticalTextAlignment="Center" />
 
-            <!--Separator-->
-            <BoxView 
-        HeightRequest="1"
-        Color="LightGray"
-        Margin="0,20"/>
 
-            <!--Additional Options-->
+
+            <!--  Login Button  -->
             <Button
-        Text="Sign Up"
-        Command="{Binding TransferToSignUp}"
-        BackgroundColor="Transparent"
-        TextColor="Purple"
-        BorderColor="Purple"
-        BorderWidth="1"/>
+                x:Name="LoginButton"
+                Margin="0,20,0,0"
+                BackgroundColor="Purple"
+                Command="{Binding LoginCommand}"
+                Text="Log In" />
 
-            <!--Add Button to transfer to info page-->
+            <Label Text="{Binding ErrorMsg}" />
+
+            <!--  Separator  -->
+            <BoxView
+                Margin="0,20"
+                HeightRequest="1"
+                Color="LightGray" />
+
+            <!--  Additional Options  -->
             <Button
-        Text="Continue without login"
-        BackgroundColor="Transparent"
-        TextColor="Gray"
-        Command="{Binding TransferToInfo}"
-        Margin="0,10,0,0"/>
+                BackgroundColor="Transparent"
+                BorderColor="Purple"
+                BorderWidth="1"
+                Command="{Binding TransferToSignUp}"
+                Text="Sign Up"
+                TextColor="Purple" />
 
-            <ActivityIndicator IsRunning="{Binding InServerCall}" 
-         Color="Red" 
-         VerticalOptions="Center" 
-         HorizontalOptions="Center" />
+            <!--  Add Button to transfer to info page  -->
+            <Button
+                Margin="0,10,0,0"
+                BackgroundColor="Transparent"
+                Command="{Binding TransferToInfo}"
+                Text="Continue without login"
+                TextColor="Gray" />
+
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                IsRunning="{Binding InServerCall}"
+                VerticalOptions="Center"
+                Color="Red" />
 
         </VerticalStackLayout>
 

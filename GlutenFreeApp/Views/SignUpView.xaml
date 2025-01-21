@@ -1,127 +1,118 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:GlutenFreeApp.ViewModel"
-             x:DataType="viewModels:SignUpViewModel"
-             x:Class="GlutenFreeApp.Views.SignUpView"
-             Title="SignUpView">
+<ContentPage
+    x:Class="GlutenFreeApp.Views.SignUpView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:GlutenFreeApp.ViewModel"
+    Title="SignUpView"
+    x:DataType="viewModels:SignUpViewModel">
     <VerticalStackLayout IsEnabled="{Binding NotInServerCall}">
-        <!--selector of type user-->
+        <!--  selector of type user  -->
         <Label
-            Text="Select user type"
-            HorizontalOptions="Center"
-            FontSize="20"
             Margin="0,0,0,20"
-            />
+            FontSize="20"
+            HorizontalOptions="Center"
+            Text="Select user type" />
 
 
         <Grid ColumnDefinitions="1*" RowDefinitions="1*,1*,1*,1*">
 
-            <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="0">
-                <!--Manager selection-->
+            <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center">
+                <!--  Manager selection  -->
                 <VerticalStackLayout Spacing="5">
 
-                    <Button 
+                    <Button
                         x:Name="ManagerDot"
-                        HeightRequest="24"
-                        WidthRequest="24"
-                        CornerRadius="12"
                         Padding="0"
-                        BorderColor="Gray"
                         BackgroundColor="Purple"
+                        BorderColor="Gray"
                         Command="{Binding ManagerSelectedCommand}"
-                        >
-                    </Button>
-                    <Label 
-                        Text="Manager"
+                        CornerRadius="12"
+                        HeightRequest="24"
+                        WidthRequest="24" />
+                    <Label
                         FontSize="14"
-                        HorizontalOptions="Center" />
+                        HorizontalOptions="Center"
+                        Text="Manager" />
                 </VerticalStackLayout>
 
 
 
-                <!--Visitor Selection-->
+                <!--  Visitor Selection  -->
 
                 <VerticalStackLayout Spacing="5">
-                    <Button 
+                    <Button
                         x:Name="VisitorDot"
-                        HeightRequest="24"
-                        WidthRequest="24"
-                        CornerRadius="12"
                         Padding="0"
-                        BorderColor="Gray"
                         BackgroundColor="Purple"
-                        Command="{Binding VisitorSelectedCommand}"   
-                        >
-                 
-                    </Button>
-                    <Label 
-                        Text="Visitor"
+                        BorderColor="Gray"
+                        Command="{Binding VisitorSelectedCommand}"
+                        CornerRadius="12"
+                        HeightRequest="24"
+                        WidthRequest="24" />
+                    <Label
                         FontSize="14"
-                        HorizontalOptions="Center" />
+                        HorizontalOptions="Center"
+                        Text="Visitor" />
                 </VerticalStackLayout>
 
 
 
-             
+
             </HorizontalStackLayout>
 
-            <!--common fields for both-->
-            <VerticalStackLayout Spacing="15" Margin="0,20,0,0" Grid.Row="1">
-                <Entry 
+            <!--  common fields for both  -->
+            <VerticalStackLayout
+                Grid.Row="1"
+                Margin="0,20,0,0"
+                Spacing="15">
+                <Entry
                     x:Name="UsernameEntry"
+                    Margin="0,20,0,0"
                     Placeholder="Username"
-                    Text="{Binding Username}"
-                    Margin="0,20,0,0" />
+                    Text="{Binding Username}" />
 
-                <Entry 
+                <Entry
                     x:Name="PasswordEntry"
+                    IsPassword="True"
                     Placeholder="Password"
-                    Text="{Binding Password}"
-                    IsPassword="True" />
-                <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"  />
+                    Text="{Binding Password}" />
+                <Label IsVisible="{Binding ShowPasswordError}" Text="{Binding PasswordError}" />
 
                 <Entry
                     x:Name="EmailEntry"
                     Placeholder="Email"
-                    Text="{Binding UserEmail}"
-                    />
-                <Label
-                    Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}"
-                    />
+                    Text="{Binding UserEmail}" />
+                <Label IsVisible="{Binding ShowEmailError}" Text="{Binding EmailError}" />
 
 
 
             </VerticalStackLayout>
 
-            <!--only manager fields-->
-            <!--IsVisible="{Binding IsManagerVisible}" - add this to see if manager is chosen-->
-            <VerticalStackLayout 
+            <!--  only manager fields  -->
+            <!--  IsVisible="{Binding IsManagerVisible}" - add this to see if manager is chosen  -->
+            <VerticalStackLayout
+                x:Name="ManagerFields"
                 Grid.Row="2"
-                x:Name="ManagerFields" 
                 IsVisible="{Binding IsManager}"
                 Spacing="15">
-                <Entry 
-                   x:Name="NameEntry"
-                   Placeholder="Name"
-                   Text="{Binding RestName}"
-                    />
+                <Entry
+                    x:Name="NameEntry"
+                    Placeholder="Name"
+                    Text="{Binding RestName}" />
 
-                <Entry 
+                <Entry
                     x:Name="AddressEntry"
-                    Placeholder="Address" 
-                    Text="{Binding Address}"
-                    />
+                    Placeholder="Address"
+                    Text="{Binding Address}" />
 
-                <!--לבדוק איך עושים בינדינג-->
-                
-                <Picker 
-                   x:Name="RestaurantTypePicker"
-                   Title="Type of Restaurant"
-                    SelectedIndex="{Binding TypeFood}"
-                    >
-                    <Picker.Items
-                        >
+                <!--  לבדוק איך עושים בינדינג  -->
+
+                <Picker
+                    x:Name="RestaurantTypePicker"
+                    Title="Type of Restaurant"
+                    SelectedIndex="{Binding TypeFood}">
+                    <Picker.Items>
                         <x:String>Italian</x:String>
                         <x:String>Asian</x:String>
                         <x:String>Mexican</x:String>
@@ -131,27 +122,27 @@
                 </Picker>
             </VerticalStackLayout>
 
-            <!--submit button-->
-            <Button 
-                Grid.Row="3"
+            <!--  submit button  -->
+            <Button
                 x:Name="RegisterButton"
-                Text="Submit"
+                Grid.Row="3"
+                Margin="0,20,0,0"
                 Command="{Binding SubmitCommand}"
-                WidthRequest="200"
-                
                 HorizontalOptions="Center"
-                Margin="0,20,0,0" />
+                Text="Submit"
+                WidthRequest="200" />
 
         </Grid>
 
-        <!-- Centered ActivityIndicator -->
-        <ActivityIndicator IsRunning="{Binding InServerCall}" 
-                 Color="Red" 
-                 VerticalOptions="Center" 
-                 HorizontalOptions="Center" />
+        <!--  Centered ActivityIndicator  -->
+        <ActivityIndicator
+            HorizontalOptions="Center"
+            IsRunning="{Binding InServerCall}"
+            VerticalOptions="Center"
+            Color="Red" />
 
     </VerticalStackLayout>
-  
+
 
 
 

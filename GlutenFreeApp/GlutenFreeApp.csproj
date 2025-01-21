@@ -57,6 +57,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\crownadmin.png" />
+	  <None Remove="Resources\Images\fun.png" />
+	  <None Remove="Resources\Images\plus.png" />
+	  <None Remove="Resources\Images\recipe.png" />
+	  <None Remove="Resources\Images\restaurant.png" />
+	  <None Remove="Resources\Images\update.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
 		  <PrivateAssets>all</PrivateAssets>

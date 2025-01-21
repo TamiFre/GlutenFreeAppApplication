@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GlutenFreeApp.Views.UpdateRestaurantProfileView"
-             Title="UpdateRestaurantProfileView">
-    <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding NotInServerCall}">
-        <!-- Header -->
-        
-        <!--Ask Ofer-->
+<ContentPage
+    x:Class="GlutenFreeApp.Views.UpdateRestaurantProfileView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="UpdateRestaurantProfileView">
+    <VerticalStackLayout
+        Padding="20"
+        IsEnabled="{Binding NotInServerCall}"
+        Spacing="15">
+        <!--  Header  -->
 
-        
+        <!--  Ask Ofer  -->
 
-        
 
-        <Label 
-    Text="Update Restaurant"
-    FontSize="40"
-    HorizontalOptions="Center"
-    Margin="0,0,0,20"/>
-        
+
+
+
+        <Label
+            Margin="0,0,0,20"
+            FontSize="40"
+            HorizontalOptions="Center"
+            Text="Update Restaurant" />
+
         <Picker
-    x:Name="RestPicker"
-    Title="Select A Restaurant"
-    ItemsSource="{Binding UserRestaurants}"
-    ItemDisplayBinding="{Binding RestName}"
-    SelectedItem="{Binding RestSelected}"
-    />
+            x:Name="RestPicker"
+            Title="Select A Restaurant"
+            ItemDisplayBinding="{Binding RestName}"
+            ItemsSource="{Binding UserRestaurants}"
+            SelectedItem="{Binding RestSelected}" />
 
+        <Label Text="The Status Of The Chosen Restaurant:" />
+        <Label Text="{Binding StatusRest}" />
+
+        <!--  Username Entry  -->
         <Label
-            Text="The Status Of The Chosen Restaurant:"
-    />
+            Margin="0,0,0,5"
+            FontSize="16"
+            Text="Restaurant Name:" />
+        <Entry
+            x:Name="RestaurantName"
+            HeightRequest="50"
+            Placeholder="Enter your restaurant name"
+            Text="{Binding RestaurantName}"
+            VerticalTextAlignment="Center" />
+
+        <!--  address Entry  -->
         <Label
-            Text="{Binding StatusRest}"
-            />
-
-        <!-- Username Entry -->
-        <Label 
-    Text="Restaurant Name:"
-    FontSize="16"
-    Margin="0,0,0,5"/>
+            Margin="0,0,0,5"
+            FontSize="16"
+            Text="Address:" />
         <Entry
-    x:Name="RestaurantName"
-    Placeholder="Enter your restaurant name"
-    Text="{Binding RestaurantName}"
-    HeightRequest="50"
-    VerticalTextAlignment="Center"/>
+            x:Name="AddressEntry"
+            HeightRequest="50"
+            IsPassword="True"
+            Placeholder="Enter your address"
+            Text="{Binding RestAddress}"
+            VerticalTextAlignment="Center" />
 
-        <!-- address Entry -->
-        <Label 
-    Text="Address:"
-    FontSize="16"
-    Margin="0,0,0,5"/>
-        <Entry
-    x:Name="AddressEntry"
-    Placeholder="Enter your address"
-    Text="{Binding RestAddress }"
-    IsPassword="True"
-    HeightRequest="50"
-    VerticalTextAlignment="Center"/>
-
-        <!-- Submit Button -->
+        <!--  Submit Button  -->
         <Button
-    Text="Update Restaurant"
-    x:Name="UpdateButton"
-    BackgroundColor="Purple"
-    Command="{Binding OnSubmit}"
-    Margin="0,20,0,0"/>
+            x:Name="UpdateButton"
+            Margin="0,20,0,0"
+            BackgroundColor="Purple"
+            Command="{Binding OnSubmit}"
+            Text="Update Restaurant" />
 
-        <!-- Separator -->
-        <BoxView 
-    HeightRequest="1"
-    Color="LightGray"
-    Margin="0,20"/>
+        <!--  Separator  -->
+        <BoxView
+            Margin="0,20"
+            HeightRequest="1"
+            Color="LightGray" />
 
-        <!-- Additional Options -->
+        <!--  Additional Options  -->
 
-        <ActivityIndicator IsRunning="{Binding InServerCall}" 
-    Color="Red" 
-    VerticalOptions="Center" 
-    HorizontalOptions="Center" />
+        <ActivityIndicator
+            HorizontalOptions="Center"
+            IsRunning="{Binding InServerCall}"
+            VerticalOptions="Center"
+            Color="Red" />
     </VerticalStackLayout>
 </ContentPage>

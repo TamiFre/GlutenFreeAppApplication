@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GlutenFreeApp.Views.AllRecipeView"
-             xmlns:models="clr-namespace:GlutenFreeApp.Models"
-             xmlns:viewModels="clr-namespace:GlutenFreeApp.ViewModel"
-             Title="AllRecipeView">
+<ContentPage
+    x:Class="GlutenFreeApp.Views.AllRecipeView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:GlutenFreeApp.Models"
+    xmlns:viewModels="clr-namespace:GlutenFreeApp.ViewModel"
+    Title="AllRecipeView">
     <VerticalStackLayout>
         <Label
-            Text="All Recipes"
+            Margin="0,0,0,30"
+            FontFamily="TorontoFont"
+            FontSize="50"
             HorizontalOptions="CenterAndExpand"
-            FontAttributes="Bold"
-            Margin="0, 0, 0, 30"
-            FontSize="30"
-            />
+            Text="All Recipes" />
 
-        
+
         <Picker
-             x:Name="FoodTypePicker"
-             Title="Select recipe type"
-             SelectedIndex="{Binding TypeFoodSelected}"
-             HeightRequest="60"
-             Margin="0, 0, 0, 10"
-                 >
+            x:Name="FoodTypePicker"
+            Title="Select recipe type"
+            Margin="0,0,0,10"
+            HeightRequest="60"
+            SelectedIndex="{Binding TypeFoodSelected}">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>ShowAll</x:String>
@@ -35,22 +34,21 @@
         </Picker>
 
         <Button
-            Text="Search by the food type"
+            Margin="0,0,0,30"
+            BackgroundColor="Purple"
             Command="{Binding SearchByFoodTypeSelected}"
-            HeightRequest="30"
-            Margin="0, 0, 0, 30"
-            />
+            Text="Search by the food type" />
 
         <CollectionView
-      x:Name="PendingRecipesList"
-      HeightRequest="300"
-      ItemsSource="{Binding RecipesCol}">
+            x:Name="PendingRecipesList"
+            HeightRequest="300"
+            ItemsSource="{Binding RecipesCol}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:RecipeInfo">
                     <Frame Margin="0,5" Padding="10">
-                        <Grid RowDefinitions="*" ColumnDefinitions="*,*">
-                            <Label Text="{Binding RecipeText}" Grid.Column="0" />
-                            <Label Text="{Binding TypeFoodName}" Grid.Column="1" />
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="*">
+                            <Label Grid.Column="0" Text="{Binding RecipeText}" />
+                            <Label Grid.Column="1" Text="{Binding TypeFoodName}" />
                         </Grid>
                     </Frame>
                 </DataTemplate>

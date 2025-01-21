@@ -17,7 +17,7 @@ namespace GlutenFreeApp
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-
+                    fonts.AddFont("Toronto College.ttf","TorontoFont");
 
                 });
             builder.Services.AddSingleton<GlutenFreeServiceWebAPIProxy>();

@@ -12,7 +12,8 @@
             <!--  Header  -->
             <Label
                 Margin="0,0,0,20"
-                FontSize="30"
+                FontFamily="TorontoFont"
+                FontSize="50"
                 HorizontalOptions="Center"
                 Text="Admin Dashboard" />
 
@@ -47,13 +48,12 @@
             <!--  Add Picker status  -->
 
             <Picker
-       x:Name="StatusRecipePicker"
-       Title="Select the status you want to see"
-       SelectedIndex="{Binding StatusRecipeSelected}"
-          >
+                x:Name="StatusRecipePicker"
+                Title="Select the status you want to see"
+                SelectedIndex="{Binding StatusRecipeSelected}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-                        
+
                         <x:String>Approved</x:String>
                         <x:String>Pending</x:String>
                         <x:String>Declined</x:String>
@@ -62,9 +62,9 @@
             </Picker>
 
             <Button
-      Text="Filter By Status Chosen"
-      Command="{Binding SearchRecipeByStatus}"
-      />
+                BackgroundColor="Purple"
+                Command="{Binding SearchRecipeByStatus}"
+                Text="Filter By Status Chosen" />
 
 
 
@@ -74,46 +74,42 @@
                 x:Name="PendingRecipesList"
                 HeightRequest="200"
                 ItemsSource="{Binding RecipesCol}"
-                SelectionMode="Single"
                 SelectedItem="{Binding ObjetRecipeSelected}"
-                >
+                SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RecipeInfo">
                         <Frame Margin="0,5" Padding="10">
-                            <SwipeView Grid.Column="0" 
-                               Margin="5,0">
+                            <SwipeView Grid.Column="0" Margin="5,0">
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItem
-                                            IsVisible="{Binding IsSwipeEnabled}"
-                                            Text="Reject"
                                             BackgroundColor="Gray"
-                                            Command="{Binding  Source={x:Reference PendingRecipesList}, Path=BindingContext.DeclineRecipe}"
+                                            Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.DeclineRecipe}"
                                             CommandParameter="{Binding .}"
-                                     />
+                                            IsVisible="{Binding IsSwipeEnabled}"
+                                            Text="Reject" />
                                     </SwipeItems>
                                 </SwipeView.LeftItems>
 
                                 <SwipeView.RightItems>
                                     <SwipeItems>
                                         <SwipeItem
+                                            BackgroundColor="Purple"
+                                            Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.ApproveRecipe}"
+                                            CommandParameter="{Binding .}"
                                             IsVisible="{Binding IsSwipeEnabled}"
-                                             Text="Approve"
-                                             BackgroundColor="Purple"
-                                             Command="{Binding  Source={x:Reference PendingRecipesList}, Path=BindingContext.ApproveRecipe}"
-                                             CommandParameter="{Binding .}"
-                                         />
+                                            Text="Approve" />
                                     </SwipeItems>
                                 </SwipeView.RightItems>
 
-                                <!-- Main content inside SwipeView -->
-                                <Grid RowDefinitions="*" ColumnDefinitions="*,*,*">
-                                    <Label Text="{Binding RecipeText}" Grid.Column="0" />
-                                    <Label Text="{Binding TypeFoodName}" Grid.Column="1" />
-                                    <Label Text="{Binding StatusName}" Grid.Column="2"/>
+                                <!--  Main content inside SwipeView  -->
+                                <Grid ColumnDefinitions="*,*,*" RowDefinitions="*">
+                                    <Label Grid.Column="0" Text="{Binding RecipeText}" />
+                                    <Label Grid.Column="1" Text="{Binding TypeFoodName}" />
+                                    <Label Grid.Column="2" Text="{Binding StatusName}" />
                                 </Grid>
-                                
-                                
+
+
                             </SwipeView>
                         </Frame>
                     </DataTemplate>
@@ -132,13 +128,12 @@
             <!--  do the picker bound to the statuses  -->
 
             <Picker
-                 x:Name="StatusRestPicker"
-                 Title="Select the status you want to see"
-                 SelectedIndex="{Binding StatusRestSelected}"
-                    >
+                x:Name="StatusRestPicker"
+                Title="Select the status you want to see"
+                SelectedIndex="{Binding StatusRestSelected}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-                        
+
                         <x:String>Approved</x:String>
                         <x:String>Pending</x:String>
                         <x:String>Declined</x:String>
@@ -147,9 +142,9 @@
             </Picker>
 
             <Button
-                Text="Filter By Status Chosen"
+                BackgroundColor="Purple"
                 Command="{Binding SearchRestByStatus}"
-                />
+                Text="Filter By Status Chosen" />
 
 
             <!--  Note: Bind ItemsSource to your restaurants database collection  -->
@@ -157,42 +152,51 @@
                 x:Name="RestaurantsList"
                 HeightRequest="200"
                 ItemsSource="{Binding RestaurantsCol}"
-                SelectionMode="Single"
                 SelectedItem="{Binding SelectedObject}"
-                >
+                SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RestaurantInfo">
                         <Frame Margin="0,5" Padding="10">
-                            <SwipeView Grid.Column="0" Margin="5,0" >
+                            <SwipeView Grid.Column="0" Margin="5,0">
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItem
+                                            BackgroundColor="Gray"
+                                            Command="{Binding Source={x:Reference RestaurantsList}, Path=BindingContext.DeclineRestaurant}"
+                                            CommandParameter="{Binding .}"
                                             IsVisible="{Binding IsSwipeEnabled}"
-                                             Text="Reject"
-                                             BackgroundColor="Gray"
-                                             Command="{Binding  Source={x:Reference RestaurantsList}, Path=BindingContext.DeclineRestaurant}"
-                                             CommandParameter="{Binding .}"
-                                             />
+                                            Text="Reject" />
                                     </SwipeItems>
                                 </SwipeView.LeftItems>
 
                                 <SwipeView.RightItems>
                                     <SwipeItems>
                                         <SwipeItem
+                                            BackgroundColor="Purple"
+                                            Command="{Binding Source={x:Reference RestaurantsList}, Path=BindingContext.ApproveRestaurant}"
+                                            CommandParameter="{Binding .}"
                                             IsVisible="{Binding IsSwipeEnabled}"
-                                              Text="Approve"
-                                              BackgroundColor="Purple"
-                                              Command="{Binding  Source={x:Reference RestaurantsList}, Path=BindingContext.ApproveRestaurant}"
-                                              CommandParameter="{Binding .}"
-                                               />
+                                            Text="Approve" />
                                     </SwipeItems>
                                 </SwipeView.RightItems>
 
-                                <Grid RowDefinitions="*,*" ColumnDefinitions="*,*,*">
-                                    <Label Text="{Binding RestName}" Grid.Row="0" Grid.Column="0"/>
-                                    <Label Text="{Binding RestAddress} " Grid.Row="1" Grid.Column="0"/>
-                                    <Label Text="{Binding TypeFoodName}" Grid.Row="0" Grid.Column="1"/>
-                                    <Label Text="{Binding StatusName}" Grid.Row="0" Grid.Column="2"/>
+                                <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,*">
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Text="{Binding RestName}" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Text="{Binding RestAddress}" />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Text="{Binding TypeFoodName}" />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Text="{Binding StatusName}" />
                                 </Grid>
                             </SwipeView>
                         </Frame>

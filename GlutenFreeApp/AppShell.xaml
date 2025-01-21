@@ -13,43 +13,48 @@
     <TabBar>
 
         <ShellContent
-            Title="admin page"
+            Title="Admin"
             ContentTemplate="{DataTemplate views:AdminPageView}"
+            Icon="crownadmin.png"
             IsVisible="{Binding IsManager}"
             Route="AdminPage" />
-        
+
         <ShellContent
-            Title="all recipes"
+            Title="Recipes"
             ContentTemplate="{DataTemplate views:AllRecipeView}"
+            Icon="recipe.png"
             Route="AllRecipes" />
         <ShellContent
-            Title="all restaurants"
+            Title="Restaurants"
             ContentTemplate="{DataTemplate views:AllRestaurantsView}"
+            Icon="restaurant.png"
             Route="AllRestauramts" />
         <ShellContent
-            Title="add recipe"
+            Title="Add Recipe"
             ContentTemplate="{DataTemplate views:AddRecipeView}"
+            Icon="plus.png"
             Route="AddRecipe" />
         <ShellContent
-            Title="addcritic"
+            Title="Add Critic"
             ContentTemplate="{DataTemplate views:AddCriticView}"
+            Icon="plus.png"
             Route="AddCritic" />
         <ShellContent
-            Title="info page"
+            Title="Fun Facts"
             ContentTemplate="{DataTemplate views:InformationView}"
-            Route="InfoPage"
-            />
+            Icon="fun.png"
+            Route="InfoPage" />
         <ShellContent
-            Title="update profile"
+            Title="Update Profile"
             ContentTemplate="{DataTemplate views:UpdateProfileView}"
-            Route="UpdateProfile"
-            />
+            Icon="update.png"
+            Route="UpdateProfile" />
         <ShellContent
-            Title="update restaurant profile"
-            IsVisible="{Binding IsRestaurantManager}"
+            Title="Update Restaurant"
             ContentTemplate="{DataTemplate views:UpdateRestaurantProfileView}"
-            Route="UpdateRestauratnProfile"
-            />
+            Icon="update.png"
+            IsVisible="{Binding IsRestaurantManager}"
+            Route="UpdateRestauratnProfile" />
 
     </TabBar>
 
