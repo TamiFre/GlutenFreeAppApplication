@@ -193,7 +193,7 @@ namespace GlutenFreeApp.Services
         #region Add Recipe
 
         //Check
-        public async Task<bool> AddRecipeAsync(RecipeInfo recipeInfo)
+        public async Task<RecipeInfo> AddRecipeAsync(RecipeInfo recipeInfo)
         {
             string url = $"{this.baseUrl}AddRecipe";
             try
@@ -205,15 +205,26 @@ namespace GlutenFreeApp.Services
                 //check if fine
                 if (response.IsSuccessStatusCode)
                 {
-                    return true;
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    RecipeInfo result = JsonSerializer.Deserialize<RecipeInfo>(resContent, options);
+                    return result;
                 }
 
-                return false;
+                else 
+                {
+                    return null;
+                }
 
             }
             catch (Exception ex)
             {
-                return false;
+                return null;
             }
         }
         #endregion
@@ -821,6 +832,53 @@ namespace GlutenFreeApp.Services
                     return result;
                 }
                 return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Upload Recipe Image
+        //This method call the UploadProfileImage web API on the server and return the AppUser object with the given URL
+        //of the profile image or null if the call fails
+        //when registering a user it is better first to call the register command and right after that call this function
+
+        public string GetDefaultProfilePhotoUrl()
+        {
+            return $"{GlutenFreeServiceWebAPIProxy.ImageBaseAddress}/recipeimages/default.png";
+        }
+
+        public async Task<RecipeInfo> UploadRecipeImage(string imagePath, int recipeID)
+        {
+            //Set URI to the specific function API
+            string url = $"{this.baseUrl}UploadRecipeImage?recipeID={recipeID}";
+            try
+            {
+                //Create the form data
+                MultipartFormDataContent form = new MultipartFormDataContent();
+                var fileContent = new ByteArrayContent(File.ReadAllBytes(imagePath));
+                form.Add(fileContent, "file", imagePath);
+                //Call the server API
+                HttpResponseMessage response = await client.PostAsync(url, form);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    RecipeInfo? result = JsonSerializer.Deserialize<RecipeInfo>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {

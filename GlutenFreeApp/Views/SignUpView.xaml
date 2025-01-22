@@ -10,14 +10,15 @@
         <!--  selector of type user  -->
         <Label
             Margin="0,0,0,20"
-            FontSize="20"
+             FontFamily="TorontoFont"
+             FontSize="40"
             HorizontalOptions="Center"
             Text="Select user type" />
 
 
         <Grid ColumnDefinitions="1*" RowDefinitions="1*,1*,1*,1*">
 
-            <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center">
+            <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center"  Spacing="50">
                 <!--  Manager selection  -->
                 <VerticalStackLayout Spacing="5">
 
@@ -66,6 +67,7 @@
                 Grid.Row="1"
                 Margin="0,20,0,0"
                 Spacing="15">
+                
                 <Entry
                     x:Name="UsernameEntry"
                     Margin="0,20,0,0"
@@ -90,15 +92,17 @@
             </VerticalStackLayout>
 
             <!--  only manager fields  -->
-            <!--  IsVisible="{Binding IsManagerVisible}" - add this to see if manager is chosen  -->
-            <VerticalStackLayout
+            
+            <VerticalStackLayout 
                 x:Name="ManagerFields"
                 Grid.Row="2"
                 IsVisible="{Binding IsManager}"
-                Spacing="15">
+                Spacing="20"
+                Margin="0,20,0,0"
+                >
                 <Entry
                     x:Name="NameEntry"
-                    Placeholder="Name"
+                    Placeholder="Restaurant Name"
                     Text="{Binding RestName}" />
 
                 <Entry
@@ -108,9 +112,11 @@
 
                 <!--  לבדוק איך עושים בינדינג  -->
 
+                <Label Text="Select Restaurant Food Type:"/>
                 <Picker
                     x:Name="RestaurantTypePicker"
                     Title="Type of Restaurant"
+                    
                     SelectedIndex="{Binding TypeFood}">
                     <Picker.Items>
                         <x:String>Italian</x:String>
@@ -130,6 +136,7 @@
                 Command="{Binding SubmitCommand}"
                 HorizontalOptions="Center"
                 Text="Submit"
+                BackgroundColor="Purple"
                 WidthRequest="200" />
 
         </Grid>

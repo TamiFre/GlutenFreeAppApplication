@@ -6,7 +6,8 @@
     Title="InformationView">
     <VerticalStackLayout HorizontalOptions="CenterAndExpand">
         <Label
-            FontSize="60"
+            FontFamily="TorontoFont"
+            FontSize="50"
             HorizontalOptions="Center"
             Text="Random Fun Facts!"
             VerticalOptions="Center" />

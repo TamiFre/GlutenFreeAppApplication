@@ -8,7 +8,8 @@
         <!-- Header -->
         <Label 
         Text="Update Profile"
-        FontSize="40"
+           FontFamily="TorontoFont"
+   FontSize="40"
         HorizontalOptions="Center"
         Margin="0,0,0,20"/>
 

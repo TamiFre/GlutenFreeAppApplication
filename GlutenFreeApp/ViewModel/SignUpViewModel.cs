@@ -198,7 +198,7 @@ public class SignUpViewModel : ViewModelBase
         IsManager = false;
         EmailError = "Email is required";
         PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
-
+        
     }
 
     #region regsiter

@@ -20,6 +20,79 @@ namespace GlutenFreeApp.ViewModel
             this.proxy = proxy;
             this.serviceProvider = serviceProvider;
             SubmitRecipeCommand = new Command(AddRecipe);
+            UploadPhotoCommand = new Command(OnUploadPhoto);
+            PhotoURL = proxy.GetDefaultProfilePhotoUrl();
+            LocalPhotoPath = "";
+
+        }
+        #endregion
+
+        #region Photo
+
+        private string photoURL;
+
+        public string PhotoURL
+        {
+            get => photoURL;
+            set
+            {
+                photoURL = value;
+                OnPropertyChanged("PhotoURL");
+            }
+        }
+
+        private string localPhotoPath;
+
+        public string LocalPhotoPath
+        {
+            get => localPhotoPath;
+            set
+            {
+                localPhotoPath = value;
+                OnPropertyChanged("LocalPhotoPath");
+            }
+        }
+
+        public Command UploadPhotoCommand { get; }
+        //This method open the file picker to select a photo
+
+        private int recipeid;
+        public int Recipeid
+        {
+            get => recipeid;
+            set 
+            {
+                if (recipeid != value)
+                {
+                    recipeid = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private async void OnUploadPhoto()
+        {
+            try
+            {
+                
+               
+                var result = await MediaPicker.Default.CapturePhotoAsync(new MediaPickerOptions
+                {
+                    Title = "Please select a photo",
+                });
+
+                if (result != null)
+                {
+                    // The user picked a file
+                    this.LocalPhotoPath = result.FullPath;
+                    this.PhotoURL = result.FullPath;
+                }
+
+                RecipeInfo? updatedrecipe = await proxy.UploadRecipeImage(LocalPhotoPath, Recipeid);
+            }
+            catch (Exception ex)
+            {
+            }
+
         }
         #endregion
 
@@ -45,8 +118,8 @@ namespace GlutenFreeApp.ViewModel
             }
         }
 
-        private string typeFood;
-        public string TypeFood
+        private int typeFood;
+        public int TypeFood
         {
             get { return typeFood; }
             set { typeFood = value; OnPropertyChanged(); }
@@ -68,16 +141,17 @@ namespace GlutenFreeApp.ViewModel
             //add the recipe as pending
 
             //how to add user id 
-            RecipeInfo information = new RecipeInfo { RecipeText = Recipe, StatusID=2, UserID = u.UserID.Value };
-            bool worked = await this.proxy.AddRecipeAsync(information);
+            RecipeInfo information = new RecipeInfo { RecipeText = Recipe, StatusID=2, UserID = u.UserID.Value, TypeFoodID = TypeFood};
+            RecipeInfo worked = await this.proxy.AddRecipeAsync(information);
             InServerCall = false;
 
-            if (!worked)
+            if (worked==null)
             {
                 ErrorMsg = "Something Went Wrong";
             }
             else
             {
+                Recipeid=worked.RecipeID;
                 ErrorMsg = "All Good";
             }
 
