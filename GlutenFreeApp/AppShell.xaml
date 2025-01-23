@@ -50,6 +50,12 @@
             Icon="update.png"
             Route="UpdateProfile" />
         <ShellContent
+            Title="Add Restaurant"
+            ContentTemplate="{DataTemplate views:AddRestaurantView}"
+            Icon="plus.png"
+            IsVisible="{Binding IsRestaurantManager}"
+            Route="AddRestaurant" />
+        <ShellContent
             Title="Update Restaurant"
             ContentTemplate="{DataTemplate views:UpdateRestaurantProfileView}"
             Icon="update.png"

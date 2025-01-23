@@ -44,6 +44,8 @@ namespace GlutenFreeApp.ViewModel
                 return (this.currentUser.TypeID == 3);
             }
         }
+       
+
 
         //this command will be used for logout menu item
         public Command LogoutCommand

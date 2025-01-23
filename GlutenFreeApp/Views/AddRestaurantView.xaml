@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GlutenFreeApp.Views.AddRestaurantView"
+             Title="AddRestaurantView">
+    <ScrollView>
+    <VerticalStackLayout 
+          
+            Spacing="20"
+            Margin="0,20,0,0"
+            >
+        <Label
+     Margin="0,0,0,30"
+     FontFamily="TorontoFont"
+     FontSize="50"
+     HorizontalOptions="CenterAndExpand"
+     Text="Add Restaurant" />
+        <Entry
+                x:Name="NameEntry"
+                Placeholder="Restaurant Name"
+                Text="{Binding RestName}" />
+
+        <Entry
+                x:Name="AddressEntry"
+                Placeholder="Address"
+                Text="{Binding Address}" />
+
+        <!--  לבדוק איך עושים בינדינג  -->
+
+        <Label Text="Select Restaurant Food Type:"/>
+        <Picker
+                x:Name="RestaurantTypePicker"
+                Title="Type of Restaurant"
+                
+                SelectedIndex="{Binding TypeFood}">
+            <Picker.Items>
+                <x:String>Italian</x:String>
+                <x:String>Asian</x:String>
+                <x:String>Mexican</x:String>
+                <x:String>BBQ</x:String>
+                <x:String>French</x:String>
+            </Picker.Items>
+        </Picker>
+
+
+        <!--  submit button  -->
+        <Button
+        x:Name="RegisterButton"
+        Grid.Row="3"
+        Margin="0,20,0,0"
+        Command="{Binding Submit}"
+        HorizontalOptions="Center"
+        Text="Submit"
+        BackgroundColor="Purple"
+            IsEnabled="{Binding NotInServerCall}"
+        WidthRequest="200" />
+
+        <!-- Photo -->
+        <Frame BorderColor="Black" Padding="5" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image x:Name="theImageBug" Source="{Binding PhotoURL}"  HeightRequest="150"/>
+                <Label Grid.Row="1"
+Text="Click Here To Upload Photo!"
+TextColor="Blue"
+HorizontalOptions="Center"
+VerticalOptions="End">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding UploadPhotoCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Frame>
+
+        <!--  Centered ActivityIndicator  -->
+        <ActivityIndicator
+    HorizontalOptions="Center"
+    IsRunning="{Binding InServerCall}"
+    VerticalOptions="Center"
+    Color="Red" />
+
+   
+
+    </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

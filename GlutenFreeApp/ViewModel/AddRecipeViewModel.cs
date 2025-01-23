@@ -21,7 +21,7 @@ namespace GlutenFreeApp.ViewModel
             this.serviceProvider = serviceProvider;
             SubmitRecipeCommand = new Command(AddRecipe);
             UploadPhotoCommand = new Command(OnUploadPhoto);
-            PhotoURL = proxy.GetDefaultProfilePhotoUrl();
+            PhotoURL = proxy.GetDefaultRecipePhotoUrl();
             LocalPhotoPath = "";
 
         }

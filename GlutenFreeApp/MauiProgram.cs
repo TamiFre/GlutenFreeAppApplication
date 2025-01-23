@@ -44,6 +44,8 @@ namespace GlutenFreeApp
             builder.Services.AddTransient<UpdateProfileViewModel>();
             builder.Services.AddTransient<UpdateRestaurantProfileViewModel>();
             builder.Services.AddTransient<UpdateRestaurantProfileView>();
+            builder.Services.AddTransient<AddRestaurantView>();
+            builder.Services.AddTransient<AddRestaurantViewModel>();
             
 #if DEBUG
             builder.Logging.AddDebug();

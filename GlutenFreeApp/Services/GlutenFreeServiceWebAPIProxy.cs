@@ -845,7 +845,7 @@ namespace GlutenFreeApp.Services
         //of the profile image or null if the call fails
         //when registering a user it is better first to call the register command and right after that call this function
 
-        public string GetDefaultProfilePhotoUrl()
+        public string GetDefaultRecipePhotoUrl()
         {
             return $"{GlutenFreeServiceWebAPIProxy.ImageBaseAddress}/recipeimages/default.png";
         }
@@ -879,6 +879,90 @@ namespace GlutenFreeApp.Services
                 {
                     return null;
                 }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Upload Restaurant Photo After Logged In - Ask Ofer
+        //This method call the UploadProfileImage web API on the server and return the AppUser object with the given URL
+        //of the profile image or null if the call fails
+        //when registering a user it is better first to call the register command and right after that call this function
+
+        public string GetDefaultRestaurantPhotoUrl()
+        {
+            return $"{GlutenFreeServiceWebAPIProxy.ImageBaseAddress}/recipeimages/default.png";
+        }
+
+        public async Task<RestaurantInfo> UploadRestaurantImage(string imagePath, int restaurantID)
+        {
+            //Set URI to the specific function API
+            string url = $"{this.baseUrl}UploadRestaurantImage?restaurantID={restaurantID}";
+            try
+            {
+                //Create the form data
+                MultipartFormDataContent form = new MultipartFormDataContent();
+                var fileContent = new ByteArrayContent(File.ReadAllBytes(imagePath));
+                form.Add(fileContent, "file", imagePath);
+                //Call the server API
+                HttpResponseMessage response = await client.PostAsync(url, form);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    RestaurantInfo? result = JsonSerializer.Deserialize<RestaurantInfo>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Add Restaurant
+        public async Task<RestaurantInfo> AddRestaurant(RestaurantInfo restaurantInfo)
+        {
+            string url = $"{this.baseUrl}AddRestaurant";
+            try
+            {
+                //do a json to info
+                string json = JsonSerializer.Serialize<RestaurantInfo>(restaurantInfo);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //check if fine
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    RestaurantInfo result = JsonSerializer.Deserialize<RestaurantInfo>(resContent, options);
+                    return result;
+                }
+
+                else
+                {
+                    return null;
+                }
+
             }
             catch (Exception ex)
             {
