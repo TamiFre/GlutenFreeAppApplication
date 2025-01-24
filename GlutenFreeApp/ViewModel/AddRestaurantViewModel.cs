@@ -67,8 +67,16 @@ namespace GlutenFreeApp.ViewModel
             InServerCall = false;
             if (newRest != null)
             {
+                //if the restaurant without the image was successfuly uploaded-> we will upload the image as well
+                //this means the select photo method only gets the image path and doesnt upload it yet
                 Restaurantid = newRest.RestID;
+                RestaurantInfo? updatedrestaurant = await proxy.UploadRestaurantImage(LocalPhotoPath, Restaurantid);
                 await Application.Current.MainPage.DisplayAlert("Restaurant Is Up And Waiting For Approval", "Success", "ok");
+                //restart the properties
+                Address = "";
+                RestName = "";
+                TypeFood = 0;
+                PhotoURL = proxy.GetDefaultRestaurantPhotoUrl();
             }
             else
                 await Application.Current.MainPage.DisplayAlert("Something Went Wrong", "nah", "ok");
@@ -117,7 +125,7 @@ namespace GlutenFreeApp.ViewModel
         }
 
         public Command UploadPhotoCommand { get; }
-        //This method open the file picker to select a photo
+        //This method open the file picker to select a photo and saves the photo but doesnt upload it yet
         private async void OnUploadPhoto()
         {
             try
@@ -134,7 +142,7 @@ namespace GlutenFreeApp.ViewModel
                     this.PhotoURL = result.FullPath;
                 }
 
-                RestaurantInfo? updatedrestaurant = await proxy.UploadRestaurantImage(LocalPhotoPath,Restaurantid );
+               
     }
             catch (Exception ex)
             {

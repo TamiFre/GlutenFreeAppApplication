@@ -198,7 +198,9 @@ public class SignUpViewModel : ViewModelBase
         IsManager = false;
         EmailError = "Email is required";
         PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
-        
+        UploadPhotoCommand = new Command(OnUploadPhoto);
+        PhotoURL = proxy.GetDefaultRestaurantPhotoUrl();
+        LocalPhotoPath = "";
     }
 
     #region regsiter
@@ -215,46 +217,59 @@ public class SignUpViewModel : ViewModelBase
 
             if (IsManager)
             {
-               
+
                 //Create a new user that is a manager
                 var newUser = new UsersInfo
                 {
-                        Name = this.Username,
-                        Password = this.Password,
-                        TypeID = 3,
-                        UserEmail= this.UserEmail,
-                        UserID = 0
+                    Name = this.Username,
+                    Password = this.Password,
+                    TypeID = 3,
+                    UserEmail = this.UserEmail,
+                    UserID = 0
                 };
-                    //Create the restaurant
-                    var newRest = new RestaurantInfo
-                    {
-                        RestAddress = this.Address,
-                        StatusID = 2,//PENDING
-                        TypeFoodID = this.TypeFood+1,
-                        UserID =(int)newUser.UserID,
-                        RestName = this.RestName
-                    };
-                    var manager = new ManagerInfo
-                    {
-                        UserManager = newUser,
-                        RestaurantManager = newRest
-                    };
-    
-                    //Call the Register method on the proxy to register the new user
-                    InServerCall = true;
-                    manager = await proxy.RegisterManager(manager);
-                    InServerCall = false;
+                //Create the restaurant
+                var newRest = new RestaurantInfo
+                {
+                    RestAddress = this.Address,
+                    StatusID = 2,//PENDING
+                    TypeFoodID = this.TypeFood + 1,
+                    UserID = (int)newUser.UserID,
+                    RestName = this.RestName
+                };
+                var manager = new ManagerInfo
+                {
+                    UserManager = newUser,
+                    RestaurantManager = newRest
+                };
 
-                    //If the registration was successful, navigate to the login page
-                    if (newUser != null)
+                //Call the Register method on the proxy to register the new user
+                InServerCall = true;
+                manager = await proxy.RegisterManager(manager);
+                InServerCall = false;
+
+                //If the registration was successful, navigate to the login page
+                if (newUser != null)
+                {
+                    //UPload profile imae if needed
+                    if (!string.IsNullOrEmpty(LocalPhotoPath))
                     {
+                        //login so we can upload the picture
+                        await proxy.LoginAsync(new UsersInfo { UserEmail = newUser.UserEmail, Password = newUser.Password, Name = newUser.Name, TypeID = 3 });
+                        Restaurantid = manager.RestaurantManager.RestID;
+                        //add an error
+                        RestaurantInfo? updatedRestaurant = await proxy.UploadRestaurantImage(LocalPhotoPath, Restaurantid);
+                        if (updatedRestaurant == null)
+                        {
+                            InServerCall = false;
+                            await Application.Current.MainPage.DisplayAlert("Registration", "User Data Was Saved BUT Restaurant image upload failed", "ok");
+                        }
                         InServerCall = false;
-
-                        //ASK OFER
-
+                        await Application.Current.MainPage.DisplayAlert("Registration Success", "you are now going to the login page", "ok");
                         ((App)(Application.Current)).MainPage.Navigation.PopAsync();
                     }
 
+
+                }
             }
 
             //if its not a manager
@@ -290,6 +305,73 @@ public class SignUpViewModel : ViewModelBase
             //If the registration failed, display an error message
             string errorMsg = "Registration failed. Please try again.";
             await Application.Current.MainPage.DisplayAlert("Registration", "failed", "ok");
+        }
+
+    }
+    #endregion
+
+    #region Photo Restaurant
+    //this holds the restaurant id after the user uploaded it so we can sort it in the files
+    private int restaurantid;
+    public int Restaurantid
+    {
+        get => restaurantid;
+        set
+        {
+            if (restaurantid != value)
+            {
+                restaurantid = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    private string photoURL;
+
+    public string PhotoURL
+    {
+        get => photoURL;
+        set
+        {
+            photoURL = value;
+            OnPropertyChanged("PhotoURL");
+        }
+    }
+
+    private string localPhotoPath;
+
+    public string LocalPhotoPath
+    {
+        get => localPhotoPath;
+        set
+        {
+            localPhotoPath = value;
+            OnPropertyChanged("LocalPhotoPath");
+        }
+    }
+
+    public Command UploadPhotoCommand { get; }
+    //This method open the file picker to select a photo and saves the photo but doesnt upload it yet
+    private async void OnUploadPhoto()
+    {
+        try
+        {
+            var result = await MediaPicker.Default.CapturePhotoAsync(new MediaPickerOptions
+            {
+                Title = "Please select a photo",
+            });
+
+            if (result != null)
+            {
+                // The user picked a file
+                this.LocalPhotoPath = result.FullPath;
+                this.PhotoURL = result.FullPath;
+            }
+
+
+        }
+        catch (Exception ex)
+        {
         }
 
     }

@@ -87,7 +87,7 @@ namespace GlutenFreeApp.ViewModel
                     this.PhotoURL = result.FullPath;
                 }
 
-                RecipeInfo? updatedrecipe = await proxy.UploadRecipeImage(LocalPhotoPath, Recipeid);
+               
             }
             catch (Exception ex)
             {
@@ -136,23 +136,24 @@ namespace GlutenFreeApp.ViewModel
             InServerCall = true;
 
             UsersInfo? u = ((App)Application.Current).LoggedInUser;
-            //call the server to add the information
-
-            //add the recipe as pending
-
-            //how to add user id 
             RecipeInfo information = new RecipeInfo { RecipeText = Recipe, StatusID=2, UserID = u.UserID.Value, TypeFoodID = TypeFood};
             RecipeInfo worked = await this.proxy.AddRecipeAsync(information);
             InServerCall = false;
 
             if (worked==null)
             {
-                ErrorMsg = "Something Went Wrong";
+                await Application.Current.MainPage.DisplayAlert("Something Went Wrong", "nah", "ok");
             }
             else
             {
                 Recipeid=worked.RecipeID;
-                ErrorMsg = "All Good";
+                RecipeInfo? updatedrecipe = await proxy.UploadRecipeImage(LocalPhotoPath, Recipeid);
+                // restart the properties
+                TypeFood = 0;
+                Recipe = "";
+                PhotoURL = proxy.GetDefaultRecipePhotoUrl();
+                LocalPhotoPath = "";
+                await Application.Current.MainPage.DisplayAlert("Recipe Is Up And Waiting For Approval", "Success", "ok");
             }
 
         }

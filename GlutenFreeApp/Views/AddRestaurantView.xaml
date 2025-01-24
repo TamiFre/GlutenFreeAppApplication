@@ -9,12 +9,12 @@
             Spacing="20"
             Margin="0,20,0,0"
             >
-        <Label
-     Margin="0,0,0,30"
-     FontFamily="TorontoFont"
-     FontSize="50"
-     HorizontalOptions="CenterAndExpand"
-     Text="Add Restaurant" />
+            <Label
+Margin="0,0,0,30"
+FontFamily="TorontoFont"
+FontSize="50"
+HorizontalOptions="CenterAndExpand"
+Text="Add Restaurant" />
         <Entry
                 x:Name="NameEntry"
                 Placeholder="Restaurant Name"
@@ -27,10 +27,9 @@
 
         <!--  לבדוק איך עושים בינדינג  -->
 
-        <Label Text="Select Restaurant Food Type:"/>
         <Picker
                 x:Name="RestaurantTypePicker"
-                Title="Type of Restaurant"
+                Title="Select Restaurant Food Type:"
                 
                 SelectedIndex="{Binding TypeFood}">
             <Picker.Items>
@@ -43,18 +42,7 @@
         </Picker>
 
 
-        <!--  submit button  -->
-        <Button
-        x:Name="RegisterButton"
-        Grid.Row="3"
-        Margin="0,20,0,0"
-        Command="{Binding Submit}"
-        HorizontalOptions="Center"
-        Text="Submit"
-        BackgroundColor="Purple"
-            IsEnabled="{Binding NotInServerCall}"
-        WidthRequest="200" />
-
+       
         <!-- Photo -->
         <Frame BorderColor="Black" Padding="5" Margin="10">
             <Grid>
@@ -78,7 +66,21 @@ VerticalOptions="End">
             </Grid>
         </Frame>
 
-        <!--  Centered ActivityIndicator  -->
+
+            <!--  submit button  -->
+            <Button
+ x:Name="RegisterButton"
+ Grid.Row="3"
+ Margin="0,20,0,0"
+ Command="{Binding Submit}"
+ HorizontalOptions="Center"
+ Text="Submit"
+ BackgroundColor="Purple"
+     IsEnabled="{Binding NotInServerCall}"
+ WidthRequest="200" />
+
+
+            <!--  Centered ActivityIndicator  -->
         <ActivityIndicator
     HorizontalOptions="Center"
     IsRunning="{Binding InServerCall}"

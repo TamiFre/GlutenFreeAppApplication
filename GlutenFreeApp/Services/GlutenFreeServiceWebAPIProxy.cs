@@ -192,7 +192,7 @@ namespace GlutenFreeApp.Services
        
         #region Add Recipe
 
-        //Check
+      
         public async Task<RecipeInfo> AddRecipeAsync(RecipeInfo recipeInfo)
         {
             string url = $"{this.baseUrl}AddRecipe";

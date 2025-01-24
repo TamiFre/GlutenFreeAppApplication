@@ -5,6 +5,7 @@
              xmlns:ViewModel ="clr-namespace:GlutenFreeApp.ViewModel"
              x:DataType="ViewModel:AddRecipeViewModel"
              Title="AddRecipeView">
+    <ScrollView>
     <VerticalStackLayout Padding="20" Spacing="15">
 
         <!-- Food Type Picker -->
@@ -19,18 +20,18 @@
 
         <Picker
             x:Name="FoodTypePicker"
-            Title="Select food type"
+            Title="Select The Recipe Food Type:"
             SelectedIndex="{Binding TypeFood}"
             >
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
+            
+                <Picker.Items>
                     <x:String>Italian</x:String>
                     <x:String>Asian</x:String>
                     <x:String>Mexican</x:String>
                     <x:String>BBQ</x:String>
                     <x:String>French</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
+                </Picker.Items>
+            
         </Picker>
 
       
@@ -49,16 +50,8 @@
             VerticalTextAlignment="Start"/>
 
         <!-- Submit Button -->
-        <Button
-            Text="Submit"
-            x:Name="SubmitButton"
-            BackgroundColor="Purple"
-            Command="{Binding SubmitRecipeCommand}"
-            IsEnabled="{Binding NotInServerCall}"
-            Margin="0,10,0,0"/>
-        <Label
-            Text="{Binding ErrorMsg}"
-            />
+        
+       
 
         <!-- Photo -->
         <Frame BorderColor="Black" Padding="5" Margin="10">
@@ -82,7 +75,17 @@ VerticalOptions="End">
                 </Label>
             </Grid>
         </Frame>
-
-
-    </VerticalStackLayout>
+            <Button
+    Text="Submit"
+    x:Name="SubmitButton"
+    BackgroundColor="Purple"
+    Command="{Binding SubmitRecipeCommand}"
+    IsEnabled="{Binding NotInServerCall}"
+    Margin="0,10,0,0"/>
+        
+            <Label
+     Text="{Binding ErrorMsg}"
+     />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
