@@ -60,27 +60,20 @@ namespace GlutenFreeApp.ViewModel
         public async void FillAllCritics(RestaurantInfo restaurantInfo)
         {
             List<CriticInfo> critics = new List<CriticInfo>();
-            critics = await this.proxy.GetCriticForRestaurant(restaurantInfo);
+            critics = await this.proxy.GetCriticForRestaurant(restaurantInfo.RestID);
             CriticCol = new ObservableCollection<CriticInfo>(critics);
         }
 
-        public async void OnExpandCommand()
+        public  async void OnExpandCommand()
         {
-            CriticCol.Clear();
-            FillAllCritics(RestSelected);
-            await ShowPopupAsync();
-        }
-
-        private async Task ShowPopupAsync()
-        {
+            
+             FillAllCritics(RestSelected);
+            await Task.Delay(5000);
             // Assuming you have a method to show the pop-up
-            var popupPage = new PopupPageView(); // Create your custom pop-up page
+            var popupPage = new PopupPageView(this); // Create your custom pop-up page
 
             //bind the context in the popup behind
-
-            popupPage.BindingContext = this; // Bind to the same ViewModel
             ((App)(Application.Current)).MainPage.Navigation.PushAsync(popupPage);
-
         }
 
         public ICommand CloseCommand { get; set; }
