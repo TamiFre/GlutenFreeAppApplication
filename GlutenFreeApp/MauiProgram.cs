@@ -2,7 +2,7 @@
 using GlutenFreeApp.ViewModel;
 using GlutenFreeApp.Views;
 using GlutenFreeApp.Services;
-
+using CommunityToolkit.Maui;
 
 namespace GlutenFreeApp
 {
@@ -11,15 +11,12 @@ namespace GlutenFreeApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                    fonts.AddFont("Toronto College.ttf","TorontoFont");
-
-                });
+            builder.UseMauiApp<App>().ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("Toronto College.ttf", "TorontoFont");
+            }).UseMauiCommunityToolkit();
             builder.Services.AddSingleton<GlutenFreeServiceWebAPIProxy>();
             builder.Services.AddTransient<LoginPageView>();
             builder.Services.AddTransient<LoginPageViewModel>();
@@ -46,11 +43,11 @@ namespace GlutenFreeApp
             builder.Services.AddTransient<UpdateRestaurantProfileView>();
             builder.Services.AddTransient<AddRestaurantView>();
             builder.Services.AddTransient<AddRestaurantViewModel>();
+            builder.Services.AddTransient<PopupPageView>();
             
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-
             return builder.Build();
         }
     }

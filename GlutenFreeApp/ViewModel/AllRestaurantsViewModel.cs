@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using GlutenFreeApp.Models;
 using System.Windows.Input;
+using GlutenFreeApp.Views;
 namespace GlutenFreeApp.ViewModel
 {
     public class AllRestaurantsViewModel:ViewModelBase
@@ -35,6 +36,8 @@ namespace GlutenFreeApp.ViewModel
             FillAllApprovedRestaurants();
             SearchByFoodSelected = new Command(ShowRestaurantsByFoodSelected);
             FoodTypeList = new ObservableCollection<TypeFoodInfo>(((App)Application.Current).FoodTypes);
+            ExpandCommand = new Command(OnExpandCommand);
+            CloseCommand = new Command(OnCloseCommand);
         }
 
         #region observable collection
@@ -60,6 +63,32 @@ namespace GlutenFreeApp.ViewModel
             critics = await this.proxy.GetCriticForRestaurant(restaurantInfo);
             CriticCol = new ObservableCollection<CriticInfo>(critics);
         }
+
+        public async void OnExpandCommand()
+        {
+            CriticCol.Clear();
+            FillAllCritics(RestSelected);
+            await ShowPopupAsync();
+        }
+
+        private async Task ShowPopupAsync()
+        {
+            // Assuming you have a method to show the pop-up
+            var popupPage = new PopupPageView(); // Create your custom pop-up page
+
+            //bind the context in the popup behind
+
+            popupPage.BindingContext = this; // Bind to the same ViewModel
+            ((App)(Application.Current)).MainPage.Navigation.PushAsync(popupPage);
+
+        }
+
+        public ICommand CloseCommand { get; set; }
+        public async void OnCloseCommand()
+        {
+            ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+        }
+        
         #endregion
 
         #region get approved restauratns
@@ -100,6 +129,21 @@ namespace GlutenFreeApp.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private RestaurantInfo restSelected;
+        public RestaurantInfo RestSelected
+        {
+            get => restSelected;
+            set 
+            {
+                if (restSelected != value)
+                {
+                    restSelected = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         #endregion
 
         #region show restaurants by food type selected
