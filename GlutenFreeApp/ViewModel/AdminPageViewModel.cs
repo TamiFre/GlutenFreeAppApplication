@@ -62,8 +62,13 @@ namespace GlutenFreeApp.ViewModel
 
         public async Task<List<RestaurantInfo>> GetAllRestaurantsByStatus()
         {
-            
-            List<RestaurantInfo> list = await this.proxy.GetRestaurantByStatus(StatusRestSelected+1);
+            if (StatusRestSelected == 0)
+            {
+                List<RestaurantInfo> restaurants = new List<RestaurantInfo>();
+                restaurants = await GetAllRestaurants();
+                return restaurants;
+            }
+            List<RestaurantInfo> list = await this.proxy.GetRestaurantByStatus(StatusRestSelected);
             return list;
         }
         #endregion
@@ -80,8 +85,18 @@ namespace GlutenFreeApp.ViewModel
 
         public async Task<List<RecipeInfo>> GetAllRecipesByStatus()
         {
-            List<RecipeInfo> list = await this.proxy.GetRecipetByStatus(StatusRecipeSelected + 1);
-            return list;
+            if (StatusRecipeSelected  == 0)
+            {
+                List<RecipeInfo> recipes = new List<RecipeInfo>();
+                recipes = await GetAllRecipes();
+               return recipes;
+            }
+            else 
+            {
+                List<RecipeInfo> list = await this.proxy.GetRecipetByStatus(StatusRecipeSelected );
+                return list; 
+            }
+            
         }
         #endregion
       

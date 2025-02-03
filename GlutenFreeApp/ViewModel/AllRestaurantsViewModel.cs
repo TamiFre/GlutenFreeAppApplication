@@ -68,7 +68,7 @@ namespace GlutenFreeApp.ViewModel
         {
             
              FillAllCritics(RestSelected);
-            await Task.Delay(5000);
+            
             // Assuming you have a method to show the pop-up
             var popupPage = new PopupPageView(this); // Create your custom pop-up page
 

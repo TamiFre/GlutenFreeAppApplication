@@ -57,7 +57,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\approvetick.png" />
 	  <None Remove="Resources\Images\crownadmin.png" />
+	  <None Remove="Resources\Images\decline.png" />
 	  <None Remove="Resources\Images\fun.png" />
 	  <None Remove="Resources\Images\plus.png" />
 	  <None Remove="Resources\Images\recipe.png" />
@@ -108,6 +110,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPageView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PopupPageRecipesView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PopupPageView.xaml">

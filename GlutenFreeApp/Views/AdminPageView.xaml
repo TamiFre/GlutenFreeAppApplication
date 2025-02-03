@@ -53,7 +53,7 @@
                 SelectedIndex="{Binding StatusRecipeSelected}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-
+                        <x:String>ShowAll</x:String>
                         <x:String>Approved</x:String>
                         <x:String>Pending</x:String>
                         <x:String>Declined</x:String>
@@ -103,10 +103,14 @@
                                 </SwipeView.RightItems>
 
                                 <!--  Main content inside SwipeView  -->
-                                <Grid ColumnDefinitions="*,*,*" RowDefinitions="*">
-                                    <Label Grid.Column="0" Text="{Binding RecipeText}" />
+                                <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*">
+                                    <Label Grid.Column="0" Text="{Binding RecipeHeadLine}" />
                                     <Label Grid.Column="1" Text="{Binding TypeFoodName}" />
                                     <Label Grid.Column="2" Text="{Binding StatusName}" />
+                                    <Button
+                                        Grid.Column="3"
+                                        BackgroundColor="Purple"
+                                        Text="Expand" />
                                 </Grid>
 
 
@@ -133,7 +137,7 @@
                 SelectedIndex="{Binding StatusRestSelected}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-
+                        <x:String>ShowAll</x:String>
                         <x:String>Approved</x:String>
                         <x:String>Pending</x:String>
                         <x:String>Declined</x:String>
@@ -164,6 +168,7 @@
                                             BackgroundColor="Gray"
                                             Command="{Binding Source={x:Reference RestaurantsList}, Path=BindingContext.DeclineRestaurant}"
                                             CommandParameter="{Binding .}"
+                                            IconImageSource="decline.png"
                                             IsVisible="{Binding IsSwipeEnabled}"
                                             Text="Reject" />
                                     </SwipeItems>
@@ -175,6 +180,7 @@
                                             BackgroundColor="Purple"
                                             Command="{Binding Source={x:Reference RestaurantsList}, Path=BindingContext.ApproveRestaurant}"
                                             CommandParameter="{Binding .}"
+                                            IconImageSource="approvetick.png"
                                             IsVisible="{Binding IsSwipeEnabled}"
                                             Text="Approve" />
                                     </SwipeItems>

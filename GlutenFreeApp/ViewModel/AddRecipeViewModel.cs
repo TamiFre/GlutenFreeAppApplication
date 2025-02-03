@@ -104,6 +104,13 @@ namespace GlutenFreeApp.ViewModel
             set { recipe = value; OnPropertyChanged(); }
         }
 
+        private string recipeTitle;
+        public string RecipeTitle
+        {
+            get { return recipeTitle; }
+            set { recipeTitle = value; OnPropertyChanged(); }
+        }
+
         private string errorMsg;
         public string ErrorMsg
         {
@@ -136,7 +143,7 @@ namespace GlutenFreeApp.ViewModel
             InServerCall = true;
 
             UsersInfo? u = ((App)Application.Current).LoggedInUser;
-            RecipeInfo information = new RecipeInfo { RecipeText = Recipe, StatusID=2, UserID = u.UserID.Value, TypeFoodID = TypeFood};
+            RecipeInfo information = new RecipeInfo { RecipeText = Recipe, StatusID=2, UserID = u.UserID.Value, TypeFoodID = TypeFood, RecipeHeadLine = RecipeTitle};
             RecipeInfo worked = await this.proxy.AddRecipeAsync(information);
             InServerCall = false;
 
@@ -151,6 +158,7 @@ namespace GlutenFreeApp.ViewModel
                 // restart the properties
                 TypeFood = 0;
                 Recipe = "";
+                RecipeTitle = "";
                 PhotoURL = proxy.GetDefaultRecipePhotoUrl();
                 LocalPhotoPath = "";
                 await Application.Current.MainPage.DisplayAlert("Recipe Is Up And Waiting For Approval", "Success", "ok");

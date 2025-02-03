@@ -47,7 +47,7 @@
                 <DataTemplate x:DataType="models:RecipeInfo">
                     <Frame Margin="0,5" Padding="10">
                         <Grid ColumnDefinitions="*,*" RowDefinitions="*">
-                            <Label Grid.Column="0" Text="{Binding RecipeText}" />
+                            <Label Grid.Column="0" Text="{Binding RecipeHeadLine}" />
                             <Label Grid.Column="1" Text="{Binding TypeFoodName}" />
                         </Grid>
                     </Frame>

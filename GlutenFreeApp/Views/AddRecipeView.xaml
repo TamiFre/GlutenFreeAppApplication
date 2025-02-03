@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GlutenFreeApp.Views.AddRecipeView"
-             xmlns:ViewModel ="clr-namespace:GlutenFreeApp.ViewModel"
-             x:DataType="ViewModel:AddRecipeViewModel"
-             Title="AddRecipeView">
+<ContentPage
+    x:Class="GlutenFreeApp.Views.AddRecipeView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModel="clr-namespace:GlutenFreeApp.ViewModel"
+    Title="AddRecipeView"
+    x:DataType="ViewModel:AddRecipeViewModel">
     <ScrollView>
-    <VerticalStackLayout Padding="20" Spacing="15">
+        <VerticalStackLayout Padding="20" Spacing="15">
 
-        <!-- Food Type Picker -->
+            <!--  Food Type Picker  -->
 
-        <Label
-    Margin="0,0,0,30"
-    FontFamily="TorontoFont"
-    FontSize="50"
-    HorizontalOptions="CenterAndExpand"
-    Text="Add Recipes" />
+            <Label
+                Margin="0,0,0,30"
+                FontFamily="TorontoFont"
+                FontSize="50"
+                HorizontalOptions="CenterAndExpand"
+                Text="Add Recipes" />
 
 
-        <Picker
-            x:Name="FoodTypePicker"
-            Title="Select The Recipe Food Type:"
-            SelectedIndex="{Binding TypeFood}"
-            >
-            
+            <Picker
+                x:Name="FoodTypePicker"
+                Title="Select The Recipe Food Type:"
+                SelectedIndex="{Binding TypeFood}">
+
                 <Picker.Items>
                     <x:String>Italian</x:String>
                     <x:String>Asian</x:String>
@@ -31,61 +31,76 @@
                     <x:String>BBQ</x:String>
                     <x:String>French</x:String>
                 </Picker.Items>
-            
-        </Picker>
 
-      
+            </Picker>
 
-        <!-- Instructions Entry -->
-        <Label 
-            Text="Recipe:"
-            FontSize="16"
-            Margin="0,0,0,5"/>
-        <Entry
-            x:Name="InstructionsEntry"
-            Placeholder="Enter cooking instructions"
-            HeightRequest="100"
-            Text="{Binding Recipe}"
-            IsEnabled="{Binding NotInServerCall}"
-            VerticalTextAlignment="Start"/>
-
-        <!-- Submit Button -->
-        
-       
-
-        <!-- Photo -->
-        <Frame BorderColor="Black" Padding="5" Margin="10">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image x:Name="theImageBug" Source="{Binding PhotoURL}"  HeightRequest="150"/>
-                <Label Grid.Row="1"
-Text="Click Here To Upload Photo!"
-TextColor="Blue"
-HorizontalOptions="Center"
-VerticalOptions="End">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding UploadPhotoCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
-            </Grid>
-        </Frame>
-            <Button
-    Text="Submit"
-    x:Name="SubmitButton"
-    BackgroundColor="Purple"
-    Command="{Binding SubmitRecipeCommand}"
-    IsEnabled="{Binding NotInServerCall}"
-    Margin="0,10,0,0"/>
-        
             <Label
-     Text="{Binding ErrorMsg}"
-     />
+                Margin="0,0,0,5"
+                FontSize="16"
+                Text="Recipe Title:" />
+            <Entry
+                x:Name="TitleEntry"
+                HeightRequest="100"
+                IsEnabled="{Binding NotInServerCall}"
+                Placeholder="Enter cooking instructions"
+                Text="{Binding RecipeTitle}"
+                VerticalTextAlignment="Start" />
+
+            <!--  Instructions Entry  -->
+            <Label
+                Margin="0,0,0,5"
+                FontSize="16"
+                Text="Recipe:" />
+            <Entry
+                x:Name="InstructionsEntry"
+                HeightRequest="100"
+                IsEnabled="{Binding NotInServerCall}"
+                Placeholder="Enter cooking instructions"
+                Text="{Binding Recipe}"
+                VerticalTextAlignment="Start" />
+
+            <!--  Submit Button  -->
+
+
+
+            <!--  Photo  -->
+            <Frame
+                Margin="10"
+                Padding="5"
+                BorderColor="Black">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        x:Name="theImageBug"
+                        HeightRequest="150"
+                        Source="{Binding PhotoURL}" />
+                    <Label
+                        Grid.Row="1"
+                        HorizontalOptions="Center"
+                        Text="Click Here To Upload Photo!"
+                        TextColor="Blue"
+                        VerticalOptions="End">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Frame>
+            <Button
+                x:Name="SubmitButton"
+                Margin="0,10,0,0"
+                BackgroundColor="Purple"
+                Command="{Binding SubmitRecipeCommand}"
+                IsEnabled="{Binding NotInServerCall}"
+                Text="Submit" />
+
+            <Label Text="{Binding ErrorMsg}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
