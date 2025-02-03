@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GlutenFreeApp.Models;
+using GlutenFreeApp.Views;
 using GlutenFreeApp.Services;
 
 
@@ -45,6 +46,7 @@ namespace GlutenFreeApp.ViewModel
             DeclineRestaurant = new Command(ChangeRestStatusToDecline);
             DeclineRecipe = new Command(ChangeRecipeStatusToDecline);
             ApproveRecipe = new Command(ChangeRecipeStatusToApprove);
+            OnExpand = new Command(OnExpandCommand);
             
         }
 
@@ -374,6 +376,38 @@ namespace GlutenFreeApp.ViewModel
             List<RecipeInfo> list = await this.proxy.GetAllRecipes();
             return list;
         }
+        #endregion
+
+        #region pop up the recipe 
+        public ICommand OnExpand;
+        //recipe selected is in the recipe selected region
+
+
+
+        //add a proprty and prvate for the recpe text
+        public async void FillRecipeText(RecipeInfo recipeInfo)
+        {
+            string recipeText = recipeInfo.RecipeText;
+        }
+
+        public async void OnExpandCommand()
+        {
+
+            FillRecipeText(SelectedRecipe);
+
+            // Assuming you have a method to show the pop-up
+            var popupPage = new PopupPageRecipesView(this); // Create your custom pop-up page
+
+            //bind the context in the popup behind
+            ((App)(Application.Current)).MainPage.Navigation.PushAsync(popupPage);
+        }
+
+        public ICommand CloseCommand { get; set; }
+        public async void OnCloseCommand()
+        {
+            ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+        }
+
         #endregion
     }
 }

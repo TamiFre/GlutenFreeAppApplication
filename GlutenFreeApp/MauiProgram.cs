@@ -44,6 +44,7 @@ namespace GlutenFreeApp
             builder.Services.AddTransient<AddRestaurantView>();
             builder.Services.AddTransient<AddRestaurantViewModel>();
             builder.Services.AddTransient<PopupPageView>();
+            builder.Services.AddTransient<PopupPageRecipesView>();
             
 #if DEBUG
             builder.Logging.AddDebug();
