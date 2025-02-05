@@ -30,7 +30,7 @@ namespace GlutenFreeApp.Services
         private HttpClient client;
         private string baseUrl;
         public static string BaseAddress = "https://srxdcrp2-5199.euw.devtunnels.ms/api/";
-        private static string ImageBaseAddress = "https://srxdcrp2-5199.euw.devtunnels.ms/";
+        public static string ImageBaseAddress = "https://srxdcrp2-5199.euw.devtunnels.ms/";
         #endregion
         public GlutenFreeServiceWebAPIProxy()
         {

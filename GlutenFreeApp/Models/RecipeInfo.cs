@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GlutenFreeApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,14 @@ namespace GlutenFreeApp.Models
         public int UserID { get; set; }
         public int StatusID { get; set; }
         public string ProfileImagePath { get; set; } = "";
+        public string FullImagePath
+        {
+            get
+            {
+                return GlutenFreeServiceWebAPIProxy.ImageBaseAddress + this.ProfileImagePath;
+            }
+        }
+
         public string StatusName
         {
             get

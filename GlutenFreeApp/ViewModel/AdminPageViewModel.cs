@@ -47,6 +47,7 @@ namespace GlutenFreeApp.ViewModel
             DeclineRecipe = new Command(ChangeRecipeStatusToDecline);
             ApproveRecipe = new Command(ChangeRecipeStatusToApprove);
             OnExpand = new Command(OnExpandCommand);
+            CloseCommand = new Command(OnCloseCommand);
             
         }
 

@@ -104,11 +104,13 @@
 
                                 <!--  Main content inside SwipeView  -->
                                 <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*">
-                                    <Label Grid.Column="0" Text="{Binding RecipeHeadLine}" />
-                                    <Label Grid.Column="1" Text="{Binding TypeFoodName}" />
-                                    <Label Grid.Column="2" Text="{Binding StatusName}" />
+                                <Image Source="{Binding FullImagePath}" Aspect="AspectFill" HeightRequest="120" Grid.Row="0" HorizontalOptions="Center"  />
+
+                                <Label Grid.Column="1" Text="{Binding RecipeHeadLine}" />
+                                    <Label Grid.Column="2" Text="{Binding TypeFoodName}" />
+                                    <Label Grid.Column="3" Text="{Binding StatusName}" />
                                     <Button
-                                        Grid.Column="3"
+                                        Grid.Column="4"
                                         BackgroundColor="Purple"
                                         Text="Expand"
                                         Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.OnExpand}"
@@ -190,7 +192,7 @@
                                 </SwipeView.RightItems>
 
                                 <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*">
-                                    <Label Text="{Binding ProfileImagePath}" />
+                                    
                                     <Label
                                         Grid.Row="0"
                                         Grid.Column="0"
@@ -207,6 +209,8 @@
                                         Grid.Row="0"
                                         Grid.Column="2"
                                         Text="{Binding StatusName}" />
+                                    <Image Grid.Column="3" Source="{Binding FullImagePath}" Aspect="AspectFill" HeightRequest="120" Grid.Row="0" HorizontalOptions="Center"  />
+
                                 </Grid>
                             </SwipeView>
                         </Frame>
