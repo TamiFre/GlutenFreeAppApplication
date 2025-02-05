@@ -104,7 +104,22 @@
 
                                 <!--  Main content inside SwipeView  -->
                                 <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*">
-                                <Image Source="{Binding FullImagePath}" Aspect="AspectFill" HeightRequest="120" Grid.Row="0" HorizontalOptions="Center"  />
+                                <Frame 
+HeightRequest="80" 
+WidthRequest="80" 
+CornerRadius="60" 
+Padding="0" 
+HasShadow="False" 
+HorizontalOptions="Center" 
+VerticalOptions="Center">
+                                    <Image 
+    Source="{Binding FullImagePath}" 
+    Aspect="AspectFill" 
+    HeightRequest="60" 
+    WidthRequest="60" 
+    HorizontalOptions="Center" 
+    VerticalOptions="Center" />
+                                </Frame>
 
                                 <Label Grid.Column="1" Text="{Binding RecipeHeadLine}" />
                                     <Label Grid.Column="2" Text="{Binding TypeFoodName}" />
@@ -195,21 +210,38 @@
                                     
                                     <Label
                                         Grid.Row="0"
-                                        Grid.Column="0"
-                                        Text="{Binding RestName}" />
+                                        Grid.Column="1"
+                                        
+                                        Text="{Binding RestName} " />
                                     <Label
                                         Grid.Row="1"
                                         Grid.Column="0"
+                                        
                                         Text="{Binding RestAddress}" />
                                     <Label
                                         Grid.Row="0"
-                                        Grid.Column="1"
+                                        Grid.Column="4"
                                         Text="{Binding TypeFoodName}" />
                                     <Label
                                         Grid.Row="0"
                                         Grid.Column="2"
                                         Text="{Binding StatusName}" />
-                                    <Image Grid.Column="3" Source="{Binding FullImagePath}" Aspect="AspectFill" HeightRequest="120" Grid.Row="0" HorizontalOptions="Center"  />
+                                    <Frame 
+    HeightRequest="80" 
+    WidthRequest="80" 
+    CornerRadius="60" 
+    Padding="0" 
+    HasShadow="False" 
+    HorizontalOptions="Center" 
+    VerticalOptions="Center">
+                                        <Image 
+        Source="{Binding FullImagePath}" 
+        Aspect="AspectFill" 
+        HeightRequest="60" 
+        WidthRequest="60" 
+        HorizontalOptions="Center" 
+        VerticalOptions="Center" />
+                                    </Frame>
 
                                 </Grid>
                             </SwipeView>
