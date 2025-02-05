@@ -156,6 +156,7 @@ namespace GlutenFreeApp.ViewModel
                 Recipeid=worked.RecipeID;
                 RecipeInfo? updatedrecipe = await proxy.UploadRecipeImage(LocalPhotoPath, Recipeid);
                 // restart the properties
+                worked.ProfileImagePath = updatedrecipe.ProfileImagePath;
                 TypeFood = 0;
                 Recipe = "";
                 RecipeTitle = "";

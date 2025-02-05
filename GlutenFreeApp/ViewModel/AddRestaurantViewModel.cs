@@ -73,6 +73,7 @@ namespace GlutenFreeApp.ViewModel
                 RestaurantInfo? updatedrestaurant = await proxy.UploadRestaurantImage(LocalPhotoPath, Restaurantid);
                 await Application.Current.MainPage.DisplayAlert("Restaurant Is Up And Waiting For Approval", "Success", "ok");
                 //restart the properties
+                newRest.ProfileImagePath = updatedrestaurant.ProfileImagePath;
                 Address = "";
                 RestName = "";
                 TypeFood = 0;

@@ -12,7 +12,8 @@ namespace GlutenFreeApp.Models
         public string RestName { get; set; } = null;
         public int RestID { get; set; }
         public int UserID { get; set; }
-        public int StatusID { get; set; }  
+        public int StatusID { get; set; }
+        public string ProfileImagePath { get; set; } = "";
         public string StatusName
         {
             get

@@ -385,9 +385,22 @@ namespace GlutenFreeApp.ViewModel
 
 
         //add a proprty and prvate for the recpe text
+        private string recipeText;
+        public string RecipeText
+        {
+            get=> recipeText;
+            set 
+            {
+                if (recipeText != value)
+                {
+                    recipeText = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public async void FillRecipeText(RecipeInfo recipeInfo)
         {
-            string recipeText = recipeInfo.RecipeText;
+            RecipeText = recipeInfo.RecipeText;
         }
 
         public async void OnExpandCommand()
