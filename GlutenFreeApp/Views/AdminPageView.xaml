@@ -103,7 +103,7 @@
                                 </SwipeView.RightItems>
 
                                 <!--  Main content inside SwipeView  -->
-                                <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*">
+                                <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*">
                                 <Frame 
 HeightRequest="80" 
 WidthRequest="80" 
@@ -126,11 +126,14 @@ VerticalOptions="Center">
                                     <Label Grid.Column="3" Text="{Binding StatusName}" />
                                     <Button
                                         Grid.Column="4"
+                                        Grid.Row="1"
                                         BackgroundColor="Purple"
                                         Text="Expand"
                                         Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.OnExpand}"
                                         CommandParameter="{Binding .}"
+                              
                                         />
+                                   
                                 </Grid>
 
 
