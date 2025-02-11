@@ -13,6 +13,7 @@
                 <DataTemplate x:DataType="models:CriticInfo">
                     <Frame Padding="10" Margin="5">
                         <Label Text="{Binding CriticText}" />
+                        
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -6,17 +6,17 @@
              xmlns:viewmodels ="clr-namespace:GlutenFreeApp.ViewModel"
              Title="AddCriticView">
 
-    <HorizontalStackLayout HorizontalOptions="CenterAndExpand" >
+    <!--<HorizontalStackLayout HorizontalOptions="CenterAndExpand" >
         <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="CenterAndExpand">
             <Grid RowDefinitions="1*,1*,1*,1*,1*" RowSpacing="15">
-                <!-- Restaurant Name Entry -->
+                --><!-- Restaurant Name Entry --><!--
                 <Entry
                 Grid.Row="0"
                 Placeholder="Name of the restaurant"
                 HeightRequest="50"
                 VerticalTextAlignment="Center"/>
 
-                <!-- Address Entry -->
+                --><!-- Address Entry --><!--
                 <Entry
                 Grid.Row="1"
                 Placeholder="Address"
@@ -24,7 +24,7 @@
                 HeightRequest="50"
                 VerticalTextAlignment="Center"/>
 
-                <!-- Critic Entry -->
+                --><!-- Critic Entry --><!--
                 <Entry
                 Grid.Row="2"
                 Placeholder="The Critic"
@@ -32,7 +32,7 @@
                 HeightRequest="50"
                 VerticalTextAlignment="Center"/>
 
-                <!-- Radio Buttons -->
+                --><!-- Radio Buttons --><!--
                 <HorizontalStackLayout
                     
                 Grid.Row="3"     
@@ -48,7 +48,7 @@
                     GroupName="groupOne"/>
                 </HorizontalStackLayout>
 
-                <!-- Submit Button -->
+                --><!-- Submit Button --><!--
                 <Button
                 Grid.Row="4"
                 Text="Submit"
@@ -56,7 +56,188 @@
                 BackgroundColor="Purple"/>
             </Grid>
         </VerticalStackLayout>
-    </HorizontalStackLayout>
+    </HorizontalStackLayout>-->
+
+    <!--<ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20" HorizontalOptions="CenterAndExpand">
+            <Grid RowDefinitions="*,*,*,*,*" RowSpacing="15">
+
+                --><!-- Restaurant Name Entry --><!--
+                <Label
+                Margin="0,0,0,5"
+                FontSize="16"
+                Text="Restaurant Name:"
+                HorizontalOptions="Start" />
+                <Entry
+                Grid.Row="0"
+                Placeholder="Name of the restaurant"
+                
+                VerticalTextAlignment="Center"
+                Style="{StaticResource DefaultEntry}"
+                />
+
+                --><!-- Address Entry --><!--
+                <Label
+                Margin="0,0,0,5"
+                FontSize="16"
+                Text="Address:"
+                 />
+                <Entry
+                Grid.Row="1"
+                Placeholder="Address"
+                Text="{Binding RestName}"
+                
+                VerticalTextAlignment="Center"
+                Style="{StaticResource DefaultEntry}"
+              />
+
+                --><!-- Critic Entry --><!--
+                <Label
+                Margin="0,0,0,5"
+                FontSize="16"
+                Text="Critic:"
+                 />
+                <Entry
+                Grid.Row="2"
+                Placeholder="The Critic"
+                Text="{Binding TheCritic}"
+                HeightRequest="50"
+                VerticalTextAlignment="Center"
+                Style="{StaticResource DefaultEntry}"
+                HorizontalOptions="FillAndExpand" />
+
+                --><!-- Radio Buttons Section --><!--
+                <Label
+                Margin="0,0,0,5"
+                FontSize="16"
+                Text="Sterile Status:"
+                HorizontalOptions="Start" />
+                <HorizontalStackLayout
+                Grid.Row="3"
+                Spacing="20"
+                HorizontalOptions="CenterAndExpand">
+                    <RadioButton
+                    Content="Sterile"
+                    IsChecked="{Binding IsSterile}"
+                    GroupName="groupOne" />
+                    <RadioButton
+                    Content="Non Sterile"
+                    IsChecked="{Binding IsNotSterile}"
+                    GroupName="groupOne" />
+                </HorizontalStackLayout>
+
+                --><!-- Submit Button --><!--
+                <Button
+                Grid.Row="4"
+                Text="Submit"
+                Command="{Binding Submit}"
+                BackgroundColor="Purple"
+                Style="{StaticResource buttonStyle}"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="50"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>-->
+
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,*,Auto,*" Padding="20">
+
+
+            <!-- Main Content -->
+            <VerticalStackLayout
+            Grid.Row="1"
+            
+            IsEnabled="{Binding NotInServerCall}"
+            Spacing="15">
+
+                <!-- Header -->
+                <Label
+                Text="Add Critic"
+                FontFamily="TorontoFont"
+                FontSize="48"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20"
+                />
+
+                <!-- Login Form -->
+                <Frame
+                BorderColor="Transparent"
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#343a40}"
+                CornerRadius="15"
+                Padding="20"
+                HasShadow="True">
+
+                    <VerticalStackLayout Spacing="15">
+                        <!-- Username Entry -->
+                        <Frame
+                        Padding="15,5"
+                        BorderColor="Transparent"
+                        BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
+                        CornerRadius="10">
+                            <Grid ColumnDefinitions="Auto,*">
+                                
+                                <Entry
+                                Grid.Column="1"
+                                x:Name="UsernameEntry"
+                                Text="{Binding RestName}"
+                                Placeholder="Restaurant Name"
+                                Style="{StaticResource DefaultEntry}"
+                                BackgroundColor="Transparent"
+                               />
+                            </Grid>
+                        </Frame>
+
+                        <!-- Password Entry -->
+                        <Frame
+                        Padding="15,5"
+                        BorderColor="Transparent"
+                        BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
+                        CornerRadius="10">
+                            <Grid ColumnDefinitions="Auto,*">
+                                
+                                <Entry
+                                Grid.Column="1"
+                                x:Name="PasswordEntry"
+                                Text="{Binding TheCritic}"
+                                IsPassword="True"
+                                Placeholder="The Critic"
+                                Style="{StaticResource DefaultEntry}"
+                                BackgroundColor="Transparent"
+                                />
+                            </Grid>
+                        </Frame>
+
+                       
+
+
+                        <!-- Login Button -->
+                        <Button
+                        Style="{StaticResource buttonStyle}"
+                        x:Name="LoginButton"
+                        Text="Add Critic"
+                        Command="{Binding Submit}"
+                        CornerRadius="25"
+                        FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+          
+            <VerticalStackLayout
+ Grid.Row="2"
+ Spacing="15"
+ Margin="0,20,0,0">
+
+                <ActivityIndicator
+                IsRunning="{Binding InServerCall}"
+                Color="#7209b7"
+                HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            
+        </Grid>
+    </ScrollView>
 
 
 

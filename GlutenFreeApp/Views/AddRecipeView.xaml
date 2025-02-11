@@ -9,21 +9,24 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
-            <!--  Food Type Picker  -->
-
+            <!-- Title Label -->
             <Label
-                Margin="0,0,0,30"
-                FontFamily="TorontoFont"
-                FontSize="50"
-                HorizontalOptions="CenterAndExpand"
-                Text="Add Recipes" />
+            Margin="0,0,0,30"
+            FontFamily="TorontoFont"
+            FontSize="50"
+            HorizontalOptions="CenterAndExpand"
+            Text="Add Recipes" />
 
-
+            <!-- Food Type Picker -->
+            <Label
+            Margin="0,0,0,5"
+            FontSize="16"
+            Text="Select the Recipe Food Type" />
             <Picker
-                x:Name="FoodTypePicker"
-                Title="Select The Recipe Food Type:"
-                SelectedIndex="{Binding TypeFood}">
-
+            x:Name="FoodTypePicker"
+            Title="Select The Recipe Food Type:"
+            SelectedIndex="{Binding TypeFood}"
+            >
                 <Picker.Items>
                     <x:String>Italian</x:String>
                     <x:String>Asian</x:String>
@@ -31,43 +34,47 @@
                     <x:String>BBQ</x:String>
                     <x:String>French</x:String>
                 </Picker.Items>
-
             </Picker>
 
+            <!-- Recipe Title Entry -->
             <Label
-                Margin="0,0,0,5"
-                FontSize="16"
-                Text="Recipe Title:" />
+            Margin="0,0,0,5"
+            FontSize="16"
+            Text="Recipe Title:" />
             <Entry
-                x:Name="TitleEntry"
-                HeightRequest="100"
-                IsEnabled="{Binding NotInServerCall}"
-                Placeholder="Enter cooking instructions"
-                Text="{Binding RecipeTitle}"
-                VerticalTextAlignment="Start" />
+            x:Name="TitleEntry"
+            HeightRequest="100"
+            IsEnabled="{Binding NotInServerCall}"
+            Placeholder="Enter recipe title"
+            Text="{Binding RecipeTitle}"
+            VerticalTextAlignment="Start"
+            Style="{StaticResource DefaultEntry}" />
 
-            <!--  Instructions Entry  -->
+            <!-- Recipe Instructions Entry -->
             <Label
-                Margin="0,0,0,5"
-                FontSize="16"
-                Text="Recipe:" />
+            Margin="0,0,0,5"
+            FontSize="16"
+            Text="Recipe Instructions:" />
             <Entry
-                x:Name="InstructionsEntry"
-                HeightRequest="100"
-                IsEnabled="{Binding NotInServerCall}"
-                Placeholder="Enter cooking instructions"
-                Text="{Binding Recipe}"
-                VerticalTextAlignment="Start" />
+            x:Name="InstructionsEntry"
+            HeightRequest="100"
+            IsEnabled="{Binding NotInServerCall}"
+            Placeholder="Enter cooking instructions"
+            Text="{Binding Recipe}"
+            VerticalTextAlignment="Start"
+            Style="{StaticResource DefaultEntry}" />
 
-            <!--  Submit Button  -->
+            <!-- Photo Upload Section -->
+            <Label
+            Margin="0,10,0,5"
+            FontSize="16"
+            Text="Recipe Photo:" />
+            <!--Photo-->
 
-
-
-            <!--  Photo  -->
             <Frame
-                Margin="10"
-                Padding="5"
-                BorderColor="Black">
+     Margin="10"
+     Padding="5"
+     BorderColor="Black">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -77,30 +84,37 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image
-                        x:Name="theImageBug"
-                        HeightRequest="150"
-                        Source="{Binding PhotoURL}" />
+             x:Name="theImageBug"
+             HeightRequest="150"
+             Source="{Binding PhotoURL}" />
                     <Label
-                        Grid.Row="1"
-                        HorizontalOptions="Center"
-                        Text="Click Here To Upload Photo!"
-                        TextColor="Blue"
-                        VerticalOptions="End">
+             Grid.Row="1"
+             HorizontalOptions="Center"
+             Text="Click Here To Upload Photo!"
+             TextColor="Blue"
+             VerticalOptions="End">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
                 </Grid>
             </Frame>
-            <Button
-                x:Name="SubmitButton"
-                Margin="0,10,0,0"
-                BackgroundColor="Purple"
-                Command="{Binding SubmitRecipeCommand}"
-                IsEnabled="{Binding NotInServerCall}"
-                Text="Submit" />
 
+            <!--Submit Button-->
+            <Button
+            x:Name="SubmitButton"
+            Margin="0,10,0,0"
+            BackgroundColor="Purple"
+            Command="{Binding SubmitRecipeCommand}"
+            IsEnabled="{Binding NotInServerCall}"
+            Text="Submit"
+                CornerRadius="25"
+            Style="{StaticResource buttonStyle}" />
+
+            <!--Error Message-->
             <Label Text="{Binding ErrorMsg}" />
+
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>

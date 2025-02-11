@@ -35,12 +35,14 @@
         </Picker>
 
         <Button
-            Margin="0,0,0,30"
+            Margin="0,0,0,60"
+            Style="{StaticResource buttonStyle}"
+            WidthRequest="300"
             BackgroundColor="Purple"
             Command="{Binding SearchByFoodSelected}"
             Text="Search By the Chosen food type" />
 
-        <CollectionView
+        <CollectionView 
             x:Name="PendingRestaurantsList"
             HeightRequest="300"
             ItemsSource="{Binding RestaurantsCol}"
@@ -51,7 +53,8 @@
                 <DataTemplate x:DataType="models:RestaurantInfo">
                    
 
-                        <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*">
+                    <Grid ColumnDefinitions="Auto,*,*,*" RowDefinitions="Auto,Auto">
+                        <!-- Image Column -->
                         <Frame 
 HeightRequest="80" 
 WidthRequest="80" 
@@ -59,37 +62,57 @@ CornerRadius="60"
 Padding="0" 
 HasShadow="False" 
 HorizontalOptions="Center" 
-VerticalOptions="Center">
+VerticalOptions="Center" 
+Grid.Row="0" 
+Grid.Column="0">
                             <Image 
     Source="{Binding FullImagePath}" 
     Aspect="AspectFill" 
     HeightRequest="60" 
     WidthRequest="60" 
-                                Grid.Column="0"
     HorizontalOptions="Center" 
     VerticalOptions="Center" />
                         </Frame>
-                        <Label
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Text="{Binding RestName}" />
-                            <Label
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                Text="{Binding RestAddress}" />
-                            <Label
-                                Grid.Row="0"
-                                Grid.Column="2"
-                                Text="{Binding TypeFoodName}" />
-                            <Button
-                                Grid.Column="3"
-                                Command="{Binding Source={x:Reference PendingRestaurantsList}, Path=BindingContext.ExpandCommand}"
+
+                        <!-- Rest Name Column -->
+                        <Label 
+Grid.Row="0" 
+Grid.Column="1" 
+Text="{Binding RestName}" 
+VerticalOptions="Center" 
+HorizontalOptions="StartAndExpand" 
+Padding="10,0" />
+
+
+                        <!-- Type Food Name Column -->
+                        <Label 
+Grid.Row="0" 
+Grid.Column="2" 
+Text="{Binding TypeFoodName}" 
+VerticalOptions="Center" 
+HorizontalOptions="Start" 
+Padding="10,0" />
+
+                        <Button
+                            Grid.Column="3"
+                            Style="{StaticResource buttonStyle}"
+                            Text="Expand"
+                            Command="{Binding Source={x:Reference PendingRestaurantsList}, Path=BindingContext.ExpandCommand}"
                                 CommandParameter="{Binding .}"
-                                CornerRadius="4"
-                                Text="Expand"
-                                WidthRequest="100" />
-                        </Grid>
-                   
+                            WidthRequest="100"
+                            CornerRadius="25"
+                            />
+
+                        <!-- Address Column (below the image) -->
+                        <Label 
+Grid.Row="1" 
+Grid.Column="0" 
+Text="{Binding RestAddress}" 
+VerticalOptions="Start" 
+HorizontalOptions="Center" 
+Padding="10,0" />
+                    </Grid>
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

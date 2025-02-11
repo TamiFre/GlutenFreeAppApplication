@@ -15,7 +15,7 @@ namespace GlutenFreeApp.ViewModel
         private GlutenFreeServiceWebAPIProxy proxy;
         private IServiceProvider serviceProvider;
 
-        //how to access in view
+     
         #region  Food Types
         //the statuses and food types
         private ObservableCollection<TypeFoodInfo> foodTypeList;

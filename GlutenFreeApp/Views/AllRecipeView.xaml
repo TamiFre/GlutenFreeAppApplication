@@ -34,8 +34,11 @@
         </Picker>
 
         <Button
-            Margin="0,0,0,30"
-            BackgroundColor="Purple"
+            
+            Margin="0,0,0,60"
+Style="{StaticResource buttonStyle}"
+WidthRequest="300"
+
             Command="{Binding SearchByFoodTypeSelected}"
             Text="Search by the food type" />
 
