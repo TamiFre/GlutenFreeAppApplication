@@ -5,11 +5,53 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:GlutenFreeApp.Models"
     Title="PopupPageRecipesView">
-    <VerticalStackLayout>
-        <Label Text="{Binding SelectedRecipe.RecipeText}" FontSize="20" HorizontalOptions="Center" />
+    <Frame
+        Margin="20"
+        Padding="20"
+        BackgroundColor="{AppThemeBinding Light=White,
+                                          Dark=#343a40}"
+        BorderColor="Transparent"
+        CornerRadius="15"
+        HasShadow="True">
+        <VerticalStackLayout Spacing="20">
+            <!--  Header  -->
+            <Label
+                Margin="0,0,0,10"
+                FontFamily="TorontoFont"
+                FontSize="48"
+                HorizontalOptions="Center"
+                Text="Recipe Instructions"
+                TextColor="{AppThemeBinding Light=#212529,
+                                            Dark=#f8f9fa}" />
 
-       
+            <!--  Recipe Instructions  -->
+            <Frame
+                Margin="0,5"
+                Padding="15"
+                BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                  Dark=#495057}"
+                BorderColor="Transparent"
+                CornerRadius="10"
+                HasShadow="False">
+                <Label
+                    FontSize="16"
+                    LineBreakMode="WordWrap"
+                    Text="{Binding SelectedRecipeFullRecipe}"
+                    TextColor="{AppThemeBinding Light=#212529,
+                                                Dark=White}" />
+            </Frame>
 
-        <Button Text="Close" Command="{Binding CloseCommand}" />
-    </VerticalStackLayout>
+            <!--  Close Button  -->
+            <Button
+                Margin="0,10,0,0"
+                Command="{Binding CloseCommand}"
+                CornerRadius="25"
+                FontAttributes="Bold"
+                HeightRequest="50"
+                HorizontalOptions="Fill"
+                Style="{StaticResource buttonStyle}"
+                Text="Close"
+                TextColor="White" />
+        </VerticalStackLayout>
+    </Frame>
 </ContentPage>

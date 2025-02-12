@@ -34,43 +34,61 @@
         </Picker>
 
         <Button
-            
             Margin="0,0,0,60"
-Style="{StaticResource buttonStyle}"
-WidthRequest="300"
-
             Command="{Binding SearchByFoodTypeSelected}"
-            Text="Search by the food type" />
+            Style="{StaticResource buttonStyle}"
+            Text="Search by the food type"
+            WidthRequest="300" />
 
         <CollectionView
             x:Name="PendingRecipesList"
             HeightRequest="300"
-            ItemsSource="{Binding RecipesCol}">
+            ItemsSource="{Binding RecipesCol}"
+            SelectedItem="{Binding ObjetRecipeSelected}"
+            SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:RecipeInfo">
-                    <Frame Margin="0,5" Padding="10">
-                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="*">
-                            <Frame 
-HeightRequest="80" 
-WidthRequest="80" 
-CornerRadius="60" 
-Padding="0" 
-HasShadow="False" 
-HorizontalOptions="Center" 
-VerticalOptions="Center">
-                                <Image 
-    Source="{Binding FullImagePath}" 
-    Aspect="AspectFill" 
-    HeightRequest="60" 
-    WidthRequest="60" 
-                                    Grid.Column="0"
-    HorizontalOptions="Center" 
-    VerticalOptions="Center" />
-                            </Frame>
-                            <Label Grid.Column="1" Text="{Binding RecipeHeadLine}" />
-                            <Label Grid.Column="2" Text="{Binding TypeFoodName}" />
-                        </Grid>
-                    </Frame>
+
+                    <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*">
+                        <Frame
+                            Padding="0"
+                            CornerRadius="60"
+                            HasShadow="False"
+                            HeightRequest="80"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="80">
+                            <Image
+                                Grid.Column="0"
+                                Aspect="AspectFill"
+                                HeightRequest="60"
+                                HorizontalOptions="Center"
+                                Source="{Binding FullImagePath}"
+                                VerticalOptions="Center"
+                                WidthRequest="60" />
+                        </Frame>
+                        <Label
+                            Grid.Column="1"
+                            Padding="10,0"
+                            HorizontalOptions="Center"
+                            Text="{Binding RecipeHeadLine}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="2"
+                            Padding="10,0"
+                            HorizontalOptions="Center"
+                            Text="{Binding TypeFoodName}"
+                            VerticalOptions="Center" />
+                        <Button
+                            Grid.Column="3"
+                            Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.ExpandCommand}"
+                            CommandParameter="{Binding .}"
+                            CornerRadius="25"
+                            Style="{StaticResource buttonStyle}"
+                            Text="Expand"
+                            WidthRequest="100" />
+                    </Grid>
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

@@ -1,85 +1,145 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GlutenFreeApp.Views.UpdateProfileView"
-             Title="UpdateProfileView"
-             >
-    <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding NotInServerCall}">
-        <!-- Header -->
-        <Label 
-        Text="Update Profile"
-           FontFamily="TorontoFont"
-   FontSize="40"
-        HorizontalOptions="Center"
-        Margin="0,0,0,20"/>
+<ContentPage
+    x:Class="GlutenFreeApp.Views.UpdateProfileView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="UpdateProfileView">
+    <ScrollView>
+        <Grid Padding="20" RowDefinitions="Auto,*,Auto">
 
-        <!-- Username Entry -->
-        <Label 
-        Text="Username:"
-        FontSize="16"
-        Margin="0,0,0,5"/>
-        <Entry
-        x:Name="UsernameEntry"
-        Placeholder="Enter your username"
-        Text="{Binding UserName}"
-        HeightRequest="50"
-        VerticalTextAlignment="Center"/>
+            <!--  Main Content  -->
+            <VerticalStackLayout
+                Grid.Row="1"
+                IsEnabled="{Binding NotInServerCall}"
+                Spacing="15">
 
-        <!-- Password Entry -->
-        <Label 
-        Text="Password:"
-        FontSize="16"
-        Margin="0,0,0,5"/>
-        <Entry
-        x:Name="PasswordEntry"
-        Placeholder="Enter your password"
-        Text="{Binding Password}"
-        IsPassword="True"
-        HeightRequest="50"
-        VerticalTextAlignment="Center"/>
+                <!--  Header  -->
+                <Label
+                    Margin="0,0,0,20"
+                    FontFamily="TorontoFont"
+                    FontSize="48"
+                    HorizontalOptions="Center"
+                    Text="Update Profile" />
 
-        <!-- Error Message -->
+                <!--  Update Form  -->
+                <Frame
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light=White,
+                                                      Dark=#343a40}"
+                    BorderColor="Transparent"
+                    CornerRadius="15"
+                    HasShadow="True">
 
-        <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"  />
+                    <VerticalStackLayout Spacing="15">
+                        <!--  Username Entry  -->
+                        <Frame
+                            Padding="15,5"
+                            BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                              Dark=#495057}"
+                            BorderColor="Transparent"
+                            CornerRadius="10">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label
+                                    FontSize="20"
+                                    Text="👤"
+                                    VerticalOptions="Center" />
+                                <Entry
+                                    x:Name="UsernameEntry"
+                                    Grid.Column="1"
+                                    BackgroundColor="Transparent"
+                                    Placeholder="Enter your username"
+                                    Style="{StaticResource DefaultEntry}"
+                                    Text="{Binding UserName}" />
+                            </Grid>
+                        </Frame>
 
-        <!-- Email Entry -->
-        <Label 
-        Text="Email:"
-        FontSize="16"
-        Margin="0,0,0,5"/>
-        <Entry
-        x:Name="EmailEntry"
-        Placeholder="Enter your email"
-        Text="{Binding UserEmail}"
-        HeightRequest="50"
-        VerticalTextAlignment="Center"/>
+                        <!--  Password Entry  -->
+                        <Frame
+                            Padding="15,5"
+                            BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                              Dark=#495057}"
+                            BorderColor="Transparent"
+                            CornerRadius="10">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label
+                                    FontSize="20"
+                                    Text="🔑"
+                                    VerticalOptions="Center" />
+                                <Entry
+                                    x:Name="PasswordEntry"
+                                    Grid.Column="1"
+                                    BackgroundColor="Transparent"
+                                    IsPassword="True"
+                                    Placeholder="Enter your password"
+                                    Style="{StaticResource DefaultEntry}"
+                                    Text="{Binding Password}" />
+                            </Grid>
+                        </Frame>
 
-        <!-- Error Message -->
+                        <!--  Password Error Message  -->
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding ShowPasswordError}"
+                            Text="{Binding PasswordError}"
+                            TextColor="#dc3545" />
 
-        <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}"  />
+                        <!--  Email Entry  -->
+                        <Frame
+                            Padding="15,5"
+                            BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                              Dark=#495057}"
+                            BorderColor="Transparent"
+                            CornerRadius="10">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label
+                                    FontSize="20"
+                                    Text="📧"
+                                    VerticalOptions="Center" />
+                                <Entry
+                                    x:Name="EmailEntry"
+                                    Grid.Column="1"
+                                    BackgroundColor="Transparent"
+                                    Placeholder="Enter your email"
+                                    Style="{StaticResource DefaultEntry}"
+                                    Text="{Binding UserEmail}" />
+                            </Grid>
+                        </Frame>
 
-        <!-- Submit Button -->
-        <Button
-        Text="Update Profile"
-        x:Name="UpdateButton"
-        BackgroundColor="Purple"
-        Command="{Binding SubmitCommand}"
-        Margin="0,20,0,0"/>
+                        <!--  Email Error Message  -->
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding ShowEmailError}"
+                            Text="{Binding EmailError}"
+                            TextColor="#dc3545" />
 
-        
-        
+                        <!--  Submit Button  -->
+                        <Button
+                            x:Name="UpdateButton"
+                            BackgroundColor="Purple"
+                            Command="{Binding SubmitCommand}"
+                            CornerRadius="25"
+                            FontAttributes="Bold"
+                            Text="Update Profile" />
 
-        <!-- Separator -->
-        <BoxView 
-        HeightRequest="1"
-        Color="LightGray"
-        Margin="0,20"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
 
-        <!-- Additional Options -->
-        
-        <ActivityIndicator IsRunning="{Binding InServerCall}" 
-        Color="Red" 
-        VerticalOptions="Center" 
-        HorizontalOptions="Center" />
-    </VerticalStackLayout>
+            <!--  Bottom Options  -->
+            <VerticalStackLayout
+                Grid.Row="2"
+                Margin="0,20,0,0"
+                Spacing="15">
+
+                <!--  Activity Indicator  -->
+                <ActivityIndicator
+                    HorizontalOptions="Center"
+                    IsRunning="{Binding InServerCall}"
+                    Color="#7209b7" />
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+
 </ContentPage>

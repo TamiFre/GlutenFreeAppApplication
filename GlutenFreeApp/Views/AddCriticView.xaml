@@ -1,241 +1,105 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GlutenFreeApp.Views.AddCriticView"
-             x:DataType="viewmodels:AddCriticViewModel"
-             xmlns:viewmodels ="clr-namespace:GlutenFreeApp.ViewModel"
-             Title="AddCriticView">
-
-    <!--<HorizontalStackLayout HorizontalOptions="CenterAndExpand" >
-        <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="CenterAndExpand">
-            <Grid RowDefinitions="1*,1*,1*,1*,1*" RowSpacing="15">
-                --><!-- Restaurant Name Entry --><!--
-                <Entry
-                Grid.Row="0"
-                Placeholder="Name of the restaurant"
-                HeightRequest="50"
-                VerticalTextAlignment="Center"/>
-
-                --><!-- Address Entry --><!--
-                <Entry
-                Grid.Row="1"
-                Placeholder="Address"
-                Text="{Binding RestName}"
-                HeightRequest="50"
-                VerticalTextAlignment="Center"/>
-
-                --><!-- Critic Entry --><!--
-                <Entry
-                Grid.Row="2"
-                Placeholder="The Critic"
-                Text="{Binding TheCritic}"
-                HeightRequest="50"
-                VerticalTextAlignment="Center"/>
-
-                --><!-- Radio Buttons --><!--
-                <HorizontalStackLayout
-                    
-                Grid.Row="3"     
-                Spacing="10"
-                HorizontalOptions="Center">
-                    <RadioButton
-                    Content="sterile"
-                    IsChecked="{Binding IsSterile}"
-                    GroupName="groupOne"/>
-                    <RadioButton
-                    Content="non sterile"
-                    IsChecked="{Binding IsNotSterile}"
-                    GroupName="groupOne"/>
-                </HorizontalStackLayout>
-
-                --><!-- Submit Button --><!--
-                <Button
-                Grid.Row="4"
-                Text="Submit"
-                Command="{Binding Submit}"
-                BackgroundColor="Purple"/>
-            </Grid>
-        </VerticalStackLayout>
-    </HorizontalStackLayout>-->
-
-    <!--<ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20" HorizontalOptions="CenterAndExpand">
-            <Grid RowDefinitions="*,*,*,*,*" RowSpacing="15">
-
-                --><!-- Restaurant Name Entry --><!--
-                <Label
-                Margin="0,0,0,5"
-                FontSize="16"
-                Text="Restaurant Name:"
-                HorizontalOptions="Start" />
-                <Entry
-                Grid.Row="0"
-                Placeholder="Name of the restaurant"
-                
-                VerticalTextAlignment="Center"
-                Style="{StaticResource DefaultEntry}"
-                />
-
-                --><!-- Address Entry --><!--
-                <Label
-                Margin="0,0,0,5"
-                FontSize="16"
-                Text="Address:"
-                 />
-                <Entry
-                Grid.Row="1"
-                Placeholder="Address"
-                Text="{Binding RestName}"
-                
-                VerticalTextAlignment="Center"
-                Style="{StaticResource DefaultEntry}"
-              />
-
-                --><!-- Critic Entry --><!--
-                <Label
-                Margin="0,0,0,5"
-                FontSize="16"
-                Text="Critic:"
-                 />
-                <Entry
-                Grid.Row="2"
-                Placeholder="The Critic"
-                Text="{Binding TheCritic}"
-                HeightRequest="50"
-                VerticalTextAlignment="Center"
-                Style="{StaticResource DefaultEntry}"
-                HorizontalOptions="FillAndExpand" />
-
-                --><!-- Radio Buttons Section --><!--
-                <Label
-                Margin="0,0,0,5"
-                FontSize="16"
-                Text="Sterile Status:"
-                HorizontalOptions="Start" />
-                <HorizontalStackLayout
-                Grid.Row="3"
-                Spacing="20"
-                HorizontalOptions="CenterAndExpand">
-                    <RadioButton
-                    Content="Sterile"
-                    IsChecked="{Binding IsSterile}"
-                    GroupName="groupOne" />
-                    <RadioButton
-                    Content="Non Sterile"
-                    IsChecked="{Binding IsNotSterile}"
-                    GroupName="groupOne" />
-                </HorizontalStackLayout>
-
-                --><!-- Submit Button --><!--
-                <Button
-                Grid.Row="4"
-                Text="Submit"
-                Command="{Binding Submit}"
-                BackgroundColor="Purple"
-                Style="{StaticResource buttonStyle}"
-                HorizontalOptions="FillAndExpand"
-                HeightRequest="50"/>
-            </Grid>
-        </VerticalStackLayout>
-    </ScrollView>-->
-
+<ContentPage
+    x:Class="GlutenFreeApp.Views.AddCriticView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="GlutenFreeApp.ViewModel"
+    Title="AddCriticView">
 
     <ScrollView>
-        <Grid RowDefinitions="Auto,*,Auto,*" Padding="20">
+        <Grid Padding="20" RowDefinitions="Auto,*,Auto,*">
 
 
-            <!-- Main Content -->
+            <!--  Main Content  -->
             <VerticalStackLayout
-            Grid.Row="1"
-            
-            IsEnabled="{Binding NotInServerCall}"
-            Spacing="15">
+                Grid.Row="1"
+                IsEnabled="{Binding NotInServerCall}"
+                Spacing="15">
 
-                <!-- Header -->
+                <!--  Header  -->
                 <Label
-                Text="Add Critic"
-                FontFamily="TorontoFont"
-                FontSize="48"
-                HorizontalOptions="Center"
-                Margin="0,0,0,20"
-                />
+                    Margin="0,0,0,20"
+                    FontFamily="TorontoFont"
+                    FontSize="48"
+                    HorizontalOptions="Center"
+                    Text="Add Critic" />
 
-                <!-- Login Form -->
+                <!--  Login Form  -->
                 <Frame
-                BorderColor="Transparent"
-                BackgroundColor="{AppThemeBinding Light=White, Dark=#343a40}"
-                CornerRadius="15"
-                Padding="20"
-                HasShadow="True">
+                    Padding="20"
+                    BackgroundColor="{AppThemeBinding Light=White,
+                                                      Dark=#343a40}"
+                    BorderColor="Transparent"
+                    CornerRadius="15"
+                    HasShadow="True">
 
                     <VerticalStackLayout Spacing="15">
-                        <!-- Username Entry -->
+                        <!--  Username Entry  -->
                         <Frame
-                        Padding="15,5"
-                        BorderColor="Transparent"
-                        BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
-                        CornerRadius="10">
+                            Padding="15,5"
+                            BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                              Dark=#495057}"
+                            BorderColor="Transparent"
+                            CornerRadius="10">
                             <Grid ColumnDefinitions="Auto,*">
-                                
-                                <Entry
-                                Grid.Column="1"
-                                x:Name="UsernameEntry"
-                                Text="{Binding RestName}"
-                                Placeholder="Restaurant Name"
-                                Style="{StaticResource DefaultEntry}"
-                                BackgroundColor="Transparent"
-                               />
+
+                                <Picker
+                                    x:Name="RestaurantPicker"
+                                    Title="Select A Restaurant To Leave A Review About"
+                                    ItemDisplayBinding="{Binding RestName}"
+                                    ItemsSource="{Binding Restaurants}"
+                                    SelectedItem="{Binding RestaurantSelected}" />
                             </Grid>
                         </Frame>
 
-                        <!-- Password Entry -->
+                        <!--  Password Entry  -->
                         <Frame
-                        Padding="15,5"
-                        BorderColor="Transparent"
-                        BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
-                        CornerRadius="10">
+                            Padding="15,5"
+                            BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                              Dark=#495057}"
+                            BorderColor="Transparent"
+                            CornerRadius="10">
                             <Grid ColumnDefinitions="Auto,*">
-                                
+
                                 <Entry
-                                Grid.Column="1"
-                                x:Name="PasswordEntry"
-                                Text="{Binding TheCritic}"
-                                IsPassword="True"
-                                Placeholder="The Critic"
-                                Style="{StaticResource DefaultEntry}"
-                                BackgroundColor="Transparent"
-                                />
+                                    x:Name="PasswordEntry"
+                                    Grid.Column="1"
+                                    BackgroundColor="Transparent"
+                                    IsPassword="True"
+                                    Placeholder="The Critic"
+                                    Style="{StaticResource DefaultEntry}"
+                                    Text="{Binding TheCritic}" />
                             </Grid>
                         </Frame>
 
-                       
 
 
-                        <!-- Login Button -->
+
+                        <!--  Login Button  -->
                         <Button
-                        Style="{StaticResource buttonStyle}"
-                        x:Name="LoginButton"
-                        Text="Add Critic"
-                        Command="{Binding Submit}"
-                        CornerRadius="25"
-                        FontAttributes="Bold"/>
+                            x:Name="LoginButton"
+                            Command="{Binding Submit}"
+                            CornerRadius="25"
+                            FontAttributes="Bold"
+                            Style="{StaticResource buttonStyle}"
+                            Text="Add Critic" />
                     </VerticalStackLayout>
                 </Frame>
             </VerticalStackLayout>
 
-          
+
             <VerticalStackLayout
- Grid.Row="2"
- Spacing="15"
- Margin="0,20,0,0">
+                Grid.Row="2"
+                Margin="0,20,0,0"
+                Spacing="15">
 
                 <ActivityIndicator
-                IsRunning="{Binding InServerCall}"
-                Color="#7209b7"
-                HorizontalOptions="Center"/>
+                    HorizontalOptions="Center"
+                    IsRunning="{Binding InServerCall}"
+                    Color="#7209b7" />
             </VerticalStackLayout>
 
-            
+
         </Grid>
     </ScrollView>
 

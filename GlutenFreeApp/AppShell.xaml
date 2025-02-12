@@ -6,55 +6,44 @@
     xmlns:local="clr-namespace:GlutenFreeApp"
     xmlns:views="clr-namespace:GlutenFreeApp.Views"
     Title="GlutenFreeApp"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Flyout">
 
-
-
-    <TabBar>
-
+    <FlyoutItem
+        Title="Admin"
+        Icon="crownadmin.png"
+        Route="tabs">
         <ShellContent
-            Title="Admin"
             ContentTemplate="{DataTemplate views:AdminPageView}"
-            Icon="crownadmin.png"
             IsVisible="{Binding IsManager}"
             Route="AdminPage" />
+    </FlyoutItem>
 
+    <FlyoutItem Title="Recipes" Icon="recipe.png">
+        <ShellContent ContentTemplate="{DataTemplate views:AllRecipeView}" Route="AllRecipes" />
+    </FlyoutItem>
+    <FlyoutItem Title="Restaurants" Icon="restaurant.png">
+        <ShellContent ContentTemplate="{DataTemplate views:AllRestaurantsView}" Route="AllRestauramts" />
+    </FlyoutItem>
+    <FlyoutItem Title="Add Recipe" Icon="plus.png">
+        <ShellContent ContentTemplate="{DataTemplate views:AddRecipeView}" Route="AddRecipe" />
+    </FlyoutItem>
+    <FlyoutItem Title="Add Critic" Icon="plus.png">
+        <ShellContent ContentTemplate="{DataTemplate views:AddCriticView}" Route="AddCritic" />
+    </FlyoutItem>
+    <FlyoutItem Title="Fun Facts" Icon="fun.png">
+        <ShellContent ContentTemplate="{DataTemplate views:InformationView}" Route="InfoPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Update Profile" Icon="update.png">
+        <ShellContent ContentTemplate="{DataTemplate views:UpdateProfileView}" Route="UpdateProfile" />
+    </FlyoutItem>
+    <FlyoutItem Title="Add Restaurant" Icon="plus.png">
         <ShellContent
-            Title="Recipes"
-            ContentTemplate="{DataTemplate views:AllRecipeView}"
-            Icon="recipe.png"
-            Route="AllRecipes" />
-        <ShellContent
-            Title="Restaurants"
-            ContentTemplate="{DataTemplate views:AllRestaurantsView}"
-            Icon="restaurant.png"
-            Route="AllRestauramts" />
-        <ShellContent
-            Title="Add Recipe"
-            ContentTemplate="{DataTemplate views:AddRecipeView}"
-            Icon="plus.png"
-            Route="AddRecipe" />
-        <ShellContent
-            Title="Add Critic"
-            ContentTemplate="{DataTemplate views:AddCriticView}"
-            Icon="plus.png"
-            Route="AddCritic" />
-        <ShellContent
-            Title="Fun Facts"
-            ContentTemplate="{DataTemplate views:InformationView}"
-            Icon="fun.png"
-            Route="InfoPage" />
-        <ShellContent
-            Title="Update Profile"
-            ContentTemplate="{DataTemplate views:UpdateProfileView}"
-            Icon="update.png"
-            Route="UpdateProfile" />
-        <ShellContent
-            Title="Add Restaurant"
             ContentTemplate="{DataTemplate views:AddRestaurantView}"
-            Icon="plus.png"
             IsVisible="{Binding IsRestaurantManager}"
             Route="AddRestaurant" />
+    </FlyoutItem>
+
+    <FlyoutItem>
         <ShellContent
             Title="Update Restaurant"
             ContentTemplate="{DataTemplate views:UpdateRestaurantProfileView}"
@@ -62,6 +51,8 @@
             IsVisible="{Binding IsRestaurantManager}"
             Route="UpdateRestauratnProfile" />
 
-    </TabBar>
+    </FlyoutItem>
+
+    <MenuItem Command="{Binding LogoutCommand}" Text="Logout" />
 
 </Shell>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GlutenFreeApp.Models;
+using GlutenFreeApp.Views;
 using System.Windows.Input;
 
 namespace GlutenFreeApp.ViewModel
@@ -15,7 +16,7 @@ namespace GlutenFreeApp.ViewModel
         private GlutenFreeServiceWebAPIProxy proxy;
         private IServiceProvider serviceProvider;
 
-        //how to access in view
+    
         #region  Food Types
         //the statuses and food types
         private ObservableCollection<TypeFoodInfo> foodTypeList;
@@ -37,6 +38,7 @@ namespace GlutenFreeApp.ViewModel
             SearchByFoodTypeSelected = new Command(ShowRecipesByFoodSelected);
             //get the data from the app - how to access it?
             FoodTypeList = new ObservableCollection<TypeFoodInfo>(((App)Application.Current).FoodTypes);
+            ExpandCommand = new Command(OnExpandCommand);
         }
 
         #region Observsble collection
@@ -87,7 +89,6 @@ namespace GlutenFreeApp.ViewModel
         #endregion
 
         #region Properties
-        //maybe do it an int and do a constant to each typefood because of the dto and models
 
         private int typeFoodSelected;
         public int TypeFoodSelected 
@@ -99,6 +100,82 @@ namespace GlutenFreeApp.ViewModel
                 OnPropertyChanged();
             }
         }
+        #endregion
+
+        #region expanbd the recipe
+        public ICommand ExpandCommand { set; get; }
+        public async void ShowFullRecipe(RecipeInfo recipeInfo)
+        {
+            var popupPage = new PopupPageRecipesView(this);
+            ((App)(Application.Current)).MainPage.Navigation.PushAsync(popupPage);
+        }
+
+        private async void OnExpandCommand()
+        {
+            UpdateFullRecipe();
+            ShowFullRecipe(ObjetRecipeSelected);
+        }
+
+        private RecipeInfo objetRecipeSelected;
+        public RecipeInfo ObjetRecipeSelected
+        {
+            get => objetRecipeSelected;
+            set
+            {
+                objetRecipeSelected = value;
+                if (value != null)
+                {
+                    // Extract the Id property by from the restaurant object
+                    int id = value.RecipeID;
+                    SelectedRecipe = RecipesCol.Where(r => r.RecipeID == id).FirstOrDefault();
+                }
+                else
+                    SelectedRecipe = null;
+                OnPropertyChanged();
+            }
+        }
+
+        private RecipeInfo selectedRecipe;
+        public RecipeInfo SelectedRecipe
+        {
+            get => selectedRecipe;
+            set
+            {
+                if (value != null)
+                {
+                    selectedRecipe = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string selectedRecipeFullRecipe;
+        public string SelectedRecipeFullRecipe
+        {
+            get => selectedRecipeFullRecipe;
+            set
+            {
+                if (selectedRecipeFullRecipe != value)
+                {
+                    selectedRecipeFullRecipe = value;
+                    OnPropertyChanged();
+                }
+            }
+            
+        }
+        private async void UpdateFullRecipe()
+        {
+            SelectedRecipeFullRecipe = ObjetRecipeSelected.RecipeText;
+        }
+
+
+        public ICommand CloseCommand { get; set; }
+        public async void OnCloseCommand()
+        {
+            ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+        }
+
+
         #endregion
 
     }

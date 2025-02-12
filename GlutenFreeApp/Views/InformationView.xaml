@@ -4,8 +4,11 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="InformationView">
+
+
     <VerticalStackLayout HorizontalOptions="CenterAndExpand">
         <Label
+            x:Name="FactTitleLabel"
             FontFamily="TorontoFont"
             FontSize="50"
             HorizontalOptions="Center"
@@ -13,6 +16,7 @@
             VerticalOptions="Center" />
 
         <Label
+            x:Name="FactLabel"
             FontSize="35"
             HorizontalOptions="Center"
             Text="{Binding CurrentFact}" />
@@ -22,7 +26,8 @@
             Command="{Binding GetRandomFactCommand}"
             HeightRequest="55"
             HorizontalOptions="Center"
-            Text="If You Dont Want To wait For the Random Fact - Press Here!" />
-
+            Text="If You Don't Want To Wait For the Random Fact - Press Here!" />
     </VerticalStackLayout>
+
+
 </ContentPage>

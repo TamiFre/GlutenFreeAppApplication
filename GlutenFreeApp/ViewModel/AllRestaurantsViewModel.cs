@@ -99,8 +99,6 @@ namespace GlutenFreeApp.ViewModel
         #endregion
 
         #region Properties
-        //maybe do it an int and do a constant to each typefood because of the dto and models
-
         private int typeFoodSelected;
         public int TypeFoodSelected
         {

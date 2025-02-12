@@ -3,9 +3,9 @@ namespace GlutenFreeApp.Views;
 
 public partial class PopupPageRecipesView : ContentPage
 {
-	public PopupPageRecipesView(AdminPageViewModel adminPageViewModel)
+	public PopupPageRecipesView(AllRecipeViewModel allRecipeViewModel)
 	{
-        this.BindingContext = adminPageViewModel;
+        this.BindingContext = allRecipeViewModel;
         InitializeComponent();
 		
 	}

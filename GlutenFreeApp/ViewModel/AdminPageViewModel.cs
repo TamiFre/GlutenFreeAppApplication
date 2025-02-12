@@ -46,8 +46,8 @@ namespace GlutenFreeApp.ViewModel
             DeclineRestaurant = new Command(ChangeRestStatusToDecline);
             DeclineRecipe = new Command(ChangeRecipeStatusToDecline);
             ApproveRecipe = new Command(ChangeRecipeStatusToApprove);
-            OnExpand = new Command(OnExpandCommand);
-            CloseCommand = new Command(OnCloseCommand);
+            //OnExpand = new Command(OnExpandCommand);
+            //CloseCommand = new Command(OnCloseCommand);
             
         }
 
@@ -380,47 +380,47 @@ namespace GlutenFreeApp.ViewModel
         #endregion
 
         #region pop up the recipe 
-        public ICommand OnExpand;
-        //recipe selected is in the recipe selected region
+        //public ICommand OnExpand;
+        ////recipe selected is in the recipe selected region
 
 
 
-        //add a proprty and prvate for the recpe text
-        private string recipeText;
-        public string RecipeText
-        {
-            get=> recipeText;
-            set 
-            {
-                if (recipeText != value)
-                {
-                    recipeText = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public async void FillRecipeText(RecipeInfo recipeInfo)
-        {
-            RecipeText = recipeInfo.RecipeText;
-        }
+        ////add a proprty and prvate for the recpe text
+        //private string recipeText;
+        //public string RecipeText
+        //{
+        //    get=> recipeText;
+        //    set 
+        //    {
+        //        if (recipeText != value)
+        //        {
+        //            recipeText = value;
+        //            OnPropertyChanged();
+        //        }
+        //    }
+        //}
+        //public async void FillRecipeText(RecipeInfo recipeInfo)
+        //{
+        //    RecipeText = recipeInfo.RecipeText;
+        //}
 
-        public async void OnExpandCommand()
-        {
+        //public async void OnExpandCommand()
+        //{
 
-            FillRecipeText(SelectedRecipe);
+        //    FillRecipeText(SelectedRecipe);
 
-            // Assuming you have a method to show the pop-up
-            var popupPage = new PopupPageRecipesView(this); // Create your custom pop-up page
+        //    // Assuming you have a method to show the pop-up
+        //    var popupPage = new PopupPageRecipesView(this); // Create your custom pop-up page
 
-            //bind the context in the popup behind
-            ((App)(Application.Current)).MainPage.Navigation.PushAsync(popupPage);
-        }
+        //    //bind the context in the popup behind
+        //    ((App)(Application.Current)).MainPage.Navigation.PushAsync(popupPage);
+        //}
 
-        public ICommand CloseCommand { get; set; }
-        public async void OnCloseCommand()
-        {
-            ((App)(Application.Current)).MainPage.Navigation.PopAsync();
-        }
+        //public ICommand CloseCommand { get; set; }
+        //public async void OnCloseCommand()
+        //{
+        //    ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+        //}
 
         #endregion
     }
