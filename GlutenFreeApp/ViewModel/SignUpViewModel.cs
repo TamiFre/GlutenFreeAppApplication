@@ -2,6 +2,7 @@ using GlutenFreeApp.ViewModel;
 using System.Windows.Input;
 using GlutenFreeApp.Services;
 using GlutenFreeApp.Models;
+using GlutenFreeApp.Services;
 
 namespace GlutenFreeApp.ViewModel;
 
@@ -22,14 +23,6 @@ public class SignUpViewModel : ViewModelBase
     {
         get { return username; }
         set { username = value; OnPropertyChanged(); }
-    }
-
-    private string address;
-    public string Address
-    {
-        get { return address; }
-        set { address = value; OnPropertyChanged(); }
-
     }
 
     private int typeFood;
@@ -201,75 +194,150 @@ public class SignUpViewModel : ViewModelBase
         UploadPhotoCommand = new Command(OnUploadPhoto);
         PhotoURL = proxy.GetDefaultRestaurantPhotoUrl();
         LocalPhotoPath = "";
+        
     }
 
     #region regsiter
+
+    #region address
+
+    private bool showAddressError;
+
+    public bool ShowAddressError
+    {
+        get => showAddressError;
+        set
+        {
+            showAddressError = value;
+            OnPropertyChanged("ShowAddressError");
+        }
+    }
+
+    private string addressval;
+
+    public string AddressVal
+    {
+        get => addressval;
+        set
+        {
+            addressval = value;
+            ValidateAddress();
+            OnPropertyChanged("Address");
+        }
+    }
+
+    private string addressError;
+
+    public string AddressError
+    {
+        get => addressError;
+        set
+        {
+            addressError = value;
+            OnPropertyChanged("AddressError");
+        }
+    }
+
+    private async Task<AddressComponents> ValidateAddress(bool fullValidation = false)
+    {
+        AddressComponents components = null;
+        this.ShowAddressError = string.IsNullOrEmpty(AddressVal);
+        if (fullValidation && !this.ShowAddressError)
+        {
+            //Check if the address is valid using the GeocodingService
+            components = await GeoCodingService.GetAddressComponentsAsync(AddressVal);
+            if (components == null)
+            {
+                AddressError = "Address is not valid";
+                ShowAddressError = true;
+            }
+            else
+            {
+                AddressError = "";
+                ShowAddressError = false;
+            }
+        }
+        else
+        {
+            AddressError = "Address is required";
+        }
+        return components;
+    }
+
+    #endregion
+
     private async void OnRegister()
     {
         ValidatePassword();
        
         if (!ShowPasswordError)
         {
-
-            //NEXT ETERATION - REGISTER FOR MANAGER 
-
             //register for manager
 
             if (IsManager)
             {
-
-                //Create a new user that is a manager
-                var newUser = new UsersInfo
+                //validate address
+                AddressComponents components = await ValidateAddress(true);
+                if (!ShowAddressError)
                 {
-                    Name = this.Username,
-                    Password = this.Password,
-                    TypeID = 3,
-                    UserEmail = this.UserEmail,
-                    UserID = 0
-                };
-                //Create the restaurant
-                var newRest = new RestaurantInfo
-                {
-                    RestAddress = this.Address,
-                    StatusID = 2,//PENDING
-                    TypeFoodID = this.TypeFood + 1,
-                    UserID = (int)newUser.UserID,
-                    RestName = this.RestName
-                };
-                var manager = new ManagerInfo
-                {
-                    UserManager = newUser,
-                    RestaurantManager = newRest
-                };
-
-                //Call the Register method on the proxy to register the new user
-                InServerCall = true;
-                manager = await proxy.RegisterManager(manager);
-                InServerCall = false;
-
-                //If the registration was successful, navigate to the login page
-                if (newUser != null)
-                {
-                    //UPload profile imae if needed
-                    if (!string.IsNullOrEmpty(LocalPhotoPath))
+                    //Create a new user that is a manager
+                    var newUser = new UsersInfo
                     {
-                        //login so we can upload the picture
-                        await proxy.LoginAsync(new UsersInfo { UserEmail = newUser.UserEmail, Password = newUser.Password, Name = newUser.Name, TypeID = 3 });
-                        Restaurantid = manager.RestaurantManager.RestID;
-                        //add an error
-                        RestaurantInfo? updatedRestaurant = await proxy.UploadRestaurantImage(LocalPhotoPath, Restaurantid);
-                        if (updatedRestaurant == null)
+                        Name = this.Username,
+                        Password = this.Password,
+                        TypeID = 3,
+                        UserEmail = this.UserEmail,
+                        UserID = 0
+                    };
+                    //Create the restaurant
+                    var newRest = new RestaurantInfo
+                    {
+                        RestAddress = this.AddressVal,
+                        StatusID = 2,//PENDING
+                        TypeFoodID = this.TypeFood + 1,
+                        UserID = (int)newUser.UserID,
+                        RestName = this.RestName
+                    };
+                    var manager = new ManagerInfo
+                    {
+                        UserManager = newUser,
+                        RestaurantManager = newRest
+                    };
+
+                    //Call the Register method on the proxy to register the new user
+                    InServerCall = true;
+                    manager = await proxy.RegisterManager(manager);
+                    InServerCall = false;
+
+                    //If the registration was successful, navigate to the login page
+                    if (newUser != null)
+                    {
+                        //UPload profile imae if needed
+                        if (!string.IsNullOrEmpty(LocalPhotoPath))
                         {
+                            //login so we can upload the picture
+                            await proxy.LoginAsync(new UsersInfo { UserEmail = newUser.UserEmail, Password = newUser.Password, Name = newUser.Name, TypeID = 3 });
+                            Restaurantid = manager.RestaurantManager.RestID;
+                            //add an error
+                            RestaurantInfo? updatedRestaurant = await proxy.UploadRestaurantImage(LocalPhotoPath, Restaurantid);
+                            if (updatedRestaurant == null)
+                            {
+                                InServerCall = false;
+                                await Application.Current.MainPage.DisplayAlert("Registration", "User Data Was Saved BUT Restaurant image upload failed", "ok");
+                            }
                             InServerCall = false;
-                            await Application.Current.MainPage.DisplayAlert("Registration", "User Data Was Saved BUT Restaurant image upload failed", "ok");
+                            await Application.Current.MainPage.DisplayAlert("Registration Success", "you are now going to the login page", "ok");
+                            ((App)(Application.Current)).MainPage.Navigation.PopAsync();
                         }
-                        InServerCall = false;
-                        await Application.Current.MainPage.DisplayAlert("Registration Success", "you are now going to the login page", "ok");
-                        ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+
+
                     }
-
-
                 }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Registration", "failed - address is not valid", "ok");
+                }
+               
             }
 
             //if its not a manager
@@ -292,8 +360,6 @@ public class SignUpViewModel : ViewModelBase
                 if (newUser != null)
                 {
                     InServerCall = false;
-
-
                     ((App)(Application.Current)).MainPage.Navigation.PopAsync();
                 }
             }

@@ -39,6 +39,7 @@ namespace GlutenFreeApp.ViewModel
             //get the data from the app - how to access it?
             FoodTypeList = new ObservableCollection<TypeFoodInfo>(((App)Application.Current).FoodTypes);
             ExpandCommand = new Command(OnExpandCommand);
+            CloseCommand = new Command(OnCloseCommand);
         }
 
         #region Observsble collection

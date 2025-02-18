@@ -24,7 +24,7 @@
                     HorizontalOptions="Center"
                     Text="Add Critic" />
 
-                <!--  Login Form  -->
+
                 <Frame
                     Padding="20"
                     BackgroundColor="{AppThemeBinding Light=White,
@@ -65,14 +65,40 @@
                                     x:Name="PasswordEntry"
                                     Grid.Column="1"
                                     BackgroundColor="Transparent"
-                                    IsPassword="True"
                                     Placeholder="The Critic"
                                     Style="{StaticResource DefaultEntry}"
                                     Text="{Binding TheCritic}" />
                             </Grid>
                         </Frame>
 
-
+                        <Frame
+                            Margin="10"
+                            Padding="5"
+                            BorderColor="Black">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    x:Name="theImageBug"
+                                    HeightRequest="150"
+                                    Source="{Binding PhotoURL}" />
+                                <Label
+                                    Grid.Row="1"
+                                    HorizontalOptions="Center"
+                                    Text="Click Here To Upload Photo!"
+                                    TextColor="Blue"
+                                    VerticalOptions="End">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </Frame>
 
 
                         <!--  Login Button  -->

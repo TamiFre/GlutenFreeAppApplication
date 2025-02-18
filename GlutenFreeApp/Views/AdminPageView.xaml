@@ -25,18 +25,18 @@
                 FontSize="16"
                 Text="Enter Facts" />
             <Entry
-                Style="{StaticResource DefaultEntry}"
                 HeightRequest="100"
                 IsEnabled="{Binding NotInServerCall}"
                 Placeholder="Enter new fact here"
+                Style="{StaticResource DefaultEntry}"
                 Text="{Binding Fact}"
                 VerticalTextAlignment="Start" />
             <Button
                 Margin="0,10,0,0"
-                Style="{StaticResource buttonStyle}"
-                CornerRadius="25"
                 Command="{Binding AddFactCommand}"
+                CornerRadius="25"
                 IsEnabled="{Binding NotInServerCall}"
+                Style="{StaticResource buttonStyle}"
                 Text="Submit Fact" />
             <Label HorizontalOptions="Center" Text="{Binding ErrorMsg}" />
 
@@ -64,9 +64,9 @@
             </Picker>
 
             <Button
-                Style="{StaticResource buttonStyle}"
-                CornerRadius="25"
                 Command="{Binding SearchRecipeByStatus}"
+                CornerRadius="25"
+                Style="{StaticResource buttonStyle}"
                 Text="Filter By Status Chosen" />
 
 
@@ -81,79 +81,82 @@
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RecipeInfo">
-                        
-                            <SwipeView Grid.Column="0" Margin="5,0">
-                                <SwipeView.LeftItems>
-                                    <SwipeItems>
-                                        <SwipeItem
-                                            BackgroundColor="Gray"
-                                            Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.DeclineRecipe}"
-                                            CommandParameter="{Binding .}"
-                                            
-                                            IsVisible="{Binding IsSwipeEnabled}"
-                                            Text="Reject" />
-                                    </SwipeItems>
-                                </SwipeView.LeftItems>
 
-                                <SwipeView.RightItems>
-                                    <SwipeItems>
-                                        <SwipeItem
-                                            BackgroundColor="Purple"
-                                            Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.ApproveRecipe}"
-                                            CommandParameter="{Binding .}"
-                                            IsVisible="{Binding IsSwipeEnabled}"
-                                            Text="Approve" />
-                                    </SwipeItems>
-                                </SwipeView.RightItems>
+                        <SwipeView Grid.Column="0" Margin="5,0">
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                        BackgroundColor="Red"
+                                        Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.DeclineRecipe}"
+                                        CommandParameter="{Binding .}"
+                                        IconImageSource="decline.png"
+                                        IsVisible="{Binding IsSwipeEnabled}"
+                                        Text="Reject" />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
 
-                                <!--  Main content inside SwipeView  -->
-                              
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                        BackgroundColor="Green"
+                                        Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.ApproveRecipe}"
+                                        CommandParameter="{Binding .}"
+                                        IconImageSource="approvetick.png"
+                                        IsVisible="{Binding IsSwipeEnabled}"
+                                        Text="Approve" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <!--  Main content inside SwipeView  -->
+
                             <Grid ColumnDefinitions="Auto,*,*,*" RowDefinitions="Auto">
-                                <!-- Image Column -->
-                                <Frame 
-        HeightRequest="80" 
-        WidthRequest="80" 
-        CornerRadius="60" 
-        Padding="0" 
-        HasShadow="False" 
-        HorizontalOptions="Center" 
-        VerticalOptions="Center">
-                                    <Image 
-            Source="{Binding FullImagePath}" 
-            Aspect="AspectFill" 
-            HeightRequest="60" 
-            WidthRequest="60" 
-            HorizontalOptions="Center" 
-            VerticalOptions="Center" />
+                                <!--  Image Column  -->
+                                <Frame
+                                    Padding="0"
+                                    CornerRadius="60"
+                                    HasShadow="False"
+                                    HeightRequest="80"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    WidthRequest="80">
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="60"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding FullImagePath}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="60" />
                                 </Frame>
 
-                                <!-- Recipe Headline Column -->
-                                <Label Grid.Column="1" 
-           Text="{Binding RecipeHeadLine}" 
-           VerticalOptions="Center" 
-           HorizontalOptions="StartAndExpand" />
+                                <!--  Recipe Headline Column  -->
+                                <Label
+                                    Grid.Column="1"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{Binding RecipeHeadLine}"
+                                    VerticalOptions="Center" />
 
-                                <!-- Status Column -->
-                                <Label Grid.Column="2" 
-           Text="{Binding StatusName}" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Start" />
+                                <!--  Status Column  -->
+                                <Label
+                                    Grid.Column="2"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding StatusName}"
+                                    VerticalOptions="Center" />
 
-                                <!-- Expand Button Column -->
-                                <Button 
-        Style="{StaticResource buttonStyle}" 
-        Grid.Column="3" 
-        CornerRadius="25" 
-                                    WidthRequest="100"
-        Text="Expand" 
-        Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.OnExpand}" 
-        CommandParameter="{Binding .}" 
-        VerticalOptions="Center" 
-        HorizontalOptions="End" />
+                                <!--  Expand Button Column  -->
+                                <Button
+                                    Grid.Column="3"
+                                    Command="{Binding Source={x:Reference PendingRecipesList}, Path=BindingContext.OnExpand}"
+                                    CommandParameter="{Binding .}"
+                                    CornerRadius="25"
+                                    HorizontalOptions="End"
+                                    Style="{StaticResource buttonStyle}"
+                                    Text="Expand"
+                                    VerticalOptions="Center"
+                                    WidthRequest="100" />
                             </Grid>
 
                         </SwipeView>
-                    
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -170,9 +173,9 @@
             <!--  do the picker bound to the statuses  -->
 
             <Picker
-    x:Name="StatusRestPicker"
-    Title="Select the status you want to see"
-    SelectedIndex="{Binding StatusRestSelected}">
+                x:Name="StatusRestPicker"
+                Title="Select the status you want to see"
+                SelectedIndex="{Binding StatusRestSelected}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>ShowAll</x:String>
@@ -184,9 +187,9 @@
             </Picker>
 
             <Button
-                Style="{StaticResource buttonStyle}"
-                CornerRadius="25"
                 Command="{Binding SearchRestByStatus}"
+                CornerRadius="25"
+                Style="{StaticResource buttonStyle}"
                 Text="Filter By Status Chosen" />
 
 
@@ -199,101 +202,101 @@
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RestaurantInfo">
-                       
-                            <SwipeView Grid.Column="0" Margin="5,0">
-                                <SwipeView.LeftItems>
-                                    <SwipeItems>
-                                        <SwipeItem
-                                            BackgroundColor="Gray"
-                                            Command="{Binding Source={x:Reference RestaurantsList}, Path=BindingContext.DeclineRestaurant}"
-                                            CommandParameter="{Binding .}"
-                                            IconImageSource="decline.png"
-                                            IsVisible="{Binding IsSwipeEnabled}"
-                                            Text="Reject" />
-                                    </SwipeItems>
-                                </SwipeView.LeftItems>
 
-                                <SwipeView.RightItems>
-                                    <SwipeItems>
-                                        <SwipeItem
-                                            BackgroundColor="Purple"
-                                            Command="{Binding Source={x:Reference RestaurantsList}, Path=BindingContext.ApproveRestaurant}"
-                                            CommandParameter="{Binding .}"
-                                            IconImageSource="approvetick.png"
-                                            IsVisible="{Binding IsSwipeEnabled}"
-                                            Text="Approve" />
-                                    </SwipeItems>
-                                </SwipeView.RightItems>
+                        <SwipeView Grid.Column="0" Margin="5,0">
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                        BackgroundColor="Red"
+                                        Command="{Binding Source={x:Reference RestaurantsList}, Path=BindingContext.DeclineRestaurant}"
+                                        CommandParameter="{Binding .}"
+                                        IconImageSource="decline.png"
+                                        IsVisible="{Binding IsSwipeEnabled}"
+                                        Text="Reject" />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
 
-                                <Grid ColumnDefinitions="Auto,*,*,*" RowDefinitions="Auto,Auto">
-                                    <!-- Image Column -->
-                                    <Frame 
-        HeightRequest="80" 
-        WidthRequest="80" 
-        CornerRadius="60" 
-        Padding="0" 
-        HasShadow="False" 
-        HorizontalOptions="Center" 
-        VerticalOptions="Center" 
-        Grid.Row="0" 
-        Grid.Column="0">
-                                        <Image 
-            Source="{Binding FullImagePath}" 
-            Aspect="AspectFill" 
-            HeightRequest="60" 
-            WidthRequest="60" 
-            HorizontalOptions="Center" 
-            VerticalOptions="Center" />
-                                    </Frame>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                        BackgroundColor="Green"
+                                        Command="{Binding Source={x:Reference RestaurantsList}, Path=BindingContext.ApproveRestaurant}"
+                                        CommandParameter="{Binding .}"
+                                        IconImageSource="approvetick.png"
+                                        IsVisible="{Binding IsSwipeEnabled}"
+                                        Text="Approve" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
 
-                                    <!-- Rest Name Column -->
-                                    <Label 
-        Grid.Row="0" 
-        Grid.Column="1" 
-        Text="{Binding RestName}" 
-        VerticalOptions="Center" 
-        HorizontalOptions="StartAndExpand" 
-        Padding="10,0" />
+                            <Grid ColumnDefinitions="Auto,*,*,*" RowDefinitions="Auto,Auto">
+                                <!--  Image Column  -->
+                                <Frame
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="0"
+                                    CornerRadius="60"
+                                    HasShadow="False"
+                                    HeightRequest="80"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    WidthRequest="80">
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="60"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding FullImagePath}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="60" />
+                                </Frame>
 
-                                    <!-- Status Column -->
-                                    <Label 
-        Grid.Row="0" 
-        Grid.Column="2" 
-        Text="{Binding StatusName}" 
-        VerticalOptions="Center" 
-        HorizontalOptions="Start" 
-        Padding="10,0" />
+                                <!--  Rest Name Column  -->
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Padding="10,0"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{Binding RestName}"
+                                    VerticalOptions="Center" />
 
-                                    <!-- Type Food Name Column -->
-                                    <Label 
-        Grid.Row="0" 
-        Grid.Column="3" 
-        Text="{Binding TypeFoodName}" 
-        VerticalOptions="Center" 
-        HorizontalOptions="Start" 
-        Padding="10,0" />
+                                <!--  Status Column  -->
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Padding="10,0"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding StatusName}"
+                                    VerticalOptions="Center" />
 
-                                    <!-- Address Column (below the image) -->
-                                    <Label 
-        Grid.Row="1" 
-        Grid.Column="0" 
-        Text="{Binding RestAddress}" 
-        VerticalOptions="Start" 
-        HorizontalOptions="Center" 
-        Padding="10,0" />
-                                </Grid>
-                            </SwipeView>
-                        
+                                <!--  Type Food Name Column  -->
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Padding="10,0"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding TypeFoodName}"
+                                    VerticalOptions="Center" />
+
+                                <!--  Address Column (below the image)  -->
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Padding="10,0"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding RestAddress}"
+                                    VerticalOptions="Start" />
+                            </Grid>
+                        </SwipeView>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-          
+
 
 
         </VerticalStackLayout>
     </ScrollView>
-    
-    
+
+
 
 </ContentPage>

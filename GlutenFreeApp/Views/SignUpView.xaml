@@ -6,182 +6,206 @@
     xmlns:viewModels="clr-namespace:GlutenFreeApp.ViewModel"
     Title="SignUpView"
     x:DataType="viewModels:SignUpViewModel">
-    
+
     <ScrollView>
-        <Grid RowDefinitions="Auto,*" Padding="20">
-            <!-- Header Area -->
-            <VerticalStackLayout Grid.Row="0" Spacing="20" Margin="0,40,0,20">
-                
+        <Grid Padding="20" RowDefinitions="Auto,*">
+            <!--  Header Area  -->
+            <VerticalStackLayout
+                Grid.Row="0"
+                Margin="0,40,0,20"
+                Spacing="20">
+
 
                 <Label
-                    Text="Create Account"
                     FontFamily="TorontoFont"
                     FontSize="48"
                     HorizontalOptions="Center"
-                    TextColor="Black"/>
+                    Text="Create Account"
+                    TextColor="Black" />
             </VerticalStackLayout>
 
-            <!-- Main Content -->
+            <!--  Main Content  -->
             <VerticalStackLayout Grid.Row="1" IsEnabled="{Binding NotInServerCall}">
                 <Frame
-                    BorderColor="Transparent"
-                    BackgroundColor="{AppThemeBinding Light=White, Dark=#343a40}"
-                    CornerRadius="15"
                     Padding="20"
+                    BackgroundColor="{AppThemeBinding Light=White,
+                                                      Dark=#343a40}"
+                    BorderColor="Transparent"
+                    CornerRadius="15"
                     HasShadow="True">
 
                     <VerticalStackLayout Spacing="20">
-                        <!-- User Type Selection -->
+                        <!--  User Type Selection  -->
                         <Label
-                            Text="Select user type"
                             FontSize="18"
                             HorizontalOptions="Center"
-                            TextColor="{AppThemeBinding Light=#212529, Dark=#f8f9fa}"/>
+                            Text="Select user type"
+                            TextColor="{AppThemeBinding Light=#212529,
+                                                        Dark=#f8f9fa}" />
 
                         <HorizontalStackLayout HorizontalOptions="Center" Spacing="50">
-                            <!-- Manager Selection -->
+                            <!--  Manager Selection  -->
                             <VerticalStackLayout Spacing="10">
                                 <Frame
-                                    HeightRequest="40"
-                                    WidthRequest="40"
-                                    CornerRadius="20"
                                     Padding="0"
-                                    BorderColor="{AppThemeBinding Light=#dee2e6, Dark=#495057}"
-                                    HasShadow="False">
+                                    BorderColor="{AppThemeBinding Light=#dee2e6,
+                                                                  Dark=#495057}"
+                                    CornerRadius="20"
+                                    HasShadow="False"
+                                    HeightRequest="40"
+                                    WidthRequest="40">
                                     <Button
                                         x:Name="ManagerDot"
-                                        Command="{Binding ManagerSelectedCommand}"
+                                        Margin="0"
                                         BackgroundColor="Purple"
+                                        Command="{Binding ManagerSelectedCommand}"
                                         CornerRadius="20"
                                         HeightRequest="40"
-                                        WidthRequest="40"
-                                        Margin="0"/>
+                                        WidthRequest="40" />
                                 </Frame>
                                 <Label
-                                    Text="Manager"
                                     FontSize="14"
                                     HorizontalOptions="Center"
-                                    TextColor="{AppThemeBinding Light=#6c757d, Dark=#adb5bd}"/>
+                                    Text="Manager"
+                                    TextColor="{AppThemeBinding Light=#6c757d,
+                                                                Dark=#adb5bd}" />
                             </VerticalStackLayout>
 
-                            <!-- Visitor Selection -->
+                            <!--  Visitor Selection  -->
                             <VerticalStackLayout Spacing="10">
                                 <Frame
-                                    HeightRequest="40"
-                                    WidthRequest="40"
-                                    CornerRadius="20"
                                     Padding="0"
-                                    BorderColor="{AppThemeBinding Light=#dee2e6, Dark=#495057}"
-                                    HasShadow="False">
+                                    BorderColor="{AppThemeBinding Light=#dee2e6,
+                                                                  Dark=#495057}"
+                                    CornerRadius="20"
+                                    HasShadow="False"
+                                    HeightRequest="40"
+                                    WidthRequest="40">
                                     <Button
                                         x:Name="VisitorDot"
-                                        Command="{Binding VisitorSelectedCommand}"
+                                        Margin="0"
                                         BackgroundColor="Purple"
+                                        Command="{Binding VisitorSelectedCommand}"
                                         CornerRadius="20"
                                         HeightRequest="40"
-                                        WidthRequest="40"
-                                        Margin="0"/>
+                                        WidthRequest="40" />
                                 </Frame>
                                 <Label
-                                    Text="Visitor"
                                     FontSize="14"
                                     HorizontalOptions="Center"
-                                    TextColor="{AppThemeBinding Light=#6c757d, Dark=#adb5bd}"/>
+                                    Text="Visitor"
+                                    TextColor="{AppThemeBinding Light=#6c757d,
+                                                                Dark=#adb5bd}" />
                             </VerticalStackLayout>
                         </HorizontalStackLayout>
 
-                        <!-- Common Fields -->
+                        <!--  Common Fields  -->
                         <Frame
+                            Margin="0,10"
                             Padding="15,5"
+                            BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                              Dark=#495057}"
                             BorderColor="Transparent"
-                            BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
-                            CornerRadius="10"
-                            Margin="0,10">
+                            CornerRadius="10">
                             <Entry
                                 x:Name="UsernameEntry"
-                                Text="{Binding Username}"
                                 Placeholder="Username"
-                                Style="{StaticResource DefaultEntry}"/>
+                                Style="{StaticResource DefaultEntry}"
+                                Text="{Binding Username}" />
                         </Frame>
 
                         <Frame
                             Padding="15,5"
+                            BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                              Dark=#495057}"
                             BorderColor="Transparent"
-                            BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
                             CornerRadius="10">
                             <Entry
                                 x:Name="PasswordEntry"
-                                Text="{Binding Password}"
                                 IsPassword="True"
                                 Placeholder="Password"
-                                Style="{StaticResource DefaultEntry}"/>
+                                Style="{StaticResource DefaultEntry}"
+                                Text="{Binding Password}" />
                         </Frame>
-                        <Label 
-                            IsVisible="{Binding ShowPasswordError}" 
+                        <Label
+                            IsVisible="{Binding ShowPasswordError}"
                             Text="{Binding PasswordError}"
-                            TextColor="#dc3545"/>
+                            TextColor="#dc3545" />
 
                         <Frame
                             Padding="15,5"
+                            BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                              Dark=#495057}"
                             BorderColor="Transparent"
-                            BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
                             CornerRadius="10">
                             <Entry
                                 x:Name="EmailEntry"
-                                Text="{Binding UserEmail}"
                                 Placeholder="Email"
-                                Style="{StaticResource DefaultEntry}"/>
+                                Style="{StaticResource DefaultEntry}"
+                                Text="{Binding UserEmail}" />
                         </Frame>
-                        <Label 
-                            IsVisible="{Binding ShowEmailError}" 
+                        <Label
+                            IsVisible="{Binding ShowEmailError}"
                             Text="{Binding EmailError}"
-                            TextColor="#dc3545"/>
+                            TextColor="Red" />
 
-                        <!-- Manager Fields -->
-                        <VerticalStackLayout 
+                        <!--  Manager Fields  -->
+                        <VerticalStackLayout
                             x:Name="ManagerFields"
                             IsVisible="{Binding IsManager}"
                             Spacing="15">
 
                             <Frame
                                 Padding="15,5"
+                                BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                                  Dark=#495057}"
                                 BorderColor="Transparent"
-                                BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
                                 CornerRadius="10">
                                 <Entry
                                     x:Name="NameEntry"
-                                    Text="{Binding RestName}"
                                     Placeholder="Restaurant Name"
-                                    Style="{StaticResource DefaultEntry}"/>
+                                    Style="{StaticResource DefaultEntry}"
+                                    Text="{Binding RestName}" />
                             </Frame>
 
                             <Frame
                                 Padding="15,5"
+                                BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                                  Dark=#495057}"
                                 BorderColor="Transparent"
-                                BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
                                 CornerRadius="10">
                                 <Entry
                                     x:Name="AddressEntry"
-                                    Text="{Binding Address}"
                                     Placeholder="Address"
-                                    Style="{StaticResource DefaultEntry}"/>
-                            </Frame>
+                                    Style="{StaticResource DefaultEntry}"
+                                    Text="{Binding AddressVal}" />
 
-                            <Label 
+
+
+                            </Frame>
+                            <Label
+                                IsVisible="{Binding ShowAddressError}"
+                                Text="{Binding AddressError}"
+                                TextColor="Red" />
+
+                            <Label
+                                Margin="0,10,0,0"
                                 Text="Select Restaurant Food Type:"
-                                TextColor="{AppThemeBinding Light=#212529, Dark=#f8f9fa}"
-                                Margin="0,10,0,0"/>
+                                TextColor="{AppThemeBinding Light=#212529,
+                                                            Dark=#f8f9fa}" />
 
                             <Frame
                                 Padding="15,5"
+                                BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                                  Dark=#495057}"
                                 BorderColor="Transparent"
-                                BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
                                 CornerRadius="10">
                                 <Picker
                                     x:Name="RestaurantTypePicker"
                                     Title="Type of Restaurant"
                                     SelectedIndex="{Binding TypeFood}"
-                                    TextColor="{AppThemeBinding Light=#212529, Dark=White}">
+                                    TextColor="{AppThemeBinding Light=#212529,
+                                                                Dark=White}">
                                     <Picker.Items>
                                         <x:String>Italian</x:String>
                                         <x:String>Asian</x:String>
@@ -192,49 +216,50 @@
                                 </Picker>
                             </Frame>
 
-                            <!-- Photo Upload -->
-                            <Frame 
-                                BorderColor="{AppThemeBinding Light=#dee2e6, Dark=#495057}"
-                                BackgroundColor="{AppThemeBinding Light=#f8f9fa, Dark=#495057}"
-                                CornerRadius="10"
+                            <!--  Photo Upload  -->
+                            <Frame
+                                Margin="0,10"
                                 Padding="10"
-                                Margin="0,10">
+                                BackgroundColor="{AppThemeBinding Light=#f8f9fa,
+                                                                  Dark=#495057}"
+                                BorderColor="{AppThemeBinding Light=#dee2e6,
+                                                              Dark=#495057}"
+                                CornerRadius="10">
                                 <Grid RowDefinitions="Auto,Auto" RowSpacing="10">
-                                    <Image 
-                                        x:Name="theImageBug" 
-                                        Source="{Binding PhotoURL}"  
+                                    <Image
+                                        x:Name="theImageBug"
+                                        Aspect="AspectFit"
                                         HeightRequest="150"
-                                        Aspect="AspectFit"/>
-                                    <Label 
+                                        Source="{Binding PhotoURL}" />
+                                    <Label
                                         Grid.Row="1"
+                                        HorizontalOptions="Center"
                                         Text="Click Here To Upload Photo!"
-                                        TextColor="Black"
-                                        HorizontalOptions="Center">
+                                        TextColor="Black">
                                         <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding UploadPhotoCommand}"/>
+                                            <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
                                         </Label.GestureRecognizers>
                                     </Label>
                                 </Grid>
                             </Frame>
                         </VerticalStackLayout>
 
-                        <!-- Submit Button -->
+                        <!--  Submit Button  -->
                         <Button
-                            Style="{StaticResource buttonStyle}"
                             x:Name="RegisterButton"
-                            Text="Create Account"
-                            CornerRadius="25"
                             Command="{Binding SubmitCommand}"
-                            />
+                            CornerRadius="25"
+                            Style="{StaticResource buttonStyle}"
+                            Text="Create Account" />
                     </VerticalStackLayout>
                 </Frame>
 
-                <!-- Activity Indicator -->
+                <!--  Activity Indicator  -->
                 <ActivityIndicator
-                    IsRunning="{Binding InServerCall}"
-                    Color="#87CEEB"
+                    Margin="0,20"
                     HorizontalOptions="Center"
-                    Margin="0,20"/>
+                    IsRunning="{Binding InServerCall}"
+                    Color="#87CEEB" />
             </VerticalStackLayout>
         </Grid>
     </ScrollView>

@@ -885,7 +885,7 @@ namespace GlutenFreeApp.Services
         }
         #endregion
 
-        #region Upload Restaurant Photo After Logged In - Ask Ofer
+        #region Upload Restaurant Photo After Logged In 
         //This method call the UploadProfileImage web API on the server and return the AppUser object with the given URL
         //of the profile image or null if the call fails
         //when registering a user it is better first to call the register command and right after that call this function
@@ -932,6 +932,50 @@ namespace GlutenFreeApp.Services
         }
         #endregion
 
+        #region Upload Critic Photo
+        public string GetDefaultCriticPhotoUrl()
+        {
+            return $"{GlutenFreeServiceWebAPIProxy.ImageBaseAddress}/criticimages/default.png";
+        }
+
+        public async Task<CriticInfo> UploadCriticImage(string imagePath, int criticID)
+        {
+            //Set URI to the specific function API
+            string url = $"{this.baseUrl}UploadCriticImage?criticID={criticID}";
+            try
+            {
+                //Create the form data
+                MultipartFormDataContent form = new MultipartFormDataContent();
+                var fileContent = new ByteArrayContent(File.ReadAllBytes(imagePath));
+                form.Add(fileContent, "file", imagePath);
+                //Call the server API
+                HttpResponseMessage response = await client.PostAsync(url, form);
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    CriticInfo? result = JsonSerializer.Deserialize<CriticInfo>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
         #region Add Restaurant
         public async Task<RestaurantInfo> AddRestaurant(RestaurantInfo restaurantInfo)
         {
@@ -953,6 +997,43 @@ namespace GlutenFreeApp.Services
                         PropertyNameCaseInsensitive = true
                     };
                     RestaurantInfo result = JsonSerializer.Deserialize<RestaurantInfo>(resContent, options);
+                    return result;
+                }
+
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Add Critic
+        public async Task<CriticInfo> AddCritic(CriticInfo criticdto)
+        {
+            string url = $"{this.baseUrl}AddCritic";
+            try
+            {
+                //do a json to info
+                string json = JsonSerializer.Serialize<CriticInfo>(criticdto);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                //check if fine
+                if (response.IsSuccessStatusCode)
+                {
+                    //Extract the content as string
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    CriticInfo result = JsonSerializer.Deserialize<CriticInfo>(resContent, options);
                     return result;
                 }
 
